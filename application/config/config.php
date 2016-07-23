@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://www.mztest.com:1988/trade';
+// $config['base_url'] = 'http://www.mztest.com:1988/trade';
+$config['base_url'] = 'http://localhost/trade';
 
 /*
 |--------------------------------------------------------------------------

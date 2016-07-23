@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
 
     <meta charset="utf-8">
@@ -8,20 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>途瑞(torun) 物流管理系统</title>
-
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="<?php echo asset_url() . '/bootstrap/dist/css/bootstrap.min.css'; ?>">
-
-
     <!-- MetisMenu CSS -->
     <link href="<?php echo asset_url() . 'metisMenu/dist/metisMenu.min.css'; ?>" rel="stylesheet">
-
-
     <!-- Custom CSS -->
     <link href="<?php echo asset_url() . 'main.css'; ?>" rel="stylesheet">
-
     <!-- Morris Charts CSS -->
     <!-- <link href="../bower_components/morrisjs/morris.css" rel="stylesheet"> -->
 
@@ -50,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php site_url( '' ); ?>">途瑞[ToRun]-领先全球的物流管理系统</a>
+                <a class="navbar-brand" href="<?php echo site_url(); ?>">途瑞[ToRun]-领先全球的物流管理系统</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,3 +57,12 @@
 
 
          <div id="page-wrapper">
+        
+        <?php 
+        if(isset($page_title)){ ?>
+            <div class="breadcrumbs">
+                <a href="<?php echo site_url(); ?>">首页</a> &raquo; <span><?php echo $page_title; ?></span>
+            </div>
+        <?php }
+         ?>
+       

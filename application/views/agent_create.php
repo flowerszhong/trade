@@ -16,8 +16,24 @@ $attributes = array('class'=>'','id'=>'create-agent');
         <input type="text" name="name" class="form-control">
     </div>
     <div class="form-group">
+        <label for="">简称</label>
+        <input type="text" name="shortname" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">公司代码</label>
+        <input type="text" name="code" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">公司地址</label>
+        <textarea name="address" class="form-control content-editor"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="">联系电话</label>
+        <input type="text" name="officephone" class="form-control">
+    </div>
+    <div class="form-group">
         <label for="">公司描述</label>
-        <textarea name="description" id="richeditor" class="form-control content-editor"></textarea>
+        <textarea name="description" class="form-control content-editor"></textarea>
     </div>
     <div class="form-group">
         <label for="sticky">备注说明</label>

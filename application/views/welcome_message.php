@@ -1,5 +1,3 @@
-<?php require_once 'header.php'; ?>
-
 	<div id="body">
 		<h1>base url</h1>
 		<?php echo base_url(); ?>
@@ -17,5 +15,3 @@
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-
-<?php require_once 'footer.php'; ?>
