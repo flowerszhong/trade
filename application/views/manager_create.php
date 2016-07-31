@@ -16,12 +16,25 @@ $attributes = array('class'=>'','id'=>'create-manager');
         <input type="text" name="name" class="form-control">
     </div>
     <div class="form-group">
-        <label for="">公司名称</label>
+        <label for="">操作员登录名</label>
+        <input type="text" name="nickname" class="form-control">
+    </div>    
+    <div class="form-group">
+        <label for="">默认密码</label>
+        <input type="text" name="defaultpassword" placeholder="默认为：123456" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="">可操作公司</label>
         <select name="company_id">
             <?php foreach ($agents as $row) { ?>
                 <option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
             <?php } ?>
         </select>
+    </div>
+
+    <div class="form-group">
+        <label for="">职务</label>
+        <input type="text" name="title" id="office-phone" class="form-control" value="" />
     </div>
     <div class="form-group">
         <label for="">办公电话</label>
@@ -30,6 +43,10 @@ $attributes = array('class'=>'','id'=>'create-manager');
     <div class="form-group">
         <label for="">手机号码</label>
         <input type="text" name="mobile" id="mobile-phone" class="form-control" value="" />
+    </div>
+    <div class="form-group">
+        <label for="">QQ</label>
+        <input type="text" name="qq" id="mobile-phone" class="form-control" value="" />
     </div>
     <div class="form-group">
         <label for="">邮箱</label>

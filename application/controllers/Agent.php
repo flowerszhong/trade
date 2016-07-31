@@ -32,6 +32,8 @@ class Agent extends My_Controller {
 
         $this->form_validation->set_rules('name', '标题', 'trim|required|xss_clean|min_length[2]|max_length[60]');
         $this->form_validation->set_rules('description', '内容', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('officephone', '电话', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('address', '地址', 'trim|required|xss_clean');
 
         if($this->form_validation->run() == True){
             $data = $this->input->post();
@@ -44,6 +46,14 @@ class Agent extends My_Controller {
             }
         }
 
+    }
+
+    public function delete($id)
+    {
+        $query_result = $this->agent_model->remove_agent($id);
+        if($query_result){
+            redirect('agent/index','refresh');
+        }
     }
 
 }

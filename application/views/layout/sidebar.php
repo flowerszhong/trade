@@ -22,7 +22,7 @@
                                     <a href="<?php echo site_url('manager/index'); ?>">人员管理</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo site_url('manager/index'); ?>">价格更新</a>
+                                    <a href="<?php echo site_url('price/index'); ?>">价格更新</a>
                                 </li>
                             </ul>
                         </li>
@@ -38,10 +38,18 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> 报价查询</a>
+                            <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-table fa-fw"></i> 报价查询</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo site_url('price/index'); ?>">报价列表</a>
+                                </li>
+                                <li>
+                                    <a href="morris.html">Morris.js Charts</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('area/index'); ?>"><i class="fa fa-edit fa-fw"></i> 区域列表</a>
+                            <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-edit fa-fw"></i> 区域列表</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> 系统配置<span class="fa arrow"></span></a>

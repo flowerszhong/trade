@@ -7,11 +7,16 @@ class Manager extends My_Controller {
         parent::__construct();
         $this->load->model('agent_model');
         $this->load->model('manager_model');
+        $this->page_titles = array(
+            'index' => '人员管理',
+            'create' => '创建新客户',
+         );
     }
     public function index()
     {
         $view_data = array();
         $view_data['managers'] = $this->manager_model->select_all();
+        $view_data['page_title']= $this->page_titles['index'];
         $this->load_template('manager_index',$view_data);
     }
 
