@@ -1,0 +1,50 @@
+#query-form table td{
+	padding: 5px;
+}
+
+#price-result table{
+	max-width: 600px;
+}
+
+#input-area{
+	min-width:260px;
+}
+
+#area-select-tool{
+	padding:10px;
+	min-height: 400px;
+	max-width:600px;
+	border:1px solid green;
+	position: fixed;
+	display: none;
+	background: #fff;
+	z-index: 99;
+}
+
+#group-header b{
+	float: left;
+	padding:6px;
+	cursor: pointer;
+}
+
+#group-header b.current{
+	color: red;
+	background: #eee;
+}
+
+
+#group-body{
+	clear:both;
+	max-width: 600px;
+}
+
+#group-body h3{
+	border-bottom: 1px dashed #ccc;
+}
+#group-body span{
+	float: left;
+	padding: 3px;
+	margin-right: 5px;
+	cursor: pointer;
+	width:40%;
+}

@@ -20,6 +20,22 @@
     <!-- Custom Fonts -->
     <link href="<?php echo asset_url() . 'font-awesome/css/font-awesome.min.css'; ?>" rel="stylesheet" type="text/css">
 
+    <!-- jQuery -->
+    <script src="<?php echo asset_url() . 'jquery/dist/jquery.min.js'; ?>"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo asset_url() . 'bootstrap/dist/js/bootstrap.min.js'; ?>""></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="<?php echo asset_url() . 'metisMenu/dist/metisMenu.min.js'; ?>""></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="<?php echo asset_url() . 'raphael/raphael-min.js'; ?>"></script>
+    <script src="<?php echo asset_url() . 'morrisjs/morris.min.js'; ?>"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="<?php echo asset_url() . 'main.js'; ?>"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

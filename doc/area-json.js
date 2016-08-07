@@ -1,0 +1,226 @@
+﻿id,area_id,state,state_en
+,1,澳门,MACAU 
+,2,汶莱,BRUNEI 
+,2,南韩,"KOREA, SOUTH "
+,2,马来西亚,MALAYSIA 
+,2,菲律宾,PHILIPPINES
+,2,新加坡,SINGAPORE 
+,2,台湾,TAIWAN 
+,2,泰国,THAILAND 
+,3,日本,JAPAN 
+,4,澳大利亚,AUSTRALIA 
+,4,新西兰,NEW ZEALAND 
+,5,柬埔寨,CAMBODIA (KAMPUCHEA) 
+,5,印度尼西亚,INDONESIA 
+,5,老挝,LAOS 
+,5,越南,VIETNAM 
+,6,美属萨摩亚群岛,AMERICAN SAMOA 
+,6,孟加拉,BANGLADESH 
+,6,不丹,BHUTAN 
+,6,库克群岛,COOK ISLANDS 
+,6,东帝汶,EAST TIMOR 
+,6,斐济,FIJI 
+,6,关岛,GUAM 
+,6,基里巴斯,KIRIBATI 
+,6,北韩,"KOREA, NORTH "
+,6,列支敦士登,LIECHTENSTEIN 
+,6,马尔代夫,MALDIVES 
+,6,马绍尔群岛,MARSHALL ISLANDS 
+,6,缅甸,MYANMAR (BURMA) 
+,6,瑙鲁,"NAURU, REPUBLIC OF "
+,6,尼泊尔,NEPAL 
+,6,新喀里多尼亚,NEW CALEDONIA 
+,6,纽埃岛,NIUE 
+,6,巴布亚新几内亚,PAPUA NEW GUINEA 
+,6,塞班岛,SAIPAN 
+,6,萨摩亚,SAMOA 
+,6,所罗门群岛,SOLOMON ISLANDS 
+,6,大溪地,TAHITI 
+,6,汤加,TONGA 
+,6,图瓦卢,TUVALU 
+,6,瓦努阿图,VANUATU 
+,7,印度,INDIA 
+,7,斯里兰卡,SRI LANKA 
+,8,巴基斯坦,PAKISTAN 
+,9,美国,UNITED STATES OF AMERICA 
+,10,加拿大,CANADA 
+,11,墨西哥,MEXICO 
+,12,比利时,BELGIUM 
+,12,法国,FRANCE 
+,12,德国,GERMANY 
+,12,意大利,ITALY 
+,12,卢森堡,LUXEMBOURG 
+,12,荷兰,"NETHERLANDS, THE "
+,12,圣马力诺,SAN MARINO 
+,12,英国,UNITED KINGDOM 
+,13,奥地利,AUSTRIA 
+,13,丹麦,DENMARK 
+,13,芬兰,FINLAND 
+,13,希腊,GREECE 
+,13,根西岛,GUERNSEY 
+,13,爱尔兰共和国,IRELAND
+,13,泽西岛,JERSEY 
+,13,挪威,NORWAY 
+,13,葡萄牙,PORTUGAL 
+,13,西班牙,SPAIN 
+,13,瑞典,SWEDEN 
+,13,瑞士,SWITZERLAND 
+,14,保加利亚,BULGARIA 
+,14,塞浦路斯,CYPRUS 
+,14,爱沙尼亚,ESTONIA 
+,14,拉脱维亚,LATVIA 
+,14,立陶宛,LITHUANIA 
+,14,马耳他,MALTA 
+,14,斯洛伐克,SLOVAKIA 
+,14,斯洛文尼亚,SLOVENIA 
+,15,捷克,"CZECH REPUBLIC, THE "
+,15,匈牙利,HUNGARY 
+,15,波兰,POLAND 
+,15,罗马尼亚,ROMANIA 
+,16,安道尔,ANDORRA 
+,16,加那利群岛,"CANARY ISLANDS, THE "
+,16,非罗岛,FAROE ISLANDS 
+,16,直布罗陀,GIBRALTAR 
+,16,格陵兰,GREENLAND 
+,16,冰岛,ICELAND 
+,17,阿富汉,AFGHANISTAN 
+,17,阿尔巴尼亚,ALBANIA 
+,17,亚美尼亚,ARMENIA 
+,17,阿塞拜疆,AZERBAIJAN 
+,17,白俄罗斯,BELARUS 
+,17,波黑,BOSNIA & HERZEGOVINA 
+,17,克罗地亚,CROATIA 
+,17,福克兰群岛,FALKLAND ISLANDS 
+,17,格鲁吉亚,GEORGIA 
+,17,哈萨克斯坦,KAZAKHSTAN 
+,17,科索沃,KOSOVO 
+,17,吉尔吉斯斯担,KYRGYZSTAN 
+,17,马其顿,"MACEDONIA, REPUBLIC OF "
+,17,摩尔多瓦,"MOLDOVA, REPUBLIC OF "
+,17,黑山,MONTENEGRO 
+,17,俄罗斯,"RUSSIAN FEDERATION, THE "
+,17,塞尔维亚,SERBIA 
+,17,塔吉克斯坦,TAJIKISTAN 
+,17,乌克兰,UKRAINE 
+,17,乌兹别克斯坦,UZBEKISTAN 
+,18,巴林,BAHRAIN 
+,18,伊朗,"IRAN, ISLAMIC REPUBLIC OF "
+,18,约旦,JORDAN 
+,18,科威特,KUWAIT 
+,18,卡塔尔,QATAR 
+,18,阿拉伯联合酋长国,UNITED ARAB EMIRATES 
+,19,土耳其,TURKEY 
+,20,伊拉克,IRAQ 
+,20,以色列,ISRAEL 
+,20,黎巴嫩,LEBANON 
+,20,阿曼,OMAN 
+,20,沙特阿拉伯,SAUDI ARABIA 
+,20,苏丹,SUDAN 
+,20,叙利亚,SYRIA 
+,20,也门共和国,YEMEN 
+,21,埃及,EGYPT 
+,22,厄立特里亚,ERITREA 
+,22,埃塞俄比亚,ETHIOPIA 
+,22,肯尼亚,KENYA 
+,22,利比亚,LIBYA 
+,22,南非,SOUTH AFRICA 
+,22,乌干达,UGANDA 
+,23,阿尔及利亚,ALGERIA 
+,23,贝宁,BENIN 
+,23,博茨瓦纳,BOTSWANA 
+,23,布隆迪,BURUNDI 
+,23,喀麦隆,CAMEROON 
+,23,佛得角,CAPE VERDE 
+,23,乍得,CHAD 
+,23,科摩罗,COMOROS 
+,23,刚果共和国,CONGO 
+,23,吉布堤,DJIBOUTI 
+,23,赤道几内亚,EQUATORIAL GUINEA 
+,23,加蓬,GABON 
+,23,冈比亚,GAMBIA 
+,23,加纳,GHANA 
+,23,莱索托,LESOTHO 
+,23,马达加斯加,MADAGASCAR 
+,23,马拉维,MALAWI 
+,23,毛里塔尼亚,MAURITANIA 
+,23,毛里求斯,MAURITIUS 
+,23,马约特岛,MAYOTTE 
+,23,摩洛哥,MOROCCO 
+,23,莫桑比克,MOZAMBIQUE 
+,23,纳米比亚,NAMIBIA 
+,23,尼日利亚,NIGERIA 
+,23,留尼汪岛,"REUNION, ISLAND OF "
+,23,卢旺达,RWANDA 
+,23,塞内加尔,SENEGAL 
+,23,塞舌尔,SEYCHELLES 
+,23,索马里,SOMALIA 
+,23,索马里兰,"SOMALILAND, REPUBLIC OF (N. SOMALIA) "
+,23,斯威士兰,SWAZILAND 
+,23,坦桑尼亚,TANZANIA 
+,23,多哥,TOGO 
+,23,突尼斯,TUNISIA 
+,23,赞比亚,ZAMBIA 
+,23,津巴布韦,ZIMBABWE 
+,23,几内亚比绍,GUINEA-BISSAU 
+,24,安哥拉,ANGOLA 
+,24,刚果民主共和国,"CONGO, THE DEMOCRATIC REPUBLIC OF "
+,24,科特迪瓦(象牙海岸),COTE D'IVOIRE (IVORYCOAST) 
+,25,布基纳法索,BURKINA FASO 
+,25,中非共和国,CENTRAL AFRICAN REPUBLIC 
+,25,几内亚,GUINEA REPUBLIC 
+,25,利比里亚,LIBERIA 
+,25,马里,MALI 
+,25,尼日尔,NIGER 
+,25,塞拉里昂,SIERRA LEONE 
+,26,多米尼加,DOMINICA 
+,26,洪都拉斯,HONDURAS 
+,26,巴拿马,PANAMA 
+,26,委内瑞拉,VENEZUELA 
+,27,智利,CHILE 
+,27,哥斯达黎加,COSTA RICA 
+,27,多米尼加共和国,DOMINICAN REPUBLIC 
+,27,秘鲁,PERU 
+,27,特立尼达和多巴哥,TRINIDAD & TOBAGO 
+,28,阿根廷,ARGENTINA 
+,28,巴西,BRAZIL 
+,28,古巴,CUBA 
+,28,牙买加,JAMAICA 
+,28,乌拉圭,URUGUAY 
+,29,安圭拉,ANGUILLA 
+,29,安提瓜和巴布达,ANTIGUA 
+,29,阿鲁巴,ARUBA 
+,29,巴哈马,BAHAMAS 
+,29,巴巴多斯,BARBADOS 
+,29,伯利兹,BELIZE 
+,29,百慕达,BERMUDA 
+,29,波利维亚,BOLIVIA 
+,29,博内尔岛（荷属安地列斯）,BONAIRE 
+,29,开曼群岛,CAYMAN ISLANDS 
+,29,哥伦比亚,COLOMBIA 
+,29,库腊索(荷属安地列斯),CURACAO 
+,29,厄瓜多尔,ECUADOR 
+,29,萨尔瓦多,EL SALVADOR 
+,29,法属圭亚那,FRENCH GUYANA 
+,29,格林纳达,GRENADA 
+,29,厄德罗普,GUADELOUPE 
+,29,危地马拉,GUATEMALA 
+,29,圭亚那,GUYANA (BRITISH) 
+,29,海地,HAITI 
+,29,马提尼克岛,MARTINIQUE 
+,29,蒙古,MONGOLIA 
+,29,蒙特塞拉特,MONTSERRAT 
+,29,尼维斯,NEVIS 
+,29,尼加拉瓜,NICARAGUA 
+,29,波多黎各,PUERTO RICO 
+,29,圣多美和普林西比,SAO TOME & PRINCIPE 
+,29,圣巴夫林米（瓜德罗普岛）,ST. BARTHELEMY 
+,29,圣尤斯特歇斯,ST. EUSTATIUS 
+,29,圣基茨和尼维斯,ST. KITTS 
+,29,圣卢西亚,ST. LUCIA 
+,29,圣马藤岛（荷属安地列斯）,ST. MAARTEN 
+,29,圣文森特和格林纳丁斯,ST. VINCENT 
+,29,苏里南,SURINAME 
+,29,特克斯和凯科斯群岛,TURKS & CAICOS ISLANDS 
+,29,维尔克戈达岛（英属维尔群岛）,VIRGIN ISLANDS (BRITISH) 
+,29,维尔克戈达岛（美属维尔群岛）,VIRGIN ISLANDS (U.S.) 
+,30,巴拉圭,PARAGUAY 

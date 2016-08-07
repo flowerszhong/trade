@@ -21,61 +21,19 @@
                                 <li>
                                     <a href="<?php echo site_url('manager/index'); ?>">人员管理</a>
                                 </li>
-                                <li>
-                                    <a href="<?php echo site_url('price/index'); ?>">价格更新</a>
-                                </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 运单查询<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Flot Charts</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Morris.js Charts</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
+                        <li class="active">
                             <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-table fa-fw"></i> 报价查询</a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="<?php echo site_url('price/index'); ?>">报价列表</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="<?php echo site_url('price/query'); ?>">报价查询</a>
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-edit fa-fw"></i> 区域列表</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 系统配置<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
-                            </ul>
-                        </li>
-                       
-                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

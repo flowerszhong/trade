@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Manager_model extends CI_Model {
 
-    protected $table = 'manager';
+    protected $table = 'admin_manager';
+    protected $agent_table = 'admin_agent';
     protected $primaryKey = 'id';
 
     public function __construct()
@@ -13,7 +14,8 @@ class Manager_model extends CI_Model {
     }
 
     public function select_all(){
-        $query = $this->db->query('select a.*,b.name as company_name from manager a inner join agent b on a.company_id = b.id;');
+        $sql = "select a.*,b.name as company_name from $this->table a inner join $this->agent_table b on a.company_id = b.id order by a.id desc";
+        $query = $this->db->query($sql);
         return $query->result();
     }
 
@@ -21,10 +23,6 @@ class Manager_model extends CI_Model {
         $this->db->insert($this->table,$data);
         return $this->db->insert_id(); 
     }
-
-
-
-
 
 }
 

@@ -3,21 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Agent_model extends CI_Model {
 
-    protected $table = 'agent';
+    protected $table = 'admin_agent';
     protected $primaryKey = 'id';
     public function __construct()
     {
         parent::__construct();
-        //Do your magic here
     }
 
     function select_all(){
-        $query = $this->db->query('select * from agent');
+        $sql = "select * from $this->table order by id desc";
+        $query = $this->db->query($sql);
         return $query->result();
     }
 
     public function create($data){
-        $this->db->insert('agent',$data);
+        $this->db->insert($this->table,$data);
         return $this->db->insert_id(); 
     }
 
@@ -28,18 +28,16 @@ class Agent_model extends CI_Model {
     }
 
     public function select_agent(){
-        $query = $this->db->query('select id,name from agent');
+        $sql = "select id,name from $this->table";
+        $query = $this->db->query($sql);
         return $query->result();
     }
     public function remove_agent($id)
     {
-        $query_string = 'delete from agent where id=' . $id;
+        $query_string = 'delete from $this->table where id=' . $id;
         $query = $this->db->query($query_string);
         return $query;
     }
-
-    
-    
 
 }
 

@@ -81,7 +81,7 @@ $db['default'] = array(
 	// 'password' => 'root',
 	'database' => 'torun2',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
+	'dbprefix' => 'admin_',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
