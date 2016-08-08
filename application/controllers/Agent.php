@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Agent extends My_Controller {
+class Agent extends MY_Controller {
 
     public function __construct()
     {

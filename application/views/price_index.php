@@ -12,21 +12,26 @@ if(isset($prices)){ ?>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($prices as $row) { 
+            <?php 
+            $ctype = array('DHL','Fedex','UPS','TNT');
+            foreach ($prices as $row) { 
                 ?>
             <tr>
                 <td>
                     <?php echo $row->cname; ?>
                 </td>
                 <td>
-                    <?php echo $row->channel; ?>
+                    <?php echo $ctype[$row->channel]; ?>
                 </td>
                 <td>
-                    <?php echo $row->update_date; ?>
+                    <?php echo $row->shortname; ?>
+                </td>
+                <td>
+                    <?php echo $row->create_time; ?>
                 </td>
                 <td>
                 <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/detail/'.$row->id); ?>">查看</a>
-                <a class="btn btn-danger btn-delete btn-xs" href="<?php echo site_url('admin/delete/'. $row->id); ?>">删除</a>
+                <a class="btn btn-danger btn-delete btn-xs disabled" href="#">删除</a>
                 </td>
             </tr>
             <?php } ?>

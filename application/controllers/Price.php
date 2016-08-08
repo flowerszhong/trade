@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Price extends My_Controller {
+class Price extends MY_Controller {
 
     public function __construct()
     {
@@ -42,6 +42,8 @@ class Price extends My_Controller {
 
         $this->load->library('upload', $config);
 
+        $post_data = $this->input->post();
+
 
         if ( ! $this->upload->do_upload('pricetable'))
         {
@@ -53,13 +55,17 @@ class Price extends My_Controller {
         {
            $upload_data = $this->upload->data();
            $data = $this->parseXLS($upload_data);
-           $post_data = $this->input->post();
            $data['channel'] = $post_data['ctype'];
            $data['cname'] = $post_data['cname'];
+           $company_ids = $post_data['company_id'];
 
-           $insert_result = $this->price_model->insert_price($data);
+           $insert_result = $this->price_model->insert_price($data,$company_ids);
+           if($insert_result){
+                $this->load_template('price_result',array('page_title'=>'新增报价成功','msg'=>'新增报价成功'));
+           }else{
+                $this->load_template('price_result',array('page_title'=>'新增报价失败','msg'=>'新增报价失败'));
+           }
 
-           $this->load_template('price_success',array('page_title'=>'新增报价成功'));
         }
 
         // $this->form_validation->set_rules('name', '标题', 'trim|required|xss_clean|min_length[2]|max_length[60]');

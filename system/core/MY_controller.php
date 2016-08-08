@@ -9,7 +9,6 @@ class My_Controller extends CI_Controller {
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
-        date_default_timezone_set('Asia/Chongqing');
     }
 
     public function load_template($view_name,$view_data = null ){

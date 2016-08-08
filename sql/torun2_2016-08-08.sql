@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-08-07 17:59:05
+-- Generation Time: 2016-08-08 13:44:54
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS `admin_agent` (
   `officephone` varchar(20) NOT NULL,
   `regdate` datetime DEFAULT NULL,
   `available` tinyint(1) DEFAULT NULL,
-  `description` blob,
-  `comments` blob,
+  `description` tinytext,
+  `comments` tinytext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -99,6 +99,20 @@ CREATE TABLE IF NOT EXISTS `admin_bidding` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `admin_ci_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `admin_ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `data` blob NOT NULL,
+  KEY `ci_sessions_timestamp` (`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `admin_consume`
 --
 
@@ -138,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `admin_price` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `channel` tinyint(4) NOT NULL,
   `cname` varchar(20) NOT NULL,
-  `update_date` timestamp NOT NULL,
+  `update_date` datetime DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `available` tinyint(1) NOT NULL DEFAULT '1',
   `company_id` int(11) NOT NULL,

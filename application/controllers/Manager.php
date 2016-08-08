@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Manager extends My_Controller {
+class Manager extends MY_Controller {
     public function __construct()
     {
         parent::__construct();

@@ -34,8 +34,8 @@ class Agent_model extends CI_Model {
     }
     public function remove_agent($id)
     {
-        $query_string = 'delete from $this->table where id=' . $id;
-        $query = $this->db->query($query_string);
+        $sql = "delete from $this->table where id=$id";
+        $query = $this->db->query($sql);
         return $query;
     }
 
