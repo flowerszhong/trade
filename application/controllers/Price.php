@@ -55,6 +55,11 @@ class Price extends MY_Controller {
         {
            $upload_data = $this->upload->data();
            $data = $this->parseXLS($upload_data);
+           if($data && isset($data['errors'])){
+                $view_data['errors'] = $data['errors'];
+                $this->load_template( 'price_create', $view_data );
+                return;
+           }
            $data['channel'] = $post_data['ctype'];
            $data['cname'] = $post_data['cname'];
            $company_ids = $post_data['company_id'];
@@ -67,22 +72,10 @@ class Price extends MY_Controller {
            }
 
         }
+    }
 
-        // $this->form_validation->set_rules('name', '标题', 'trim|required|xss_clean|min_length[2]|max_length[60]');
-        // $this->form_validation->set_rules('description', '内容', 'trim|required|xss_clean');
-        // $this->form_validation->set_rules('officephone', '电话', 'trim|required|xss_clean');
-        // $this->form_validation->set_rules('address', '地址', 'trim|required|xss_clean');
-
-        // if($this->form_validation->run() == True){
-        //     $data = $this->input->post();
-        //     $data['regdate'] = date("Y-m-d H:i:s");
-        //     $data['available'] = 1;
-        //     if (!$this->agent_model->create($data)) {
-        //         return false;
-        //     }else{
-        //         redirect('price/index','refresh');
-        //     }
-        // }
+    private function uploadError()
+    {
 
     }
 
@@ -90,30 +83,38 @@ class Price extends MY_Controller {
     public function parseXLS($upload_data)
     {
 
-        $file = './files/test.xlsx';
         $file = $upload_data['full_path'];
 
          
         //load the excel library
         $this->load->library('excel');
+        $data = array();
          
         //read file from path
         $objPHPExcel = PHPExcel_IOFactory::load($file);
+
+        $sheetCount = $objPHPExcel->getSheetCount();
+        if($sheetCount < 2){
+            $data['errors'] = '上传的报价单至少应当包含两个sheet';
+            return $data;
+        }
          
         //get only the Cell Collection
-        $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+        //get sheet index 1 cell collection
+        $cell_collection_1 = $objPHPExcel->getSheet(0)->getCellCollection();
+        $cell_collection_2 = $objPHPExcel->getSheet(1)->getCellCollection();
          
         //extract to a PHP readable array format
-        $data = array();
         $first_row = array();
         $first_column = array();
-        $arr_data = array();
+        $price_data = array();
+        $area_data = array();
 
 
-        foreach ($cell_collection as $cell) {
-            $column = $objPHPExcel->getActiveSheet()->getCell($cell)->getColumn();
-            $row = $objPHPExcel->getActiveSheet()->getCell($cell)->getRow();
-            $data_value = $objPHPExcel->getActiveSheet()->getCell($cell)->getValue();
+        foreach ($cell_collection_1 as $cell) {
+            $column = $objPHPExcel->getSheet(0)->getCell($cell)->getColumn();
+            $row = $objPHPExcel->getSheet(0)->getCell($cell)->getRow();
+            $data_value = $objPHPExcel->getSheet(0)->getCell($cell)->getValue();
          
             //header will/should be in row 1 only. of course this can be modified to suit your need.
             if ($row == 1) {
@@ -123,14 +124,28 @@ class Price extends MY_Controller {
                 $first_column[$row] = $data_value;
             }
             if($row!==1){
-                $arr_data[$row][$column] = $data_value;
+                $price_data[$row][$column] = $data_value;
             }
         }
-         
+
+        
+
+        foreach ($cell_collection_2 as $cell) {
+            $column = $objPHPExcel->getSheet(1)->getCell($cell)->getColumn();
+            $row = $objPHPExcel->getSheet(1)->getCell($cell)->getRow();
+            $data_value = $objPHPExcel->getSheet(1)->getCell($cell)->getValue();
+            
+            if($row!==1){
+                $area_data[$row][$column] = $data_value;
+            }
+        }
+
         //send the data in an array format
         $data['firstrow'] = json_encode($first_row);
         $data['firstcol'] = json_encode($first_column);
-        $data['pricedata'] = json_encode($arr_data);
+        $data['pricedata'] = json_encode($price_data);
+        $data['areadata'] = json_encode($area_data);
+
         return $data;
     }
 

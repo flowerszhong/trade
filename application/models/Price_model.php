@@ -21,6 +21,11 @@ class Price_model extends CI_Model {
         return $query->result();
     }
 
+    public function query_by_company($company_id)
+    {
+        $sql = "select a.id,"
+    }
+
     public function insert_price($data,$company_ids){
         $this->db->trans_start();
         $this->db->insert($this->table,$data);
@@ -39,7 +44,7 @@ class Price_model extends CI_Model {
     }
     public function get_detail($id)
     {
-        $sql = "select * from $this->table where $id=" . $id;
+        $sql = "select * from $this->table where id=$id";
         $query = $this->db->query($sql);
         $result = $query->first_row('array');
         return $this->jsontoarray($result);
