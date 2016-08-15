@@ -170,19 +170,91 @@ class Price extends MY_Controller {
 
     public function query()
     {
-        $view_data = array();
+        $companies = $this->agent_model->get_all_company();
+        $view_data = array('companies'=>$companies);
         $view_data['page_title'] = $this->page_titles['query'];
         $this->load_template('price_query',$view_data);
     }
 
     public function ajax()
     {
-        $post_data = $this->input->post();
+        $post = $this->input->post();
+        $weight = $post['weight'];
+        $state = $post['state'];
+        $state_en = $post['state_en'];
+        $json_data = array(
+            'ok'=>false,
+            'state'=>$state,
+            'state_en'=>$state_en,
+            'weight'=>$weight
+        );
+        $data = array();
+
+        if($post['company_id'] && $post['state'] && $post['state_en'] and is_numeric($post['weight'])){
+            $company_id = $post['company_id'];
+
+            $query_data = $this->price_model->query_by_company($company_id);
+            $weight = $post['weight'];
+            $state = $post['state'];
+            $state_en = $post['state_en'];
+
+            foreach ($query_data as $query_result) {
+                $query_result = $this->jsontoarray($query_result);
+                $firstrow = $query_result['firstrow'];
+                $firstcol = $query_result['firstcol'];
+                $pricedata = $query_result['pricedata'];
+                $areadata = $query_result['areadata'];
+                
+                $area = $this->get_area($areadata,$state);
+
+                $col_index = $this->get_index($firstrow,$weight);
+                $row_index = $this->get_index($firstcol,$area);
+                $row = $pricedata->$row_index;
+                $cell = $row->$col_index;
+                $ret = array();
+                $ret['price']= $cell;
+                $ret['area']= $area;
+                $ret['cname']= $query_result['cname'];
+                $data[] = $ret;
+            }
+        }
+        if(sizeof($data)>0){
+            $json_data['data']=$data;
+            $json_data['ok']=true;
+        }
+        echo json_encode($json_data);
+    }
+
+    private function jsontoarray($result)
+    {
+        $result['firstrow'] = json_decode($result['firstrow']);
+        $result['firstcol'] = json_decode($result['firstcol']);
+        $result['pricedata'] = json_decode($result['pricedata']);
+        $result['areadata'] = json_decode($result['areadata']);
+        return $result;
+    }
+
+    public function get_area($area,$state)
+    {
+        foreach ($area as $row) {
+            if($row->B == $state){
+                return $row->A;
+            }
+        }
+    }
+
+
+    public function ajax2()
+    {
+        $post = $this->input->post();
         $ret = array(
             'ok'=>false,
         );
-        if($post_data['area']){
-            $price_data = $this->price_model->get_latest();
+
+        if($post['company_id'] && $post['state'] && $post['state_en'] and is_numeric($post['weight'])){
+            $company_id = $post['company_id'];
+
+            $price_data = $this->price_model->query_by_company($company_id);
             $firstrow = $price_data['firstrow'];
             $firstcol = $price_data['firstcol'];
             $pricedata = $price_data['pricedata'];
@@ -203,6 +275,7 @@ class Price extends MY_Controller {
         }
         echo json_encode($ret);
     }
+
 
     private function get_index($data,$match){
         $match_key = null;

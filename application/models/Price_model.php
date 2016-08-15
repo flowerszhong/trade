@@ -22,8 +22,15 @@ class Price_model extends CI_Model {
     }
 
     public function query_by_company($company_id)
-    {
-        $sql = "select a.id,"
+    {   
+        $sql = "select a.id,cname,firstrow,firstcol,pricedata,areadata from $this->table a inner join $this->table_agent_price b on a.id=b.price_id";
+
+        if(isset($company_id) && is_numeric($company_id)){
+            $sql .= " where b.company_id=$company_id";
+        }
+
+        $query=$this->db->query($sql);
+        return $query->result('array');
     }
 
     public function insert_price($data,$company_ids){

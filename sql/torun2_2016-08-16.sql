@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-08-08 13:44:54
+-- Generation Time: 2016-08-15 19:00:46
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -159,6 +159,24 @@ CREATE TABLE IF NOT EXISTS `admin_price` (
   `firstrow` text NOT NULL,
   `firstcol` text NOT NULL,
   `pricedata` mediumtext NOT NULL,
+  `areadata` mediumtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `admin_query_records`
+--
+
+CREATE TABLE IF NOT EXISTS `admin_query_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manager_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `weight` float NOT NULL,
+  `query_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `state` varchar(30) NOT NULL,
+  `ip` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

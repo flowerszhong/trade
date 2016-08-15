@@ -46,24 +46,34 @@ $(function () {
 	$btn_query.on('click', function(event) {
 		event.preventDefault();
 		var url = $('#query-form').attr('action');
-		var area_id= $input_area.attr('data-id');
-		var state = $input_area.val();
+		var state= $input_area.attr('data-state');
+		var state_en= $input_area.attr('data-en');
 		var weight = $input_weight.val();
+		var company_id = $('#choose-company').val();
 		/* Act on the event */
 		$.ajax({
 			url: url,
 			type: 'POST',
 			dataType: 'json',
 			data: {
-				'area':area_id,
+				'state':state,
+				'state_en':state_en,
 				'weight': weight,
-				'state' : state 
+				'company_id': company_id
 			}
 		})
-		.done(function(data) {
-			if(data.ok){
-				var tr = "<tr><td>" + data.area + "</td><td>"+ data.state + '</td><td>'+ data.weight +'KG </td><td>' + data.price + '</td></tr>';
-				$price_result.find('#price-tbody').empty().append(tr);
+		.done(function(response) {
+			if(response.ok){
+				var data = response.data;
+				var state = response.state + '(' + response['state_en'] + ')';
+				var w = response.weight;
+				var trs = '';
+				for (var i = 0; i < data.length; i++) {
+					var _d = data[i];
+					var tr = "<tr><td>"+ _d.cname+"</td><td>" + _d.area + "</td><td>"+ state + '</td><td>'+ w +'KG </td><td>' + _d.price + '</td></tr>';
+					trs += tr;
+				}
+				$price_result.find('#price-tbody').empty().append(trs);
 			}
 		})
 		.fail(function() {
@@ -88,9 +98,11 @@ $(function () {
 
 	$group_body.on('click','span',function(event) {
 		event.preventDefault();
-		var area_id = $(this).attr('data-id');
+		var state = $(this).attr('data-state');
+		var state_en = $(this).attr('data-en');
 		var $input = $('#input-area');
-		$input.attr('data-id',area_id);
+		$input.attr('data-state',state);
+		$input.attr('data-en',state_en);
 		$input.val($(this).text());
 		$select_tool.hide();
 	});
@@ -117,7 +129,7 @@ $(function () {
 			var area_id = area['area_id'];
 			var state = area['state'];
 			var state_en = area['state_en'];
-			group += '<span data-id="'+area_id+'">' + state + '(' + state_en + ')' + '</span>';
+			group += '<span data-state="'+state+'" data-en="'+state_en+'">' + state + '(' + state_en + ')' + '</span>';
 		}
 		$("#group-body").empty().append(group_title,group);
 	});

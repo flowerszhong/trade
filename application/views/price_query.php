@@ -1,7 +1,19 @@
 <form action="<?php echo site_url('price/ajax'); ?>" id="query-form">
     <table>
         <tr>
-            <td>国际快递</td>
+            <td>
+            <select name="company" id="choose-company" class="form-control">
+            <?php 
+            foreach ($companies as $company) { ?>
+                <option value="<?php echo $company['id'] ?>"><?php echo $company['shortname'] ?></option>
+            <?php }
+
+             ?>
+            </select>
+                
+
+
+            </td>
             <td>深圳市[SHENZHEN]</td>
             <td>
                 <input type="text" id="input-area" name="s" class="form-control" placeholder="请输入目标国家" action="<?php echo site_url('price/ajax_area'); ?>">
@@ -20,6 +32,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th>报价名称</th>
                 <th>区域</th>
                 <th>国家（地区）</th>
                 <th>重量</th>

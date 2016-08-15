@@ -39,6 +39,13 @@ class Agent_model extends CI_Model {
         return $query;
     }
 
+    public function get_all_company()
+    {
+        $sql = "select id,shortname from $this->table";
+        $query = $this->db->query($sql);
+        return $query->result('array');
+    }
+
 }
 
 /* End of file Agent_model.php */
