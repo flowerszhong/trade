@@ -22,4 +22,5 @@ class Welcome extends MY_Controller {
 	{
 		$this->load_template('welcome_message');
 	}
+
 }

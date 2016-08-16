@@ -16,16 +16,16 @@ $attributes = array('class'=>'','id'=>'create-manager');
         <input type="text" name="name" class="form-control">
     </div>
     <div class="form-group">
-        <label for="">操作员登录名</label>
-        <input type="text" name="nickname" class="form-control">
+        <label for="">账号</label><span class="hint">请输入字母及数字</span>
+        <input type="text" name="username" class="form-control">
     </div>    
     <div class="form-group">
-        <label for="">默认密码</label>
-        <input type="text" name="defaultpassword" placeholder="默认为：123456" class="form-control">
+        <label for="">密码</label>
+        <input type="text" name="pwd" placeholder="不填写默认为：123456" class="form-control">
     </div>
     <div class="form-group">
-        <label for="">可操作公司</label>
-        <select name="company_id">
+        <label for="">可操作公司</label> <br>
+        <select name="company_id" class="form-control">
             <?php foreach ($agents as $row) { ?>
                 <option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
             <?php } ?>

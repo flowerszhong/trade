@@ -24,6 +24,31 @@ class Manager_model extends CI_Model {
         return $this->db->insert_id(); 
     }
 
+    public function checkLogin($username,$pwd)
+    {
+        $manager_id = $this->get_user_id($username);
+        if($manager_id){
+            $sql = "select * from $this->table where id=$manager_id";
+            $query = $this->db->query($sql);
+            $row = $query->result('array');
+            var_dump($row);
+        }else{
+            return false;
+        }
+    }
+
+    public function get_user_id($username)
+    {
+        $sql = "select id from $this->table where username='$username' limit 1";
+        $query = $this->db->query($sql);
+        $row = $query->row();
+        if($row){
+            return $row->id;
+        }else{
+            return false;
+        }
+    }
+
 }
 
 /* End of file Manager_model.php */

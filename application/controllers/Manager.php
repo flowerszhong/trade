@@ -30,6 +30,17 @@ class Manager extends MY_Controller {
 
         $data = $this->input->post();
         $data['regdate'] = date("Y-m-d H:i:s");
+        $salt1 = rand(4,4444);
+        $salt2 = rand(6,666666);
+        $pwd = $data['pwd'];
+        if(is_null($pwd)){
+            $pwd = '123456';
+        }
+        $pwd = sha1($salt2. $salt2 . $pwd);
+
+        $data['salt1'] = $salt1;
+        $data['salt2'] = $salt2;
+        $data['pwd'] = $pwd;
 
         if (!$this->manager_model->create($data)) {
             return false;
@@ -37,8 +48,6 @@ class Manager extends MY_Controller {
             redirect('manager/index','refresh');
         }
     }
-
-
 
 }
 

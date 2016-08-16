@@ -9,6 +9,7 @@ class My_Controller extends CI_Controller {
         $this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
+        $this->checkLogin();
         date_default_timezone_set('Asia/Chongqing');
     }
 
@@ -16,6 +17,13 @@ class My_Controller extends CI_Controller {
         $main_content = $this->load->view($view_name, $view_data, true);
         $data=array('main_content'=>$main_content);
         $this->load->view('template',$data);
+    }
+
+    public function checkLogin()
+    {
+        if(!$this->session->userdata('manager')){
+            redirect('login/index','refresh');
+        }
     }
 
 }
