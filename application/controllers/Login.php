@@ -26,9 +26,12 @@ class Login extends CI_Controller {
     	if($this->form_validation->run() == True){
     		$username = $post['username'];
     		$pwd = $post['password'];
-    	    if (!$this->manager_model->checkLogin($username,$pwd)) {
-    	        return false;
+            $login_data = $this->manager_model->checkLogin($username,$pwd);
+    	    if (!$login_data) {
+                $view_data = array('error'=>'账号或密码不正确');
+    	        $this->load->view('login_index',$view_data);
     	    }else{
+                $this->session->set_userdata('manager',$login_data);
     	        redirect('welcome/index','refresh');
     	    }
     	}else{
@@ -52,8 +55,8 @@ class Login extends CI_Controller {
 
     public function logout()
     {
-        $this->session->unset_userdata('username');
-        redirect('index','refresh');
+        $this->session->unset_userdata('manager');
+        redirect('welcome/index','refresh');
     }
 
 }

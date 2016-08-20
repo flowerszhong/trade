@@ -54,6 +54,11 @@
             <?php echo validation_errors(); ?>
         </div>
         <?php } ?>
+        <?php if($error){ ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $error; ?>
+        </div>
+        <?php } ?>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       <?php form_close(); ?>

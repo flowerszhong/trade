@@ -23,6 +23,10 @@ class My_Controller extends CI_Controller {
     {
         if(!$this->session->userdata('manager')){
             redirect('login/index','refresh');
+        }else{
+            $session_data = $this->session->userdata('manager');
+            $this->manager_name = $session_data['name'];
+            $this->manager_power = $session_data['power'];
         }
     }
 

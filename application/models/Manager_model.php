@@ -30,8 +30,9 @@ class Manager_model extends CI_Model {
         if($manager_id){
             $sql = "select * from $this->table where id=$manager_id";
             $query = $this->db->query($sql);
-            $row = $query->result('array');
-            var_dump($row);
+            $row = $query->first_row('array');
+            // var_dump($row);
+            return $row;
         }else{
             return false;
         }
