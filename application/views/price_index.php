@@ -5,7 +5,6 @@ if(isset($prices)){ ?>
         <thead>
             <tr>
                 <th>报价名称</th>
-                <th>渠道类型</th>
                 <th>公司名称</th>
                 <th>最后更新日期</th>
                 <th>操作</th>
@@ -19,9 +18,6 @@ if(isset($prices)){ ?>
             <tr>
                 <td>
                     <?php echo $row->cname; ?>
-                </td>
-                <td>
-                    <?php echo $ctype[$row->channel]; ?>
                 </td>
                 <td>
                     <?php echo $row->shortname; ?>

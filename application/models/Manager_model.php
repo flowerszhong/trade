@@ -28,10 +28,23 @@ class Manager_model extends CI_Model {
     {
         $manager_id = $this->get_user_id($username);
         if($manager_id){
-            $sql = "select * from $this->table where id=$manager_id";
+            $sql = "select a.*,b.shortname from $this->table a inner join $this->agent_table b on a.company_id = b.id where a.id=$manager_id";
             $query = $this->db->query($sql);
             $row = $query->first_row('array');
             // var_dump($row);
+            if($row){
+                $salt2 = $row['salt2'];
+                $pwd_row = $row['pwd'];
+                $pwd1 = sha1($salt2. $salt2 . $pwd);
+                if($pwd_row == $pwd1){
+                    return $row;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
             return $row;
         }else{
             return false;

@@ -54,7 +54,7 @@
             <?php echo validation_errors(); ?>
         </div>
         <?php } ?>
-        <?php if($error){ ?>
+        <?php if(isset($error)){ ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $error; ?>
         </div>

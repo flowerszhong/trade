@@ -6,6 +6,7 @@ class Price_model extends CI_Model {
     private $table = 'admin_price';
     private $table_agent_price = 'admin_agent_price';
     private $table_agent = 'admin_agent';
+    private $table_history = 'admin_history';
     protected $primaryKey = 'id';
 
     public function __construct()
@@ -71,6 +72,13 @@ class Price_model extends CI_Model {
         $query = $this->db->query($sql);
         $result = $query->row_array();
         return $this->jsontoarray($result);
+    }
+
+    public function logging($record)
+    {
+        if($record){
+            $this->db->insert($this->table_history,$record);
+        }
     }
 
 }

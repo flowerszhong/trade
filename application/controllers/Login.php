@@ -27,12 +27,13 @@ class Login extends CI_Controller {
     		$username = $post['username'];
     		$pwd = $post['password'];
             $login_data = $this->manager_model->checkLogin($username,$pwd);
+            var_dump($login_data);
     	    if (!$login_data) {
                 $view_data = array('error'=>'账号或密码不正确');
     	        $this->load->view('login_index',$view_data);
     	    }else{
                 $this->session->set_userdata('manager',$login_data);
-    	        redirect('welcome/index','refresh');
+    	        // redirect('welcome/index','refresh');
     	    }
     	}else{
     		$this->load->view('login_index');

@@ -46,9 +46,14 @@ $(function () {
 	$btn_query.on('click', function(event) {
 		event.preventDefault();
 		var url = $('#query-form').attr('action');
-		var state= $input_area.attr('data-state');
-		var state_en= $input_area.attr('data-en');
+        var area = $input_area.val();
 		var weight = $input_weight.val();
+        if(!(area && weight)){
+            alert('查询条件不完整，请输入国家或重量！');
+            return false;
+        }
+        var state= $input_area.attr('data-state') || area;
+        var state_en= $input_area.attr('data-en');
 		var company_id = $('#choose-company').val();
 		/* Act on the event */
 		$.ajax({

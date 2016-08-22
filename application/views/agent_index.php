@@ -31,11 +31,11 @@ if(isset($agents)){ ?>
                 </td>
                 <td>
                 <a class="btn btn-warning btn-xs" href="<?php echo site_url('agent/detail/'.$row->id); ?>">下载</a>
-                <a class="btn btn-danger btn-delete btn-xs" href="<?php echo site_url('agent/delete/'. $row->id); ?>">更新</a>
+                <a class="btn btn-danger btn-delete btn-xs" href="<?php echo site_url('price/index/'. $row->id); ?>">更新</a>
                 </td>
                 <td>
-                <a class="btn btn-warning btn-xs" href="<?php echo site_url('agent/delete/'.$row->id); ?>">更新</a>
-                <a class="btn btn-warning btn-xs" href="<?php echo site_url('agent/delete/'.$row->id); ?>">交结</a>
+                <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/index/'.$row->id); ?>">更新</a>
+                <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/index/'.$row->id); ?>">冻结</a>
                 <a class="btn btn-danger btn-delete btn-xs" href="<?php echo site_url('agent/delete/'. $row->id); ?>">删除</a>
                 </td>
             </tr>

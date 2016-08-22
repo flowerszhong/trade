@@ -19,7 +19,7 @@ if(isset($managers)){ ?>
                 ?>
             <tr>
                 <td>
-                    <?php echo $row->nickname; ?>
+                    <?php echo $row->username; ?>
                 </td>
                 <td>
                     <?php echo $row->name; ?>

@@ -1,8 +1,3 @@
-<?php $session_data = $this->session->userdata('manager');
-if($session_data){
- ?>
-
-
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -17,6 +12,11 @@ if($session_data){
                             </div>
                             <!-- /input-group -->
                         </li>
+
+                        <?php echo $this->manager_power; ?>
+                        
+                        <?php if( $this->manager_power > 10){ ?>
+
                         <li class="active">
                             <a href="<?php echo site_url( 'agent/index'); ?>"><i class="fa fa-dashboard fa-fw"></i> 人员管理 <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -28,6 +28,7 @@ if($session_data){
                                 </li>
                             </ul>
                         </li>
+                        <?php } ?>
                         <li class="active">
                             <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-table fa-fw"></i> 报价查询</a>
                             <ul class="nav nav-second-level">
@@ -37,6 +38,9 @@ if($session_data){
                                 <li>
                                     <a href="<?php echo site_url('price/query'); ?>">报价查询</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo site_url('price/history'); ?>">报价查询记录</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -45,9 +49,3 @@ if($session_data){
             </div>
             <!-- /.navbar-static-side -->
 
-
-<?php } 
-
-echo "no login"
-
-?>

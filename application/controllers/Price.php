@@ -14,6 +14,7 @@ class Price extends MY_Controller {
             'create'=>'新增报价',
             'detail'=>'报价明细',
             'query'=>'报价查询',
+            'history'=>'报价查询记录',
         );
     }
 
@@ -60,7 +61,7 @@ class Price extends MY_Controller {
                 $this->load_template( 'price_create', $view_data );
                 return;
            }
-           $data['channel'] = $post_data['ctype'];
+           // $data['channel'] = $post_data['ctype'];
            $data['cname'] = $post_data['cname'];
            $company_ids = $post_data['company_id'];
 
@@ -168,12 +169,26 @@ class Price extends MY_Controller {
 
     }
 
+    public function history()
+    {
+        $companies = $this->get_all_company();
+        $view_data = array('companies'=>$companies);
+        $view_data['page_title'] = $this->page_titles['history'];
+        $this->load_template( 'price_history', $view_data );
+    }
+
     public function query()
     {
-        $companies = $this->agent_model->get_all_company();
+        $companies = $this->get_all_company();
         $view_data = array('companies'=>$companies);
         $view_data['page_title'] = $this->page_titles['query'];
         $this->load_template('price_query',$view_data);
+    }
+
+    public function get_all_company()
+    {
+        $companies = $this->agent_model->get_all_company();
+        return $companies;
     }
 
     public function ajax()
@@ -190,7 +205,8 @@ class Price extends MY_Controller {
         );
         $data = array();
 
-        if($post['company_id'] && $post['state'] && $post['state_en'] and is_numeric($post['weight'])){
+        if($post['company_id'] && $post['state'] && is_numeric($post['weight'])){
+            $this->logging($weight,$state);
             $company_id = $post['company_id'];
 
             $query_data = $this->price_model->query_by_company($company_id);
@@ -225,6 +241,19 @@ class Price extends MY_Controller {
         echo json_encode($json_data);
     }
 
+    public function logging($weight,$state)
+    {
+        $company_id = $this->company_id;
+        $ip = $this->getIp();
+        $record = array(
+            'company_id'=>$company_id,
+            'state'=>$state,
+            'weight'=>$weight,
+            'ip'=>$ip,
+            );
+        $this->price_model->logging($record);
+    }
+
     private function jsontoarray($result)
     {
         $result['firstrow'] = json_decode($result['firstrow']);
@@ -241,6 +270,19 @@ class Price extends MY_Controller {
                 return $row->A;
             }
         }
+    }
+
+    private function getIp()
+    {
+        $ip = null;
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
 
