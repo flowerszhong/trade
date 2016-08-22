@@ -17,7 +17,11 @@ class Price_model extends CI_Model {
     }
 
     public function select_all($company_id){
-        $sql = "SELECT a.id,a.cname,a.channel,b.create_time,c.shortname FROM $this->table a inner join $this->table_agent_price b on a.id=b.price_id inner join $this->table_agent c on b.company_id = c.id order by a.id desc";
+        if($this->manager_power>10){
+            $sql = "SELECT a.id,a.cname,a.channel,b.create_time,c.shortname FROM $this->table a inner join $this->table_agent_price b on a.id=b.price_id inner join $this->table_agent c on b.company_id = c.id where c.id <> $this->company_id order by a.id desc";
+        }else{
+            $sql = "SELECT a.id,a.cname,a.channel,b.create_time,c.shortname FROM $this->table a inner join $this->table_agent_price b on a.id=b.price_id inner join $this->table_agent c on b.company_id = c.id where c.id = $this->company_id order by a.id desc";
+        }
         $query = $this->db->query($sql);
         return $query->result();
     }
@@ -79,6 +83,20 @@ class Price_model extends CI_Model {
         if($record){
             $this->db->insert($this->table_history,$record);
         }
+    }
+
+    public function get_history($startdate,$enddate,$company_id = null)
+    {
+        $sql = "select a.*,b.shortname from $this->table_history a inner join $this->table_agent b on a.company_id = b.id where date(a.querytime) between '$startdate' and '$enddate'";
+        if($company_id && is_numeric($company_id)){
+            $sql .= " and company_id= $company_id";
+        }
+
+        $sql .= " limit 20";
+
+        $query = $this->db->query($sql);
+        $result = $query->result();
+        return $result;
     }
 
 }

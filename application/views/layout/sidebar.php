@@ -12,8 +12,6 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-
-                        <?php echo $this->manager_power; ?>
                         
                         <?php if( $this->manager_power > 10){ ?>
 
@@ -38,9 +36,13 @@
                                 <li>
                                     <a href="<?php echo site_url('price/query'); ?>">报价查询</a>
                                 </li>
+                                <?php 
+                                if($this->manager_power > 10 ){
+                                 ?>
                                 <li>
                                     <a href="<?php echo site_url('price/history'); ?>">报价查询记录</a>
                                 </li>
+                                <?php } ?>
                             </ul>
                         </li>
                     </ul>

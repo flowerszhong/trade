@@ -33,7 +33,7 @@ class Manager extends MY_Controller {
         $salt1 = rand(4,4444);
         $salt2 = rand(6,666666);
         $pwd = $data['pwd'];
-        if(is_null($pwd)){
+        if(is_null($pwd) or empty($pwd)){
             $pwd = '123456';
         }
         $pwd = sha1($salt2. $salt2 . $pwd);

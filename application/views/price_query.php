@@ -2,6 +2,8 @@
     <table>
         <tr>
             <td>
+
+            <?php if($this->manager_power > 10){ ?>
             <select name="company" id="choose-company" class="form-control">
             <?php 
             foreach ($companies as $company) { ?>
@@ -10,6 +12,12 @@
 
              ?>
             </select>
+
+            <?php }else{ ?>
+
+            <label for=""> <?php echo $this->company_name; ?> </label>
+
+            <?php } ?>
                 
 
 

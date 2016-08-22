@@ -1,4 +1,9 @@
+<?php if($this->manager_power > 10){ ?>
+
 <a href="<?php echo site_url( 'price/create'); ?>" class="btn btn-primary">新增报价</a>
+
+<?php } ?>
+
 <?php 
 if(isset($prices)){ ?>
     <table class="table table-hover">

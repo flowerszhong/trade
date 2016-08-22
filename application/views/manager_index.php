@@ -44,7 +44,6 @@ if(isset($managers)){ ?>
                 <a class="btn btn-warning btn-xs" href="<?php echo base_url('manager/detail/'.$row->id); ?>">更新</a>
                 <a class="btn btn-warning btn-xs" href="<?php echo base_url('manager/detail/'.$row->id); ?>">权限</a>
                 <a class="btn btn-warning btn-xs" href="<?php echo base_url('manager/detail/'.$row->id); ?>">冻结</a>
-                <a class="btn btn-danger btn-delete btn-xs" href="<?php echo base_url('manager/delete/'. $row->id); ?>">删除</a>
                 </td>
             </tr>
             <?php } ?>

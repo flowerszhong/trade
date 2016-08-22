@@ -205,6 +205,10 @@ class Price extends MY_Controller {
         );
         $data = array();
 
+        if($this->manager_power<10){
+            $post['company_id'] = $this->company_id;
+        }
+
         if($post['company_id'] && $post['state'] && is_numeric($post['weight'])){
             $this->logging($weight,$state);
             $company_id = $post['company_id'];
@@ -283,6 +287,18 @@ class Price extends MY_Controller {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         return $ip;
+    }
+
+    public function historyquery()
+    {
+        $post = $this->input->post();
+        if($post){
+            $startdate = $post['startdate'];
+            $enddate = $post['enddate'];
+            $company_id = $post['company_id'];
+            $records = $this->price_model->get_history($startdate,$enddate,$company_id);
+            echo json_encode($records);
+        }
     }
 
 

@@ -31,7 +31,7 @@
 
 </style>
 
-<form class="form-horizontal" id="history-form" action="<?php echo site_url('query/historyquery'); ?>">
+<form class="form-horizontal" id="history-form" action="<?php echo site_url('price/historyquery'); ?>">
 <table class="history-query">
     <tr>
         <td>
@@ -60,7 +60,7 @@
         </td>
         <td>
             <br>
-            <input type="button" class="btn btn-primary" value="查询">
+            <input type="button" class="btn btn-primary" value="查询" id="btn-history">
         </td>
     </tr>
 </table>
@@ -87,6 +87,9 @@
             查询IP地址
         </th>
     </thead>
+    <tbody id="history-tbody">
+    
+    </tbody>
 
 </table>
 
