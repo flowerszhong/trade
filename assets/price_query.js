@@ -115,16 +115,21 @@ $(function () {
 	$group_header.on('click', 'b', function(event) {
 		event.preventDefault();
 		var key = $(this).text();
-		var area_json = window.areajson;
-
-		$(this).addClass('current').siblings().removeClass('current');
-
-		var filter_result = area_json.filter(function (area) {
-			var state_en = area['state_en'];
-			if(state_en.toUpperCase().charAt(0)==this){
-				return true;
-			}
-		},key);
+        $(this).addClass('current').siblings().removeClass('current');
+        
+        var filter_result = [];
+        if(key == '常用国家'){
+            filter_result = window['common_counties'];
+        }else{
+            var area_json = window.areajson;
+            filter_result = area_json.filter(function (area) {
+                var state_en = area['state_en'];
+                if(state_en.toUpperCase().charAt(0)==this){
+                    return true;
+                }
+            },key);
+        }
+		
 
 		var group = "";
 		var group_title = "<h3>" + key + '</h3>';

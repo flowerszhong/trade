@@ -57,6 +57,7 @@
 
 <div id="area-select-tool">
     <div id="group-header">
+        <b>常用国家</b>
         <b>A</b>
         <b>B</b>
         <b>C</b>
@@ -83,6 +84,7 @@
         <b>X</b>
         <b>Y</b>
         <b>Z</b>
+        <div class="clearfix"></div>
     </div>
     <div id="group-body">
         

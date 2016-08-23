@@ -899,3 +899,47 @@ window.areajson = [{
 	"state": "巴拉圭",
 	"state_en": "PARAGUAY"
 }];
+
+
+
+window.common_counties = [{
+    "area_id": "9",
+    "state": "美国",
+    "state_en": "UNITED STATES OF AMERICA"
+},{
+    "area_id": "10",
+    "state": "加拿大",
+    "state_en": "CANADA"
+}, {
+    "area_id": "12",
+    "state": "法国",
+    "state_en": "FRANCE"
+}, {
+    "area_id": "12",
+    "state": "德国",
+    "state_en": "GERMANY"
+},{
+    "area_id": "3",
+    "state": "日本",
+    "state_en": "JAPAN"
+}, {
+    "area_id": "4",
+    "state": "澳大利亚",
+    "state_en": "AUSTRALIA"
+}, {
+    "area_id": "12",
+    "state": "意大利",
+    "state_en": "ITALY"
+}, {
+    "area_id": "17",
+    "state": "俄罗斯",
+    "state_en": "RUSSIAN FEDERATION, THE"
+}, {
+    "area_id": "12",
+    "state": "英国",
+    "state_en": "UNITED KINGDOM"
+}, {
+    "area_id": "13",
+    "state": "西班牙",
+    "state_en": "SPAIN"
+}];

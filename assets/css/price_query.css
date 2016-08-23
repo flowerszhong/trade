@@ -1,9 +1,12 @@
+.clearfix{
+	clear: both;
+}
 #query-form table td{
 	padding: 5px;
 }
 
 #price-result table{
-	max-width: 600px;
+	max-width: 660px;
 }
 
 #input-area{
@@ -13,7 +16,7 @@
 #area-select-tool{
 	padding:10px;
 	min-height: 400px;
-	max-width:600px;
+	max-width:660px;
 	border:1px solid green;
 	position: fixed;
 	display: none;
@@ -32,14 +35,15 @@
 	background: #eee;
 }
 
-
 #group-body{
 	clear:both;
-	max-width: 600px;
+	max-width: 660px;
 }
 
 #group-body h3{
 	border-bottom: 1px dashed #ccc;
+	margin-top: 10px;
+	margin-bottom: 5px;
 }
 #group-body span{
 	float: left;
