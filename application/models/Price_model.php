@@ -92,7 +92,7 @@ class Price_model extends CI_Model {
             $sql .= " and company_id= $company_id";
         }
 
-        $sql .= " limit 20";
+        $sql .= " order by querytime desc limit 20 ";
 
         $query = $this->db->query($sql);
         $result = $query->result();

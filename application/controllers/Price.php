@@ -226,16 +226,19 @@ class Price extends MY_Controller {
                 $areadata = $query_result['areadata'];
                 
                 $area = $this->get_area($areadata,$state);
+                if($area){
+                    $col_index = $this->get_index($firstrow,$weight);
+                    $row_index = $this->get_index($firstcol,$area);
+                    $row = $pricedata->$row_index;
+                    $cell = $row->$col_index;
+                    $ret = array();
+                    $ret['price']= $cell;
+                    $ret['area']= $area;
+                    $ret['cname']= $query_result['cname'];
+                    $data[] = $ret;
+                }
 
-                $col_index = $this->get_index($firstrow,$weight);
-                $row_index = $this->get_index($firstcol,$area);
-                $row = $pricedata->$row_index;
-                $cell = $row->$col_index;
-                $ret = array();
-                $ret['price']= $cell;
-                $ret['area']= $area;
-                $ret['cname']= $query_result['cname'];
-                $data[] = $ret;
+               
             }
         }
         if(sizeof($data)>0){
