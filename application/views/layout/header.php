@@ -77,7 +77,11 @@
         <?php 
         if(isset($page_title)){ ?>
             <div class="breadcrumbs">
-                <a href="<?php echo site_url(); ?>">首页</a> &raquo; <span><?php echo $page_title; ?></span>
+                <a href="<?php echo site_url(); ?>">首页</a> 
+                &raquo; 
+                <span><?php echo $this->company_name; ?></span>
+                &raquo; 
+                <span><?php echo $page_title; ?></span>
             </div>
         <?php }
          ?>

@@ -22,10 +22,25 @@
     <![endif]-->
 
     <style>
+    .form-signin-heading{
+        color: #fff;
+    }
+    .login{
+        background-color: #666 !important;
+        background: url(../assets/images/login_bg.jpg) no-repeat;
+        background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        -webkit-background-size: 100% 100%;
+        background-attachment: fixed;
+    }
     .form-signin {
         max-width: 400px;
         padding: 15px;
-        margin: 0 auto;
+        margin: 60px auto;
+    }
+
+    .form-signin label{
+        color: #fff;
     }
     .form-signin-heading{
       font-size: 24px;
@@ -34,7 +49,7 @@
 
   </head>
 
-  <body>
+  <body class="login">
 
     <div class="container">
 
@@ -42,6 +57,7 @@
         <h2 class="form-signin-heading">欢迎使用途瑞物流管理系统</h2>
         <label for="account" class="sr-only">账号</label>
         <input type="input" id="inputAccount" class="form-control" name="username" placeholder="请输入账号" required autofocus>
+        <br>
         <label for="inputPassword" class="sr-only">密码</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="请输入密码" required>
         <div class="checkbox">

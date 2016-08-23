@@ -56,7 +56,7 @@ class Login extends CI_Controller {
     public function logout()
     {
         $this->session->unset_userdata('manager');
-        redirect('welcome/index','refresh');
+        redirect('login/index','refresh');
     }
 
 }
