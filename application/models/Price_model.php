@@ -30,7 +30,7 @@ class Price_model extends CI_Model {
     {   
         $sql = "select a.id,cname,firstrow,firstcol,pricedata,areadata from $this->table a inner join $this->table_agent_price b on a.id=b.price_id";
 
-        if(isset($company_id) && is_numeric($company_id)){
+        if(isset($company_id) && is_numeric($company_id) && !empty($company_id)){
             $sql .= " where b.company_id=$company_id";
         }
 

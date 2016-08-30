@@ -5,6 +5,7 @@
 
             <?php if($this->manager_power > 10){ ?>
             <select name="company" id="choose-company" class="form-control">
+                <option value="<?php echo $this->company_id; ?>">请选择公司</option>
             <?php 
             foreach ($companies as $company) { ?>
                 <option value="<?php echo $company['id'] ?>"><?php echo $company['shortname'] ?></option>
@@ -44,7 +45,8 @@
                 <th>区域</th>
                 <th>国家（地区）</th>
                 <th>重量</th>
-                <th>报价</th>
+                <th>单价</th>
+                <th>运费</th>
             </tr>
         </thead>
         <tbody id="price-tbody">

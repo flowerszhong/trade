@@ -26,8 +26,9 @@ $attributes = array('class'=>'','id'=>'create-manager');
     <div class="form-group">
         <label for="">可操作公司</label> <br>
         <select name="company_id" class="form-control">
+                <option value="">请选择公司</option>
             <?php foreach ($agents as $row) { ?>
-                <option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
+                <option value="<?php echo $row['id']; ?>"><?php echo $row['shortname']; ?></option>
             <?php } ?>
         </select>
     </div>

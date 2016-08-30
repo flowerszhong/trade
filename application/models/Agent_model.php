@@ -27,11 +27,6 @@ class Agent_model extends CI_Model {
         return $this->db->insert_id(); 
     }
 
-    public function select_agent(){
-        $sql = "select id,name from $this->table";
-        $query = $this->db->query($sql);
-        return $query->result();
-    }
     public function remove_agent($id)
     {
         $sql = "delete from $this->table where id=$id";
@@ -39,9 +34,12 @@ class Agent_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_company()
+    public function get_all_company($include_admin=false)
     {
-        $sql = "select id,shortname from $this->table";
+        $sql = "select id,shortname from $this->table where id<>$this->company_id";
+        if($include_admin){
+            $sql = "select id,shortname from $this->table";
+        }
         $query = $this->db->query($sql);
         return $query->result('array');
     }

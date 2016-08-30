@@ -39,20 +39,6 @@ class Login extends CI_Controller {
     	}
     }
 
-    public function process()
-    {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-        if ($username && $password) {
-            // redirect('/article/index',true);
-            $this->session->set_userdata('username',$username);
-            redirect('article/index','refresh');
-        }else{
-            $data['error'] = 'Username InValid';
-            $this->load->view('login', $data);
-        }
-    }
-
     public function logout()
     {
         $this->session->unset_userdata('manager');

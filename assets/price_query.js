@@ -75,7 +75,13 @@ $(function () {
 				var trs = '';
 				for (var i = 0; i < data.length; i++) {
 					var _d = data[i];
-					var tr = "<tr><td>"+ _d.cname+"</td><td>" + _d.area + "</td><td>"+ state + '</td><td>'+ w +'KG </td><td>' + _d.price + '</td></tr>';
+					var single = _d.price;
+					var sum = (single * w).toFixed(2);
+					if(w<=20.5){
+						single = '';
+						sum = _d.price;
+					}
+					var tr = "<tr><td>"+ _d.cname+"</td><td>" + _d.area + "</td><td>"+ state + '</td><td>'+ w +'KG </td><td>' + single + '</td><td>'+ sum +'</td></tr>';
 					trs += tr;
 				}
 				$price_result.find('#price-tbody').empty().append(trs);

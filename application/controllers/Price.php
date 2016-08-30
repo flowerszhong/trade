@@ -30,9 +30,17 @@ class Price extends MY_Controller {
     public function create($company_id = null){
         $view_data = array();
         $view_data['page_title'] = $this->page_titles['create'];
-        $view_data['agents'] = $this->agent_model->select_agent();
+        $view_data['agents'] = $this->agent_model->get_all_company();
 
         if(!$this->input->post()){
+            $this->load_template('price_create',$view_data);
+            return true;
+        }
+
+        $this->form_validation->set_rules('cname', '报价名称', 'trim|required|xss_clean|min_length[2]|max_length[24]');
+        $this->form_validation->set_rules('company_id[]', '关联公司', 'trim|required');
+
+        if($this->form_validation->run() == False){
             $this->load_template('price_create',$view_data);
             return true;
         }
@@ -191,6 +199,7 @@ class Price extends MY_Controller {
         return $companies;
     }
 
+    //query price ajax request
     public function ajax()
     {
         $post = $this->input->post();
@@ -213,6 +222,9 @@ class Price extends MY_Controller {
             $this->logging($weight,$state);
             $company_id = $post['company_id'];
 
+            if($this->manager_power > 10 && $this->company_id == $company_id){
+                $company_id = null;
+            }
             $query_data = $this->price_model->query_by_company($company_id);
             $weight = $post['weight'];
             $state = $post['state'];
@@ -304,7 +316,8 @@ class Price extends MY_Controller {
         }
     }
 
-
+    //old code
+    //useless
     public function ajax2()
     {
         $post = $this->input->post();

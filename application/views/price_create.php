@@ -23,6 +23,12 @@
 </div>
 <?php } ?> 
 
+<?php if(validation_errors()){ ?>
+<div class="alert alert-danger" role="alert">
+    <?php echo validation_errors(); ?>
+</div>
+<?php } ?>
+
 <div class="panel panel-success">
 
     <div class="panel-heading"><?php echo $page_title; ?>
@@ -49,15 +55,12 @@ $attributes = array('class'=>'','id'=>'create-manager');
         <label for="">关联公司</label>
         <span class="hint">(<b>*</b>必须要选择关联公司)</span>
         <br>
-        <?php 
-        foreach ($agents as $key => $row) { ?>
-            <span class="c-span">
-                <input type="checkbox" name="company_id[]" id="<?php echo 'company_' . $row->id; ?>" value="<?php echo $row->id; ?>"> <label for="<?php echo 'company_' . $row->id; ?>"><?php echo $row->name; ?></label>
-            </span>
-            
-        <?php }
-
-         ?>
+        <select name="company_id[]" class="form-control">
+                 <option value="">请选择公司</option>
+             <?php foreach ($agents as $row) { ?>
+                 <option value="<?php echo $row['id']; ?>"><?php echo $row['shortname']; ?></option>
+             <?php } ?>
+         </select>
 
     </div>
 

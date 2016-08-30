@@ -23,7 +23,7 @@ class Manager extends MY_Controller {
     public function create(){
         $view_data = array();
         if(!$this->input->post()){
-            $view_data['agents'] = $this->agent_model->select_agent();
+            $view_data['agents'] = $this->agent_model->get_all_company();
             $this->load_template('manager_create',$view_data);
             return true;
         }
