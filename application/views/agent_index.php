@@ -41,5 +41,15 @@ if(isset($agents)){ ?>
             <?php } ?>
         </tbody>
     </table>
+
+
+
+
+
 <?php }
+ ?>
+
+
+<?php 
+echo $this->pagination->create_links();
  ?>

@@ -21,6 +21,29 @@ class Agent_model extends CI_Model {
         return $this->db->insert_id(); 
     }
 
+    public function record_count($include_admin=False)
+    {
+        if(!$include_admin){
+            $this->db->where('id!=',$this->company_id);
+        }
+        return $this->db->count_all_results($this->table);
+    }
+
+    public function fetch_agents($limit, $start) {
+        $this->db->limit($limit, $start);
+        $this->db->where('id!=',$this->company_id);
+        $this->db->order_by('id','desc');
+        $query = $this->db->get($this->table);
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+   }
+
     public function insert_data($data)
     {
         $this->db->insert($this->table,$data);
