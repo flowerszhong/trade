@@ -85,6 +85,23 @@ class Price_model extends CI_Model {
         }
     }
 
+    public function record_count()
+    {
+        return $this->db->count_all_results($this->table);
+    }
+
+    public function fetch_prices($limit, $start=0) {
+        $start = $limit * $start;
+
+        if($this->manager_power>10){
+            $sql = "SELECT a.id,a.cname,a.channel,b.create_time,c.shortname FROM $this->table a inner join $this->table_agent_price b on a.id=b.price_id inner join $this->table_agent c on b.company_id = c.id where c.id <> $this->company_id order by a.id desc limit $start,$limit";
+        }else{
+            $sql = "SELECT a.id,a.cname,a.channel,b.create_time,c.shortname FROM $this->table a inner join $this->table_agent_price b on a.id=b.price_id inner join $this->table_agent c on b.company_id = c.id where c.id = $this->company_id order by a.id desc limit $start,$limit";
+        }
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+
     public function get_history($startdate,$enddate,$company_id = null)
     {
         $sql = "select a.*,b.shortname from $this->table_history a inner join $this->table_agent b on a.company_id = b.id where date(a.querytime) between '$startdate' and '$enddate'";

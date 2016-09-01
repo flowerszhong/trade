@@ -18,13 +18,32 @@ class Price extends MY_Controller {
         );
     }
 
-    public function index($id=null)
+    public function index2($id=null)
     {
         $view_data = array();
         $prices = $this->price_model->select_all($id);
         $view_data['prices'] = $prices;
         $view_data['page_title'] = $this->page_titles['index'];
         $this->load_template('price_index',$view_data);
+    }
+
+    public function index() {
+        $this->load->library('pagination');
+        $config = array();
+        $this->config->load('pagination');
+        $config["base_url"] = site_url('price/index');
+        $config["total_rows"] = $this->price_model->record_count();
+        $config["per_page"] = 2;
+        $config["uri_segment"] = 3;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data["prices"] = $this->price_model->
+            fetch_prices($config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+        $data['page_title'] = $this->page_titles['index'];
+        $this->load_template('price_index',$data);
     }
 
     public function create($company_id = null){

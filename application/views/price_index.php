@@ -41,6 +41,7 @@ if(isset($prices)){ ?>
 <?php }
  ?>
 
+<?php echo $links; ?>
 
 
 

@@ -38,6 +38,7 @@ class Agent extends MY_Controller {
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $data["agents"] = $this->agent_model->
             fetch_agents($config["per_page"], $page);
+        $data['page_title'] = $this->page_titles['index'];
         $data["links"] = $this->pagination->create_links();
         $this->load_template('agent_index',$data);
     }
