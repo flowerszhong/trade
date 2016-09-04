@@ -76,6 +76,18 @@ class Agent_model extends CI_Model {
         return $query->result('array');
     }
 
+    public function update($data,$id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update($this->table,$data);
+    }
+
+    public function get_agent_by_id($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->get($this->table)->row_array();
+    }
+
 }
 
 /* End of file Agent_model.php */

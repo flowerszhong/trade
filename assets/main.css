@@ -369,3 +369,12 @@ table.dataTable thead .sorting:after {
     margin-top:5px;
     margin-bottom: 5px;
 }
+
+
+.hint {
+    color: #999;
+    font-size: 11px;
+}
+.hint b{
+    color: red;
+}

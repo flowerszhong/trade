@@ -41,9 +41,8 @@ if(isset($managers)){ ?>
                     <?php echo $row->company_name; ?>
                 </td>
                 <td>
-                <a class="btn btn-warning btn-xs" href="<?php echo base_url('manager/detail/'.$row->id); ?>">更新</a>
-                <a class="btn btn-warning btn-xs" href="<?php echo base_url('manager/detail/'.$row->id); ?>">权限</a>
-                <a class="btn btn-warning btn-xs" href="<?php echo base_url('manager/detail/'.$row->id); ?>">冻结</a>
+                <a class="btn btn-warning btn-xs" href="<?php echo site_url('manager/edit/'.$row->id); ?>">编辑</a>
+                <a class="btn btn-danger btn-xs btn-delete" href="<?php echo site_url('manager/delete/'.$row->id); ?>">删除</a>
                 </td>
             </tr>
             <?php } ?>

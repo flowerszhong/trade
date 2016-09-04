@@ -34,8 +34,8 @@ if(isset($agents)){ ?>
                 <a class="btn btn-danger btn-xs" href="<?php echo site_url('price/create/'. $row->id); ?>">新增</a>
                 </td>
                 <td>
-                <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/index/'.$row->id); ?>">更新</a>
-                <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/index/'.$row->id); ?>">冻结</a>
+                <a class="btn btn-warning btn-xs" href="<?php echo site_url('agent/edit/'.$row->id); ?>">编辑</a>
+                <a class="btn btn-danger btn-delete btn-xs" href="<?php echo site_url('agent/delete/'.$row->id); ?>">删除</a>
                 </td>
             </tr>
             <?php } ?>

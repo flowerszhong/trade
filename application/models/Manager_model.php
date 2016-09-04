@@ -20,6 +20,8 @@ class Manager_model extends CI_Model {
     }
 
     public function create($data){
+
+
         $this->db->insert($this->table,$data);
         return $this->db->insert_id(); 
     }
@@ -61,6 +63,18 @@ class Manager_model extends CI_Model {
         }else{
             return false;
         }
+    }
+
+    public function get_manager_by_id($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->get($this->table)->row_array();
+    }
+
+    public function update($data,$id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update($this->table,$data);
     }
 
 }

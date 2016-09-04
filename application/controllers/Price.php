@@ -531,7 +531,6 @@ class Price extends MY_Controller {
             $weight = $post_data['weight'];
             $area = $post_data['area'];
             $state = $post_data['state'];
-            // var_dump($pricedata);
 
             $col_index = $this->get_index($firstrow,$weight);
             $row_index = $this->get_index($firstcol,$area);
