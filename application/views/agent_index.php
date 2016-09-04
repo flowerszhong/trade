@@ -30,8 +30,8 @@ if(isset($agents)){ ?>
                     <?php echo $row->officephone; ?>
                 </td>
                 <td>
-                <a class="btn btn-warning btn-xs" href="<?php echo site_url('agent/detail/'.$row->id); ?>">下载</a>
-                <a class="btn btn-danger btn-delete btn-xs" href="<?php echo site_url('price/index/'. $row->id); ?>">更新</a>
+                <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/company/'.$row->id); ?>">查看</a>
+                <a class="btn btn-danger btn-xs" href="<?php echo site_url('price/create/'. $row->id); ?>">新增</a>
                 </td>
                 <td>
                 <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/index/'.$row->id); ?>">更新</a>
@@ -51,5 +51,5 @@ if(isset($agents)){ ?>
 
 
 <?php 
-echo $this->pagination->create_links();
+echo $links;
  ?>

@@ -27,11 +27,12 @@ class Agent extends MY_Controller {
     public function index() {
         $this->load->library('pagination');
         $config = array();
-        $this->config->load('pagination');
+        // $this->config->load('pagination');
         $config["base_url"] = site_url('agent/index');
         $config["total_rows"] = $this->agent_model->record_count();
         $config["per_page"] = 2;
         $config["uri_segment"] = 3;
+        $config['use_page_numbers'] = TRUE;
 
         $this->pagination->initialize($config);
 

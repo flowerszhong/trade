@@ -33,4 +33,13 @@ $(function() {
     if (element.is('li')) {
         element.addClass('active');
     }
+
+
+    $('.btn-delete').on('click', function(event) {
+        event.preventDefault();
+        if(window.confirm('确定删除该记录?')){
+            window.location.href = this.href;
+        }
+        /* Act on the event */
+    });
 });

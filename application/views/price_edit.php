@@ -35,35 +35,17 @@
     </div>
     <div class="panel-body">
 <?php 
-$attributes = array('class'=>'','id'=>'create-manager');
+$attributes = array('class'=>'','id'=>'edit-price');
 ?>
-<?php echo form_open_multipart('price/create',$attributes); ?>
+<?php echo form_open_multipart("price/edit/$id",$attributes); ?>
     <div class="form-group">
         <label for="">报价名称<span class="hint">(<b>*</b>)</span></label>
-        <input type="text" name="cname" class="form-control">
+        <input type="text" name="cname" class="form-control" value="<?php echo $cname; ?>">
     </div>
-    <!--<div class="form-group">
-        <label for="">渠道类型</label>
-        <select name="ctype">
-            <option value="0">DHL</option>
-            <option value="1">Fedex</option>
-            <option value="2">UPS</option>
-        </select>
-    </div>-->    
-
-
 
     <div class="form-group">
         <label for="">关联公司</label>
-        <span class="hint">(<b>*</b>必须要选择关联公司)</span>
-        <br>
-        <select name="company_id" class="form-control">
-                 <option value="">请选择公司</option>
-             <?php foreach ($agents as $row) { ?>
-                 <option value="<?php echo $row['id']; ?>" <?php if(isset($company_id) && $company_id == $row['id']){echo "selected";} ?>><?php echo $row['shortname']; ?></option>
-             <?php } ?>
-         </select>
-
+        <input type="text" disabled name="" class="form-control" value="<?php echo $shortname; ?>">
     </div>
 
     <div class="form-group">

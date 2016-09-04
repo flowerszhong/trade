@@ -16,6 +16,15 @@ class Agent_model extends CI_Model {
         return $query->result();
     }
 
+    public function get_name_by_id($id)
+    {
+        $this->db->select('shortname');
+        $this->db->where('id',$id);
+        $this->db->limit(1);
+        $query = $this->db->get($this->table)->row_array();
+        return $query['shortname'];
+    }
+
     public function create($data){
         $this->db->insert($this->table,$data);
         return $this->db->insert_id(); 

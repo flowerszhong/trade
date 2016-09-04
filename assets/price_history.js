@@ -33,13 +33,38 @@ $(function () {
     $('#startdate').val(yyyymmdd(default_startdate));
     $('#enddate').val(yyyymmdd(default_enddate));
 
+    $("#pagination-wrap").on('click', 'li', function(event) {
+        event.preventDefault();
+        $this = $(this);
+        if($this.hasClass('active')){
+            return true;
+        }
+
+        var url = $this.find('a').attr('href');
+        var page = $this.find('a').attr('data-ci-pagination-page');
+        var startdate = $('#startdate').val();
+        var enddate = $('#enddate').val();
+        var company_id = $('#choose-company').val();
+
+        history_ajaxaction(url,startdate,enddate,company_id,page);
+
+        return false;
+
+        /* Act on the event */
+    });
+
     $('#btn-history').on('click', function() {
         var url = $("#history-form").attr('action');
         var startdate = $('#startdate').val();
         var enddate = $('#enddate').val();
         var company_id = $('#choose-company').val();
+        var page = 0;
+        history_ajaxaction(url,startdate,enddate,company_id,page);
+    });
 
+    function history_ajaxaction(url,startdate,enddate,company_id,page) {
         $('#history-tbody').empty();
+        $('#pagination-wrap').empty();
         $.ajax({
             url: url,
             type: 'POST',
@@ -47,11 +72,14 @@ $(function () {
             data: {
                 'startdate': startdate,
                 'enddate': enddate,
-                'company_id': company_id
+                'company_id': company_id,
+                'page':page
             }
         })
-        .done(function(data) {
-            if(data && data.length){
+        .done(function(response) {
+            if(response && response.ok){
+                var data = response.pricedata;
+                var pagination = response.pagination;
                 var trs = "";
                 for (var i = 0; i < data.length; i++) {
                     var row = data[i];
@@ -66,8 +94,8 @@ $(function () {
                 }
 
                 $('#history-tbody').append(trs);
+                $('#pagination-wrap').append(pagination);
             }
-            console.log(data);
         })
         .fail(function() {
             console.log("error");
@@ -75,11 +103,7 @@ $(function () {
         .always(function() {
             console.log("complete");
         });
-        
-
-
-        /* Act on the event */
-    });
+    }
     
     
 });

@@ -360,3 +360,12 @@ table.dataTable thead .sorting:after {
     border-bottom:1px dashed #eee;
     padding-bottom:5px;
 }
+
+.pagination{
+    margin-top: 0;
+}
+
+.table{
+    margin-top:5px;
+    margin-bottom: 5px;
+}

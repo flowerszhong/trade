@@ -93,5 +93,9 @@
 
 </table>
 
+<div id="pagination-wrap">
+    
+</div>
+
 
 <script src="<?php echo asset_url() . 'price_history.js'; ?>"></script>

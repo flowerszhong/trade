@@ -1,8 +1,25 @@
-<?php if($this->manager_power > 10){ ?>
+<?php if($this->manager_power > 10){ 
+$create_url = "price/create/";
+if(isset($company_name)){
+    $create_url = $create_url . $this->uri->segment(3);
+}
+    ?>
 
-<a href="<?php echo site_url( 'price/create'); ?>" class="btn btn-primary">新增报价</a>
+<a href="<?php echo site_url($create_url); ?>" class="btn btn-primary">新增报价</a>
 
 <?php } ?>
+
+
+<?php if(isset($company_name)){ ?>
+    <h3>
+    <?php 
+    echo $company_name .' 报价列表';
+    ?>
+
+    </h3>
+
+
+   <?php } ?>
 
 <?php 
 if(isset($prices)){ ?>
@@ -11,7 +28,7 @@ if(isset($prices)){ ?>
             <tr>
                 <th>报价名称</th>
                 <th>公司名称</th>
-                <th>最后更新日期</th>
+                <th>创建日期</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -31,8 +48,18 @@ if(isset($prices)){ ?>
                     <?php echo $row->create_time; ?>
                 </td>
                 <td>
+
+                <a class="btn btn-warning btn-xs" href="<?php echo base_url('uploads/'. $row->filename ); ?>">下载</a>
                 <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/detail/'.$row->id); ?>">查看</a>
-                <a class="btn btn-danger btn-delete btn-xs disabled" href="#">删除</a>
+
+                <?php if($this->manager_power > 10){ ?>
+                    <a class="btn btn-danger btn-xs" href="<?php echo site_url('price/edit/'.$row->id); ?>">编辑</a>
+                <a class="btn btn-danger btn-delete btn-xs" href="<?php echo site_url('price/delete/'.$row->id); ?>">删除</a>
+
+                <?php } ?>
+
+
+
                 </td>
             </tr>
             <?php } ?>
@@ -40,8 +67,7 @@ if(isset($prices)){ ?>
     </table>
 <?php }
  ?>
-
-<?php echo $links; ?>
+<?php echo $this->pagination->create_links(); ?>
 
 
 

@@ -5,7 +5,7 @@
 
             <?php if($this->manager_power > 10){ ?>
             <select name="company" id="choose-company" class="form-control">
-                <option value="<?php echo $this->company_id; ?>">请选择公司</option>
+                <option value="">请选择公司</option>
             <?php 
             foreach ($companies as $company) { ?>
                 <option value="<?php echo $company['id'] ?>"><?php echo $company['shortname'] ?></option>

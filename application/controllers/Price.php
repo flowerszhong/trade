@@ -15,6 +15,7 @@ class Price extends MY_Controller {
             'detail'=>'报价明细',
             'query'=>'报价查询',
             'history'=>'报价查询记录',
+            'edit'=>'编辑报价',
         );
     }
 
@@ -30,20 +31,53 @@ class Price extends MY_Controller {
     public function index() {
         $this->load->library('pagination');
         $config = array();
-        $this->config->load('pagination');
+        // $this->config->load('pagination');
         $config["base_url"] = site_url('price/index');
         $config["total_rows"] = $this->price_model->record_count();
-        $config["per_page"] = 2;
+        $config["per_page"] = 3;
         $config["uri_segment"] = 3;
+        $config['use_page_numbers'] = TRUE;
+
 
         $this->pagination->initialize($config);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $data["prices"] = $this->price_model->
             fetch_prices($config["per_page"], $page);
-        $data["links"] = $this->pagination->create_links();
         $data['page_title'] = $this->page_titles['index'];
         $this->load_template('price_index',$data);
+    }
+
+    public function company($company_id) {
+        $this->load->library('pagination');
+        $config = array();
+        // $this->config->load('pagination');
+        $config["base_url"] = site_url("price/index/$company_id");
+        $config["total_rows"] = $this->price_model->record_count($company_id);
+        $config["per_page"] = 3;
+        $config["uri_segment"] = 4;
+        $config['use_page_numbers'] = TRUE;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data['company_name'] = $this->agent_model->get_name_by_id($company_id);
+        $data["prices"] = $this->price_model->
+            fetch_prices_by_company($config["per_page"], $page,$company_id);
+        $data['page_title'] = $this->page_titles['index'];
+        $this->load_template('price_index',$data);
+    }
+
+
+
+    public function upload_config()
+    {
+        $config = array();
+        $config['upload_path']      = './uploads/';
+        $config['allowed_types']    = 'xls|xlsx';
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload', $config);
     }
 
     public function create($company_id = null){
@@ -52,6 +86,9 @@ class Price extends MY_Controller {
         $view_data['agents'] = $this->agent_model->get_all_company();
 
         if(!$this->input->post()){
+            if($company_id){
+                $view_data['company_id'] = $company_id;
+            }
             $this->load_template('price_create',$view_data);
             return true;
         }
@@ -64,11 +101,8 @@ class Price extends MY_Controller {
             return true;
         }
 
-        $config = array();
-        $config['upload_path']      = './uploads/';
-        $config['allowed_types']    = 'xls|xlsx|csv';
-
-        $this->load->library('upload', $config);
+        
+        $this->upload_config();
 
         $post_data = $this->input->post();
 
@@ -82,6 +116,7 @@ class Price extends MY_Controller {
         else
         {
            $upload_data = $this->upload->data();
+           $file_name = $upload_data['file_name'];
            $data = $this->parseXLS($upload_data);
            if($data && isset($data['errors'])){
                 $view_data['errors'] = $data['errors'];
@@ -90,9 +125,132 @@ class Price extends MY_Controller {
            }
            // $data['channel'] = $post_data['ctype'];
            $data['cname'] = $post_data['cname'];
-           $company_ids = $post_data['company_id'];
+           $data['filename'] = $file_name;
+           $data['company_id'] = $post_data['company_id'];
+           // $company_ids = $post_data['company_id'];
 
-           $insert_result = $this->price_model->insert_price($data,$company_ids);
+           $insert_result = $this->price_model->insert_price($data);
+           if($insert_result){
+                $this->load_template('price_result',array('page_title'=>'新增报价成功','msg'=>'新增报价成功'));
+           }else{
+                $this->load_template('price_result',array('page_title'=>'新增报价失败','msg'=>'新增报价失败'));
+           }
+
+        }
+    }
+
+
+    public function edit($price_id=null)
+    {
+        $view_data = array();
+        $view_data['page_title'] = $this->page_titles['create'];
+        $this->page_title = $this->page_titles['edit'];
+        if($this->manager_power<10 or is_null($price_id)){
+            redirect('price/index','refresh');
+        }
+
+        if(!$this->input->post()){
+            $price_data = $this->price_model->get_price_by_id($price_id);
+            $price_data['page_title'] = $this->page_titles['edit'];
+            $this->load_template( 'price_edit', $price_data );
+            return true;
+        }
+
+        $this->form_validation->set_rules('cname', '报价名称', 'trim|required|xss_clean|min_length[2]|max_length[24]');
+
+        if($this->form_validation->run() == False){
+            $price_data = $this->price_model->get_price_by_id($price_id);
+            $price_data['page_title'] = $this->page_titles['edit'];
+            $this->load_template( 'price_edit', $price_data );
+            return true;
+        }
+
+        $post_data = $this->input->post();
+        $cname = $post_data['cname'];
+        if (empty($_FILES['pricetable']['name'])) {
+            $data = array();
+            $data['cname'] = $cname;
+            $data['update_date'] = date('Y-m-d H:i:s');
+            $this->price_model->update($price_id,$data);
+        }else{
+            $this->upload_config();
+            if ( ! $this->upload->do_upload('pricetable'))
+            {
+               $errors = $this->upload->display_errors();
+               $view_data['errors'] = $errors;
+               $this->load_template( 'price_edit', $view_data );
+            }
+            else
+            {
+               $upload_data = $this->upload->data();
+               $file_name = $upload_data['file_name'];
+               $data = $this->parseXLS($upload_data);
+               if($data && isset($data['errors'])){
+                    $view_data['errors'] = $data['errors'];
+                    $this->load_template( 'price_edit', $view_data );
+                    return;
+               }
+               $data['cname'] = $post_data['cname'];
+               $data['filename'] = $file_name;
+               $data['update_date'] = date('Y-m-d H:i:s');
+            }
+        }
+
+        $update_result = $this->price_model->update($price_id,$data);
+        if($update_result){
+             $this->load_template('price_result',array('page_title'=>'编辑报价成功','msg'=>'编辑报价成功'));
+        }else{
+             $this->load_template('price_result',array('page_title'=>'编辑报价失败','msg'=>'编辑报价失败'));
+        }
+
+    }
+
+    public function update($id)
+    {
+        if(!$this->input->post()){
+            redirect("price/edit/$id",'refresh');
+        }
+
+        $this->form_validation->set_rules('cname', '报价名称', 'trim|required|xss_clean|min_length[2]|max_length[24]');
+
+        if($this->form_validation->run() == False){
+            $view_data = $this->price_model->get_price_by_id($id);
+            $this->load_template( 'price_edit', $view_data );
+            return true;
+        }
+
+        
+        $this->upload_config();
+
+        $post_data = $this->input->post();
+
+        if (empty($_FILES['pricetable']['name'])) {
+
+        }
+
+        if ( ! $this->upload->do_upload('pricetable'))
+        {
+           $errors = $this->upload->display_errors();
+           $view_data['errors'] = $errors;
+           $this->load_template( 'price_create', $view_data );
+        }
+        else
+        {
+           $upload_data = $this->upload->data();
+           $file_name = $upload_data['file_name'];
+           $data = $this->parseXLS($upload_data);
+           if($data && isset($data['errors'])){
+                $view_data['errors'] = $data['errors'];
+                $this->load_template( 'price_create', $view_data );
+                return;
+           }
+           // $data['channel'] = $post_data['ctype'];
+           $data['cname'] = $post_data['cname'];
+           $data['filename'] = $file_name;
+           $data['company_id'] = $post_data['company_id'];
+           // $company_ids = $post_data['company_id'];
+
+           $insert_result = $this->price_model->insert_price($data);
            if($insert_result){
                 $this->load_template('price_result',array('page_title'=>'新增报价成功','msg'=>'新增报价成功'));
            }else{
@@ -179,9 +337,9 @@ class Price extends MY_Controller {
 
     public function delete($id)
     {
-        $query_result = $this->agent_model->remove_agent($id);
+        $query_result = $this->price_model->remove_price($id);
         if($query_result){
-            redirect('agent/index','refresh');
+            redirect('price/index','refresh');
         }
     }
 
@@ -237,13 +395,9 @@ class Price extends MY_Controller {
             $post['company_id'] = $this->company_id;
         }
 
-        if($post['company_id'] && $post['state'] && is_numeric($post['weight'])){
+        if($post['state'] && is_numeric($post['weight'])){
             $this->logging($weight,$state);
             $company_id = $post['company_id'];
-
-            if($this->manager_power > 10 && $this->company_id == $company_id){
-                $company_id = null;
-            }
             $query_data = $this->price_model->query_by_company($company_id);
             $weight = $post['weight'];
             $state = $post['state'];
@@ -262,11 +416,13 @@ class Price extends MY_Controller {
                     $row_index = $this->get_index($firstcol,$area);
                     $row = $pricedata->$row_index;
                     $cell = $row->$col_index;
-                    $ret = array();
-                    $ret['price']= $cell;
-                    $ret['area']= $area;
-                    $ret['cname']= $query_result['cname'];
-                    $data[] = $ret;
+                    if($cell){
+                        $ret = array();
+                        $ret['price']= $cell;
+                        $ret['area']= $area;
+                        $ret['cname']= $query_result['cname'];
+                        $data[] = $ret;
+                    }
                 }
 
                
@@ -327,12 +483,33 @@ class Price extends MY_Controller {
     {
         $post = $this->input->post();
         if($post){
+            $limit = 10;
             $startdate = $post['startdate'];
             $enddate = $post['enddate'];
             $company_id = $post['company_id'];
-            $records = $this->price_model->get_history($startdate,$enddate,$company_id);
-            echo json_encode($records);
+            $start_page = $post['page'];
+            $counts = $this->price_model->get_history_count($startdate,$enddate,$company_id);
+            $records = $this->price_model->get_history($startdate,$enddate,$company_id,$limit,$start_page);
+
+            $ret = array('pricedata'=>$records);
+
+            $this->load->library('pagination');
+            $config = array();
+            // $this->config->load('pagination');
+            $config["base_url"] = site_url('price/historyquery');
+            $config["total_rows"] = $counts;
+            $config["per_page"] = $limit;
+            $config["uri_segment"] = 3;
+            $config['use_page_numbers'] = TRUE;
+            $this->pagination->initialize($config);
+            $ret['pagination'] = $this->pagination->create_links();
+            $ret['ok'] = true;
+
+            echo json_encode($ret);
         }
+
+
+
     }
 
     //old code

@@ -106,6 +106,7 @@ $(function () {
 		}).slideDown();
 		
 	});
+	$input_area.keydown(false);
 
 	$group_body.on('click','span',function(event) {
 		event.preventDefault();
