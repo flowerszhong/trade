@@ -62,8 +62,8 @@ class Agent extends MY_Controller {
     {
         $this->form_validation->set_rules('name', '公司名称', 'trim|required|xss_clean|min_length[2]|max_length[60]');
         $this->form_validation->set_rules('shortname', '公司简称', 'trim|required|max_length[20]|xss_clean');
-        $this->form_validation->set_rules('code', '公司代码', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('officephone', '电话', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('code', '公司代码', 'trim|required|xss_clean|alpha_dash');
+        $this->form_validation->set_rules('officephone', '电话', 'trim|required|xss_clean|alpha_dash');
         $this->form_validation->set_rules('address', '地址', 'trim|required|xss_clean|max_length[80]');
         $this->form_validation->set_rules('description', '描述', 'trim|max_length[100]|xss_clean');
         $this->form_validation->set_rules('comments', '描述', 'trim|max_length[100]|xss_clean');

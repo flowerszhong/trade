@@ -36,7 +36,7 @@
     .form-signin {
         max-width: 400px;
         padding: 15px;
-        margin: 60px auto;
+        margin: 178px auto;
     }
 
     .form-signin label{

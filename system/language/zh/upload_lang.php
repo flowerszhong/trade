@@ -38,11 +38,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['upload_userfile_not_set'] = 'Unable to find a post variable called userfile.';
-$lang['upload_file_exceeds_limit'] = 'The uploaded file exceeds the maximum allowed size in your PHP configuration file.';
+$lang['upload_file_exceeds_limit'] = '上传文件大小超过PHP设置大小';
 $lang['upload_file_exceeds_form_limit'] = 'The uploaded file exceeds the maximum size allowed by the submission form.';
 $lang['upload_file_partial'] = 'The file was only partially uploaded.';
 $lang['upload_no_temp_directory'] = 'The temporary folder is missing.';
-$lang['upload_unable_to_write_file'] = 'The file could not be written to disk.';
+$lang['upload_unable_to_write_file'] = '文件不允许写入';
 $lang['upload_stopped_by_extension'] = 'The file upload was stopped by extension.';
 $lang['upload_no_file_selected'] = 'You did not select a file to upload.';
 $lang['upload_invalid_filetype'] = '不允许上传该格式文件.';

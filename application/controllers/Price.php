@@ -34,7 +34,7 @@ class Price extends MY_Controller {
         // $this->config->load('pagination');
         $config["base_url"] = site_url('price/index');
         $config["total_rows"] = $this->price_model->record_count();
-        $config["per_page"] = 3;
+        $config["per_page"] = 15;
         $config["uri_segment"] = 3;
         $config['use_page_numbers'] = TRUE;
 
@@ -483,7 +483,7 @@ class Price extends MY_Controller {
     {
         $post = $this->input->post();
         if($post){
-            $limit = 10;
+            $limit = 15;
             $startdate = $post['startdate'];
             $enddate = $post['enddate'];
             $company_id = $post['company_id'];
