@@ -1,6 +1,6 @@
+<a href="<?php echo site_url( 'agent/create'); ?>" class="btn btn-primary">新增公司</a>
 <?php 
-if(isset($agents)){ ?>
-    <a href="<?php echo site_url( 'agent/create'); ?>" class="btn btn-primary">新增公司</a>
+if(isset($agents) && is_array($agents)){ ?>
     <table class="table table-hover">
         <thead>
             <tr>
