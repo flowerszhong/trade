@@ -28,7 +28,7 @@
                         </li>
                         <?php } ?>
                         <li class="active">
-                            <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-table fa-fw"></i> 报价查询</a>
+                            <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-table fa-fw"></i> 报价查询<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="<?php echo site_url('price/index'); ?>">报价列表</a>
@@ -44,6 +44,33 @@
                                 </li>
                                 <?php } ?>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> 资料查询<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="true">
+                                <li>
+                                    <a href="#">偏远查询</a>
+                                </li>
+                                <li>
+                                    <a href="#">商品编码</a>
+                                </li>
+                                <li>
+                                    <a href="#">文档模板</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li class="">
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 系统配置<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="true">
+                                <li>
+                                    <a href="<?php echo site_url('configure/changepwd'); ?>">修改密码</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('configure/profile') ?>">个人资料</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>

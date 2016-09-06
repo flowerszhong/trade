@@ -77,6 +77,32 @@ class Manager_model extends CI_Model {
         return $this->db->update($this->table,$data);
     }
 
+
+    public function checkoldpwd($oldpwd)
+    {
+        $this->db->where('id',$this->manager_id);
+        $manager_data = $this->db->get($this->table)->row_array();
+        if($manager_data){
+            $salt2 = $manager_data['salt2'];
+            $oldpwd = sha1($salt2. $salt2 . $oldpwd);
+            $pwd = $manager_data['pwd'];
+            if($oldpwd == $pwd){
+                return True;
+            }
+        }
+        return False;
+    }
+
+    public function updatepwd($pwd)
+    {
+        $salt2 = rand(6,666666);
+        $pwd = sha1($salt2. $salt2 . $pwd);
+        $this->db->where('id',$this->manager_id);
+        $this->db->set('pwd',$pwd);
+        $this->db->set('salt2',$salt2);
+        return $this->db->update($this->table);
+    }
+
 }
 
 /* End of file Manager_model.php */

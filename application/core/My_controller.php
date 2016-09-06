@@ -32,6 +32,7 @@ class MY_Controller extends CI_Controller {
             redirect('login/index','refresh');
         }else{
             $session_data = $this->session->userdata('manager');
+            $this->manager_id = $session_data['id'];
             $this->manager_name = $session_data['name'];
             $this->manager_power = $session_data['power'];
             $this->company_id = $session_data['company_id'];
