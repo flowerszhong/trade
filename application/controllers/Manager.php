@@ -12,6 +12,7 @@ class Manager extends MY_Controller {
             'create' => '创建新客户',
             'edit' => '编辑客户资料',
          );
+        $this->checkPermission();
     }
     public function index()
     {

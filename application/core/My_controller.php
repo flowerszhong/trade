@@ -19,6 +19,13 @@ class MY_Controller extends CI_Controller {
         $this->load->view('template',$data);
     }
 
+    public function checkPermission()
+    {
+        if($this->manager_power<10){
+            redirect('price/index','refresh');
+        }
+    }
+
     public function checkLogin()
     {
         if(!$this->session->userdata('manager')){

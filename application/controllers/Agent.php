@@ -12,6 +12,7 @@ class Agent extends MY_Controller {
             'create'=>'新增公司',
             'edit'=>'编辑公司信息'
         );
+        $this->checkPermission();
     }
 
     public function index() {

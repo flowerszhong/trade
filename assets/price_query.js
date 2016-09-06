@@ -116,6 +116,7 @@ $(function () {
 		$input.attr('data-state',state);
 		$input.attr('data-en',state_en);
 		$input.val($(this).text());
+        $(this).addClass('selected').siblings().removeClass('selected');
 		$select_tool.hide();
 	});
 

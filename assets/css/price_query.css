@@ -52,3 +52,10 @@
 	cursor: pointer;
 	width:40%;
 }
+
+
+#group-body span.selected,
+#group-body span:hover{
+	color: #fff;
+	background-color: red;
+}
