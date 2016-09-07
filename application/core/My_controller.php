@@ -22,7 +22,7 @@ class MY_Controller extends CI_Controller {
     public function checkPermission()
     {
         if($this->manager_power<10){
-            redirect('price/index','refresh');
+            redirect('price/query','refresh');
         }
     }
 

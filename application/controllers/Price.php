@@ -29,6 +29,7 @@ class Price extends MY_Controller {
     }
 
     public function index() {
+        $this->checkPermission();
         $this->load->library('pagination');
         $config = array();
         // $this->config->load('pagination');
