@@ -17,7 +17,7 @@ class Manager extends MY_Controller {
     public function index()
     {
         $view_data = array();
-        $view_data['managers'] = $this->manager_model->select_all();
+        $view_data['managers'] = $this->manager_model->select_all($this->isSuperAdmin());
         $view_data['page_title']= $this->page_titles['index'];
         $this->load_template('manager_index',$view_data);
     }

@@ -92,6 +92,7 @@
         
     </div>
     <div class="clearfix"></div>
+    <input type="button" name="" id="btn-close" class="btn btn-danger btn-large" value="关闭">
 </div>
 
 <!-- jQuery -->

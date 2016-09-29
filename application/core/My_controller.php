@@ -40,6 +40,17 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    public function isSuperAdmin()
+    {
+        if($this->manager_power>10){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    
+
 }
 
 /* End of file My_controller.php */

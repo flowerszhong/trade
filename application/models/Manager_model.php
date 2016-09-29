@@ -13,8 +13,12 @@ class Manager_model extends CI_Model {
         //Do your magic here
     }
 
-    public function select_all(){
+    public function select_all($is_super_admin=false){
         $sql = "select a.*,b.name as company_name from $this->table a inner join $this->agent_table b on a.company_id = b.id order by a.id desc";
+        if($is_super_admin){
+        $sql = "select a.*,b.name as company_name from $this->table a inner join $this->agent_table b on a.company_id = b.id where a.id<>$this->manager_id order by a.id desc";
+
+        }
         $query = $this->db->query($sql);
         return $query->result();
     }

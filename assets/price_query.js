@@ -42,6 +42,7 @@ $(function () {
 	var $group_header = $('#group-header');
 	var $group_body = $('#group-body');
 	var $price_result = $('#price-result');
+	var $btn_close = $('#btn-close');
 
 	$btn_query.on('click', function(event) {
 		event.preventDefault();
@@ -150,6 +151,11 @@ $(function () {
 			group += '<span data-state="'+state+'" data-en="'+state_en+'">' + state + '(' + state_en + ')' + '</span>';
 		}
 		$("#group-body").empty().append(group_title,group);
+	});
+
+	$btn_close.on('click', function(event) {
+		event.preventDefault();
+		$select_tool.hide();
 	});
 
 	$group_header.find('b:first').trigger('click');

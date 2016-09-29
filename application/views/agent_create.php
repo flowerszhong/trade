@@ -32,7 +32,7 @@ $attributes = array('class'=>'','id'=>'create-agent');
         <input type="text" name="shortname" class="form-control">
     </div>
     <div class="form-group">
-        <label for="">公司代码</label><span class="hint">(<b>*</b>必填)</span>
+        <label for="">公司代码</label><span class="hint">(<b>*</b>必填，非中文)</span>
         <input type="text" name="code" class="form-control">
     </div>
     <div class="form-group">

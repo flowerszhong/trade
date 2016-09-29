@@ -392,17 +392,13 @@ class Price extends MY_Controller {
         );
         $data = array();
 
-        if($this->manager_power<10){
+        if(!$this->isSuperAdmin()){
             $post['company_id'] = $this->company_id;
         }
 
-        if($post['state'] && is_numeric($post['weight'])){
-            $this->logging($weight,$state);
+        if($state && is_numeric($weight)){
             $company_id = $post['company_id'];
             $query_data = $this->price_model->query_by_company($company_id);
-            $weight = $post['weight'];
-            $state = $post['state'];
-            $state_en = $post['state_en'];
 
             foreach ($query_data as $query_result) {
                 $query_result = $this->jsontoarray($query_result);
@@ -427,6 +423,10 @@ class Price extends MY_Controller {
                 }
 
                
+            }
+
+            if(!$this->isSuperAdmin()){
+                $this->logging($weight,$state);
             }
         }
         if(sizeof($data)>0){
