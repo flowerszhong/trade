@@ -107,6 +107,13 @@ class Manager_model extends CI_Model {
         return $this->db->update($this->table);
     }
 
+    public function checkDuplicate($field,$value)
+    {
+        $sql = "select count(*) count from $this->table where $field='$value'";
+        $query = $this->db->query($sql);
+        return $query->result('array');
+    }
+
 }
 
 /* End of file Manager_model.php */

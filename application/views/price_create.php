@@ -40,7 +40,9 @@ $attributes = array('class'=>'','id'=>'create-manager');
 <?php echo form_open_multipart('price/create',$attributes); ?>
     <div class="form-group">
         <label for="">报价名称<span class="hint">(<b>*</b>)</span></label>
-        <input type="text" name="cname" class="form-control">
+        <input type="text" name="cname" class="form-control check-duplicate" data-type="price" data-url="<?php echo site_url('common/check_duplicate'); ?>">
+        <label for="" class="dup-error info-danger">提示：报价名称有重复</label>
+
     </div>
     <!--<div class="form-group">
         <label for="">渠道类型</label>

@@ -36,7 +36,8 @@
                             <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i> 财务查询<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="http://www.szxtorun.com/query/waybill" target="_blank">运单查询</a>
+                                    <!-- <a href="http://www.szxtorun.com/query/waybill" target="_blank">运单查询</a> -->
+                                    <a href="<?php echo site_url("query/index"); ?>">运单查询</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo site_url('price/query'); ?>">报价查询</a>
@@ -51,7 +52,9 @@
                                     <a href="http://www.szxtorun.com/query/remoteareas" target="_blank">偏远查询</a>
                                 </li>
                                 <li>
-                                    <a href="http://www.szxtorun.com/query/hscode" target="_blank">商品编码</a>
+                                    <!-- <a href="http://www.szxtorun.com/query/hscode" target="_blank">商品编码</a> -->
+
+                                    <a href="<?php echo site_url('hscode/index'); ?>">商品编码</a>
                                 </li>
                                 <li>
                                     <a href="http://www.szxtorun.com/services/files" target="_blank">文档模板</a>

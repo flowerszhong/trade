@@ -12,14 +12,13 @@ class Common extends MY_Controller {
         $this->checkPermission();
     }
 
-    public function checkDuplicate() {
+    public function check_duplicate() {
         $post = $this->input->post();
         $type = $post['type'];
         $field = $post['field'];
         $value = $post['value'];
-        $ret  = array('error'=>false,'duplicate'=>false);
         $model_type = $type . '_model';
-        $ret['duplicate'] = $this->$model_type->checkDuplicate($field,$value);
+        $ret = $this->$model_type->checkDuplicate($field,$value);
         echo json_encode($ret);
     }
 

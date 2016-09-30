@@ -22,7 +22,8 @@ $attributes = array('class'=>'','id'=>'create-manager');
     </div>
     <div class="form-group">
         <label for="">账号</label><span class="hint">请输入字母及数字</span><span class="hint">(<b>*</b>必填)</span>
-        <input type="text" name="username" class="form-control">
+        <input type="text" name="username" class="form-control check-duplicate" data-type="manager" data-url="<?php echo site_url('common/check_duplicate'); ?>">
+        <label for="" class="dup-error info-danger">提示：用户账号有重复</label>
     </div>    
     <div class="form-group">
         <label for="">密码</label>

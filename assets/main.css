@@ -378,3 +378,9 @@ table.dataTable thead .sorting:after {
 .hint b{
     color: red;
 }
+
+.dup-error{
+    display: none;
+    padding: 3px;
+    color:red;
+}

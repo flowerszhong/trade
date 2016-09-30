@@ -33,6 +33,11 @@ if (!Array.prototype.filter) {
   };
 }
 
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+
 $(function () {
 
 	var $select_tool = $('#area-select-tool');
@@ -125,15 +130,14 @@ $(function () {
 		event.preventDefault();
 		var key = $(this).text();
         $(this).addClass('current').siblings().removeClass('current');
-        
         var filter_result = [];
         if(key == '常用国家'){
-            filter_result = window['common_counties'];
+            filter_result = window.common_counties;
         }else{
             var area_json = window.areajson;
             filter_result = area_json.filter(function (area) {
                 var state_en = area['state_en'];
-                if(state_en.toUpperCase().charAt(0)==this){
+                if(state_en.capitalize().charAt(0)==this){
                     return true;
                 }
             },key);

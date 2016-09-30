@@ -42,4 +42,48 @@ $(function() {
         }
         /* Act on the event */
     });
+
+    $('.check-duplicate').on('focus', function(event) {
+        $(this).next('.dup-error').hide();
+        /* Act on the event */
+    });
+
+    $('.check-duplicate').on('blur', function(event) {
+        var $this = $(this);
+        var url = $this.attr('data-url');
+        var type = $this.attr('data-type');
+        var field = $(this).attr('name');
+        var value = $.trim($(this).val());
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                type: type,
+                field : field,
+                value : value,
+            },
+        })
+        .done(function(data) {
+            if(data && data.length){
+                var d = data[0];
+                var count = d['count'];
+                var count = parseInt(count);
+                if(count == 1){
+                    // alert('该字段值与系统某条记录有重复');
+                    $this.next('.dup-error').show();
+                }
+            }
+        })
+        .fail(function() {
+            // console.log("error");
+        })
+        .always(function() {
+            // console.log("complete");
+        });
+        
+        /* Act on the event */
+    });
+
+
 });

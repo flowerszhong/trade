@@ -25,15 +25,18 @@ $attributes = array('class'=>'','id'=>'create-agent');
 <?php echo form_open('agent/create',$attributes); ?>
     <div class="form-group">
         <label for="">公司名称</label><span class="hint">(<b>*</b>必填)</span>
-        <input type="text" name="name" class="form-control">
+        <input type="text" name="name" class="form-control check-duplicate" data-type="agent" data-url="<?php echo site_url('common/check_duplicate'); ?>">
+        <label for="" class="dup-error info-danger">提示：公司名称有重复</label>
     </div>
     <div class="form-group">
         <label for="">简称</label><span class="hint">(<b>*</b>必填)</span>
-        <input type="text" name="shortname" class="form-control">
+        <input type="text" name="shortname" class="form-control check-duplicate" data-type="agent" data-url="<?php echo site_url('common/check_duplicate'); ?>">
+        <label for="" class="dup-error info-danger">提示：公司简称有重复</label>
     </div>
     <div class="form-group">
         <label for="">公司代码</label><span class="hint">(<b>*</b>必填，非中文)</span>
-        <input type="text" name="code" class="form-control">
+        <input type="text" name="code" class="form-control check-duplicate" data-type="agent" data-url="<?php echo site_url('common/check_duplicate'); ?>">
+        <label for="" class="dup-error info-danger">提示：公司代码有重复</label>
     </div>
     <div class="form-group">
         <label for="">公司地址</label><span class="hint">(<b>*</b>必填)</span>

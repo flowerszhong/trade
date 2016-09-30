@@ -1,0 +1,945 @@
+window.areajson = [{
+	"area_id": "1",
+	"state": "澳门",
+	"state_en": "MACAU"
+}, {
+	"area_id": "2",
+	"state": "汶莱",
+	"state_en": "BRUNEI"
+}, {
+	"area_id": "2",
+	"state": "南韩",
+	"state_en": "KOREA, SOUTH"
+}, {
+	"area_id": "2",
+	"state": "马来西亚",
+	"state_en": "MALAYSIA"
+}, {
+	"area_id": "2",
+	"state": "菲律宾",
+	"state_en": "PHILIPPINES"
+}, {
+	"area_id": "2",
+	"state": "新加坡",
+	"state_en": "SINGAPORE"
+}, {
+	"area_id": "2",
+	"state": "台湾",
+	"state_en": "TAIWAN"
+}, {
+	"area_id": "2",
+	"state": "泰国",
+	"state_en": "THAILAND"
+}, {
+	"area_id": "3",
+	"state": "日本",
+	"state_en": "JAPAN"
+}, {
+	"area_id": "4",
+	"state": "澳大利亚",
+	"state_en": "AUSTRALIA"
+}, {
+	"area_id": "4",
+	"state": "新西兰",
+	"state_en": "NEW ZEALAND"
+}, {
+	"area_id": "5",
+	"state": "柬埔寨",
+	"state_en": "CAMBODIA (KAMPUCHEA)"
+}, {
+	"area_id": "5",
+	"state": "印度尼西亚",
+	"state_en": "INDONESIA"
+}, {
+	"area_id": "5",
+	"state": "老挝",
+	"state_en": "LAOS"
+}, {
+	"area_id": "5",
+	"state": "越南",
+	"state_en": "VIETNAM"
+}, {
+	"area_id": "6",
+	"state": "美属萨摩亚群岛",
+	"state_en": "AMERICAN SAMOA"
+}, {
+	"area_id": "6",
+	"state": "孟加拉",
+	"state_en": "BANGLADESH"
+}, {
+	"area_id": "6",
+	"state": "不丹",
+	"state_en": "BHUTAN"
+}, {
+	"area_id": "6",
+	"state": "库克群岛",
+	"state_en": "COOK ISLANDS"
+}, {
+	"area_id": "6",
+	"state": "东帝汶",
+	"state_en": "EAST TIMOR"
+}, {
+	"area_id": "6",
+	"state": "斐济",
+	"state_en": "FIJI"
+}, {
+	"area_id": "6",
+	"state": "关岛",
+	"state_en": "GUAM"
+}, {
+	"area_id": "6",
+	"state": "基里巴斯",
+	"state_en": "KIRIBATI"
+}, {
+	"area_id": "6",
+	"state": "北韩",
+	"state_en": "KOREA, NORTH"
+}, {
+	"area_id": "6",
+	"state": "列支敦士登",
+	"state_en": "LIECHTENSTEIN"
+}, {
+	"area_id": "6",
+	"state": "马尔代夫",
+	"state_en": "MALDIVES"
+}, {
+	"area_id": "6",
+	"state": "马绍尔群岛",
+	"state_en": "MARSHALL ISLANDS"
+}, {
+	"area_id": "6",
+	"state": "缅甸",
+	"state_en": "MYANMAR (BURMA)"
+}, {
+	"area_id": "6",
+	"state": "瑙鲁",
+	"state_en": "NAURU, REPUBLIC OF"
+}, {
+	"area_id": "6",
+	"state": "尼泊尔",
+	"state_en": "NEPAL"
+}, {
+	"area_id": "6",
+	"state": "新喀里多尼亚",
+	"state_en": "NEW CALEDONIA"
+}, {
+	"area_id": "6",
+	"state": "纽埃岛",
+	"state_en": "NIUE"
+}, {
+	"area_id": "6",
+	"state": "巴布亚新几内亚",
+	"state_en": "PAPUA NEW GUINEA"
+}, {
+	"area_id": "6",
+	"state": "塞班岛",
+	"state_en": "SAIPAN"
+}, {
+	"area_id": "6",
+	"state": "萨摩亚",
+	"state_en": "SAMOA"
+}, {
+	"area_id": "6",
+	"state": "所罗门群岛",
+	"state_en": "SOLOMON ISLANDS"
+}, {
+	"area_id": "6",
+	"state": "大溪地",
+	"state_en": "TAHITI"
+}, {
+	"area_id": "6",
+	"state": "汤加",
+	"state_en": "TONGA"
+}, {
+	"area_id": "6",
+	"state": "图瓦卢",
+	"state_en": "TUVALU"
+}, {
+	"area_id": "6",
+	"state": "瓦努阿图",
+	"state_en": "VANUATU"
+}, {
+	"area_id": "7",
+	"state": "印度",
+	"state_en": "INDIA"
+}, {
+	"area_id": "7",
+	"state": "斯里兰卡",
+	"state_en": "SRI LANKA"
+}, {
+	"area_id": "8",
+	"state": "巴基斯坦",
+	"state_en": "PAKISTAN"
+}, {
+	"area_id": "9",
+	"state": "美国",
+	"state_en": "UNITED STATES OF AMERICA"
+}, {
+	"area_id": "10",
+	"state": "加拿大",
+	"state_en": "CANADA"
+}, {
+	"area_id": "11",
+	"state": "墨西哥",
+	"state_en": "MEXICO"
+}, {
+	"area_id": "12",
+	"state": "比利时",
+	"state_en": "BELGIUM"
+}, {
+	"area_id": "12",
+	"state": "法国",
+	"state_en": "FRANCE"
+}, {
+	"area_id": "12",
+	"state": "德国",
+	"state_en": "GERMANY"
+}, {
+	"area_id": "12",
+	"state": "意大利",
+	"state_en": "ITALY"
+}, {
+	"area_id": "12",
+	"state": "卢森堡",
+	"state_en": "LUXEMBOURG"
+}, {
+	"area_id": "12",
+	"state": "荷兰",
+	"state_en": "NETHERLANDS, THE"
+}, {
+	"area_id": "12",
+	"state": "圣马力诺",
+	"state_en": "SAN MARINO"
+}, {
+	"area_id": "12",
+	"state": "英国",
+	"state_en": "UNITED KINGDOM"
+}, {
+	"area_id": "13",
+	"state": "奥地利",
+	"state_en": "AUSTRIA"
+}, {
+	"area_id": "13",
+	"state": "丹麦",
+	"state_en": "DENMARK"
+}, {
+	"area_id": "13",
+	"state": "芬兰",
+	"state_en": "FINLAND"
+}, {
+	"area_id": "13",
+	"state": "希腊",
+	"state_en": "GREECE"
+}, {
+	"area_id": "13",
+	"state": "根西岛",
+	"state_en": "GUERNSEY"
+}, {
+	"area_id": "13",
+	"state": "爱尔兰共和国",
+	"state_en": "IRELAND"
+}, {
+	"area_id": "13",
+	"state": "泽西岛",
+	"state_en": "JERSEY"
+}, {
+	"area_id": "13",
+	"state": "挪威",
+	"state_en": "NORWAY"
+}, {
+	"area_id": "13",
+	"state": "葡萄牙",
+	"state_en": "PORTUGAL"
+}, {
+	"area_id": "13",
+	"state": "西班牙",
+	"state_en": "SPAIN"
+}, {
+	"area_id": "13",
+	"state": "瑞典",
+	"state_en": "SWEDEN"
+}, {
+	"area_id": "13",
+	"state": "瑞士",
+	"state_en": "SWITZERLAND"
+}, {
+	"area_id": "14",
+	"state": "保加利亚",
+	"state_en": "BULGARIA"
+}, {
+	"area_id": "14",
+	"state": "塞浦路斯",
+	"state_en": "CYPRUS"
+}, {
+	"area_id": "14",
+	"state": "爱沙尼亚",
+	"state_en": "ESTONIA"
+}, {
+	"area_id": "14",
+	"state": "拉脱维亚",
+	"state_en": "LATVIA"
+}, {
+	"area_id": "14",
+	"state": "立陶宛",
+	"state_en": "LITHUANIA"
+}, {
+	"area_id": "14",
+	"state": "马耳他",
+	"state_en": "MALTA"
+}, {
+	"area_id": "14",
+	"state": "斯洛伐克",
+	"state_en": "SLOVAKIA"
+}, {
+	"area_id": "14",
+	"state": "斯洛文尼亚",
+	"state_en": "SLOVENIA"
+}, {
+	"area_id": "15",
+	"state": "捷克",
+	"state_en": "CZECH REPUBLIC, THE"
+}, {
+	"area_id": "15",
+	"state": "匈牙利",
+	"state_en": "HUNGARY"
+}, {
+	"area_id": "15",
+	"state": "波兰",
+	"state_en": "POLAND"
+}, {
+	"area_id": "15",
+	"state": "罗马尼亚",
+	"state_en": "ROMANIA"
+}, {
+	"area_id": "16",
+	"state": "安道尔",
+	"state_en": "ANDORRA"
+}, {
+	"area_id": "16",
+	"state": "加那利群岛",
+	"state_en": "CANARY ISLANDS, THE"
+}, {
+	"area_id": "16",
+	"state": "非罗岛",
+	"state_en": "FAROE ISLANDS"
+}, {
+	"area_id": "16",
+	"state": "直布罗陀",
+	"state_en": "GIBRALTAR"
+}, {
+	"area_id": "16",
+	"state": "格陵兰",
+	"state_en": "GREENLAND"
+}, {
+	"area_id": "16",
+	"state": "冰岛",
+	"state_en": "ICELAND"
+}, {
+	"area_id": "17",
+	"state": "阿富汉",
+	"state_en": "AFGHANISTAN"
+}, {
+	"area_id": "17",
+	"state": "阿尔巴尼亚",
+	"state_en": "ALBANIA"
+}, {
+	"area_id": "17",
+	"state": "亚美尼亚",
+	"state_en": "ARMENIA"
+}, {
+	"area_id": "17",
+	"state": "阿塞拜疆",
+	"state_en": "AZERBAIJAN"
+}, {
+	"area_id": "17",
+	"state": "白俄罗斯",
+	"state_en": "BELARUS"
+}, {
+	"area_id": "17",
+	"state": "波黑",
+	"state_en": "BOSNIA & HERZEGOVINA"
+}, {
+	"area_id": "17",
+	"state": "克罗地亚",
+	"state_en": "CROATIA"
+}, {
+	"area_id": "17",
+	"state": "福克兰群岛",
+	"state_en": "FALKLAND ISLANDS"
+}, {
+	"area_id": "17",
+	"state": "格鲁吉亚",
+	"state_en": "GEORGIA"
+}, {
+	"area_id": "17",
+	"state": "哈萨克斯坦",
+	"state_en": "KAZAKHSTAN"
+}, {
+	"area_id": "17",
+	"state": "科索沃",
+	"state_en": "KOSOVO"
+}, {
+	"area_id": "17",
+	"state": "吉尔吉斯斯担",
+	"state_en": "KYRGYZSTAN"
+}, {
+	"area_id": "17",
+	"state": "马其顿",
+	"state_en": "MACEDONIA, REPUBLIC OF"
+}, {
+	"area_id": "17",
+	"state": "摩尔多瓦",
+	"state_en": "MOLDOVA, REPUBLIC OF"
+}, {
+	"area_id": "17",
+	"state": "黑山",
+	"state_en": "MONTENEGRO"
+}, {
+	"area_id": "17",
+	"state": "俄罗斯",
+	"state_en": "RUSSIAN FEDERATION, THE"
+}, {
+	"area_id": "17",
+	"state": "塞尔维亚",
+	"state_en": "SERBIA"
+}, {
+	"area_id": "17",
+	"state": "塔吉克斯坦",
+	"state_en": "TAJIKISTAN"
+}, {
+	"area_id": "17",
+	"state": "乌克兰",
+	"state_en": "UKRAINE"
+}, {
+	"area_id": "17",
+	"state": "乌兹别克斯坦",
+	"state_en": "UZBEKISTAN"
+}, {
+	"area_id": "18",
+	"state": "巴林",
+	"state_en": "BAHRAIN"
+}, {
+	"area_id": "18",
+	"state": "伊朗",
+	"state_en": "IRAN, ISLAMIC REPUBLIC OF"
+}, {
+	"area_id": "18",
+	"state": "约旦",
+	"state_en": "JORDAN"
+}, {
+	"area_id": "18",
+	"state": "科威特",
+	"state_en": "KUWAIT"
+}, {
+	"area_id": "18",
+	"state": "卡塔尔",
+	"state_en": "QATAR"
+}, {
+	"area_id": "18",
+	"state": "阿拉伯联合酋长国",
+	"state_en": "UNITED ARAB EMIRATES"
+}, {
+	"area_id": "19",
+	"state": "土耳其",
+	"state_en": "TURKEY"
+}, {
+	"area_id": "20",
+	"state": "伊拉克",
+	"state_en": "IRAQ"
+}, {
+	"area_id": "20",
+	"state": "以色列",
+	"state_en": "ISRAEL"
+}, {
+	"area_id": "20",
+	"state": "黎巴嫩",
+	"state_en": "LEBANON"
+}, {
+	"area_id": "20",
+	"state": "阿曼",
+	"state_en": "OMAN"
+}, {
+	"area_id": "20",
+	"state": "沙特阿拉伯",
+	"state_en": "SAUDI ARABIA"
+}, {
+	"area_id": "20",
+	"state": "苏丹",
+	"state_en": "SUDAN"
+}, {
+	"area_id": "20",
+	"state": "叙利亚",
+	"state_en": "SYRIA"
+}, {
+	"area_id": "20",
+	"state": "也门共和国",
+	"state_en": "YEMEN"
+}, {
+	"area_id": "21",
+	"state": "埃及",
+	"state_en": "EGYPT"
+}, {
+	"area_id": "22",
+	"state": "厄立特里亚",
+	"state_en": "ERITREA"
+}, {
+	"area_id": "22",
+	"state": "埃塞俄比亚",
+	"state_en": "ETHIOPIA"
+}, {
+	"area_id": "22",
+	"state": "肯尼亚",
+	"state_en": "KENYA"
+}, {
+	"area_id": "22",
+	"state": "利比亚",
+	"state_en": "LIBYA"
+}, {
+	"area_id": "22",
+	"state": "南非",
+	"state_en": "SOUTH AFRICA"
+}, {
+	"area_id": "22",
+	"state": "乌干达",
+	"state_en": "UGANDA"
+}, {
+	"area_id": "23",
+	"state": "阿尔及利亚",
+	"state_en": "ALGERIA"
+}, {
+	"area_id": "23",
+	"state": "贝宁",
+	"state_en": "BENIN"
+}, {
+	"area_id": "23",
+	"state": "博茨瓦纳",
+	"state_en": "BOTSWANA"
+}, {
+	"area_id": "23",
+	"state": "布隆迪",
+	"state_en": "BURUNDI"
+}, {
+	"area_id": "23",
+	"state": "喀麦隆",
+	"state_en": "CAMEROON"
+}, {
+	"area_id": "23",
+	"state": "佛得角",
+	"state_en": "CAPE VERDE"
+}, {
+	"area_id": "23",
+	"state": "乍得",
+	"state_en": "CHAD"
+}, {
+	"area_id": "23",
+	"state": "科摩罗",
+	"state_en": "COMOROS"
+}, {
+	"area_id": "23",
+	"state": "刚果共和国",
+	"state_en": "CONGO"
+}, {
+	"area_id": "23",
+	"state": "吉布堤",
+	"state_en": "DJIBOUTI"
+}, {
+	"area_id": "23",
+	"state": "赤道几内亚",
+	"state_en": "EQUATORIAL GUINEA"
+}, {
+	"area_id": "23",
+	"state": "加蓬",
+	"state_en": "GABON"
+}, {
+	"area_id": "23",
+	"state": "冈比亚",
+	"state_en": "GAMBIA"
+}, {
+	"area_id": "23",
+	"state": "加纳",
+	"state_en": "GHANA"
+}, {
+	"area_id": "23",
+	"state": "莱索托",
+	"state_en": "LESOTHO"
+}, {
+	"area_id": "23",
+	"state": "马达加斯加",
+	"state_en": "MADAGASCAR"
+}, {
+	"area_id": "23",
+	"state": "马拉维",
+	"state_en": "MALAWI"
+}, {
+	"area_id": "23",
+	"state": "毛里塔尼亚",
+	"state_en": "MAURITANIA"
+}, {
+	"area_id": "23",
+	"state": "毛里求斯",
+	"state_en": "MAURITIUS"
+}, {
+	"area_id": "23",
+	"state": "马约特岛",
+	"state_en": "MAYOTTE"
+}, {
+	"area_id": "23",
+	"state": "摩洛哥",
+	"state_en": "MOROCCO"
+}, {
+	"area_id": "23",
+	"state": "莫桑比克",
+	"state_en": "MOZAMBIQUE"
+}, {
+	"area_id": "23",
+	"state": "纳米比亚",
+	"state_en": "NAMIBIA"
+}, {
+	"area_id": "23",
+	"state": "尼日利亚",
+	"state_en": "NIGERIA"
+}, {
+	"area_id": "23",
+	"state": "留尼汪岛",
+	"state_en": "REUNION, ISLAND OF"
+}, {
+	"area_id": "23",
+	"state": "卢旺达",
+	"state_en": "RWANDA"
+}, {
+	"area_id": "23",
+	"state": "塞内加尔",
+	"state_en": "SENEGAL"
+}, {
+	"area_id": "23",
+	"state": "塞舌尔",
+	"state_en": "SEYCHELLES"
+}, {
+	"area_id": "23",
+	"state": "索马里",
+	"state_en": "SOMALIA"
+}, {
+	"area_id": "23",
+	"state": "索马里兰",
+	"state_en": "SOMALILAND, REPUBLIC OF (N. SOMALIA)"
+}, {
+	"area_id": "23",
+	"state": "斯威士兰",
+	"state_en": "SWAZILAND"
+}, {
+	"area_id": "23",
+	"state": "坦桑尼亚",
+	"state_en": "TANZANIA"
+}, {
+	"area_id": "23",
+	"state": "多哥",
+	"state_en": "TOGO"
+}, {
+	"area_id": "23",
+	"state": "突尼斯",
+	"state_en": "TUNISIA"
+}, {
+	"area_id": "23",
+	"state": "赞比亚",
+	"state_en": "ZAMBIA"
+}, {
+	"area_id": "23",
+	"state": "津巴布韦",
+	"state_en": "ZIMBABWE"
+}, {
+	"area_id": "23",
+	"state": "几内亚比绍",
+	"state_en": "GUINEA-BISSAU"
+}, {
+	"area_id": "24",
+	"state": "安哥拉",
+	"state_en": "ANGOLA"
+}, {
+	"area_id": "24",
+	"state": "刚果民主共和国",
+	"state_en": "CONGO, THE DEMOCRATIC REPUBLIC OF"
+}, {
+	"area_id": "24",
+	"state": "科特迪瓦(象牙海岸)",
+	"state_en": "COTE D'IVOIRE (IVORYCOAST)"
+}, {
+	"area_id": "25",
+	"state": "布基纳法索",
+	"state_en": "BURKINA FASO"
+}, {
+	"area_id": "25",
+	"state": "中非共和国",
+	"state_en": "CENTRAL AFRICAN REPUBLIC"
+}, {
+	"area_id": "25",
+	"state": "几内亚",
+	"state_en": "GUINEA REPUBLIC"
+}, {
+	"area_id": "25",
+	"state": "利比里亚",
+	"state_en": "LIBERIA"
+}, {
+	"area_id": "25",
+	"state": "马里",
+	"state_en": "MALI"
+}, {
+	"area_id": "25",
+	"state": "尼日尔",
+	"state_en": "NIGER"
+}, {
+	"area_id": "25",
+	"state": "塞拉里昂",
+	"state_en": "SIERRA LEONE"
+}, {
+	"area_id": "26",
+	"state": "多米尼加",
+	"state_en": "DOMINICA"
+}, {
+	"area_id": "26",
+	"state": "洪都拉斯",
+	"state_en": "HONDURAS"
+}, {
+	"area_id": "26",
+	"state": "巴拿马",
+	"state_en": "PANAMA"
+}, {
+	"area_id": "26",
+	"state": "委内瑞拉",
+	"state_en": "VENEZUELA"
+}, {
+	"area_id": "27",
+	"state": "智利",
+	"state_en": "CHILE"
+}, {
+	"area_id": "27",
+	"state": "哥斯达黎加",
+	"state_en": "COSTA RICA"
+}, {
+	"area_id": "27",
+	"state": "多米尼加共和国",
+	"state_en": "DOMINICAN REPUBLIC"
+}, {
+	"area_id": "27",
+	"state": "秘鲁",
+	"state_en": "PERU"
+}, {
+	"area_id": "27",
+	"state": "特立尼达和多巴哥",
+	"state_en": "TRINIDAD & TOBAGO"
+}, {
+	"area_id": "28",
+	"state": "阿根廷",
+	"state_en": "ARGENTINA"
+}, {
+	"area_id": "28",
+	"state": "巴西",
+	"state_en": "BRAZIL"
+}, {
+	"area_id": "28",
+	"state": "古巴",
+	"state_en": "CUBA"
+}, {
+	"area_id": "28",
+	"state": "牙买加",
+	"state_en": "JAMAICA"
+}, {
+	"area_id": "28",
+	"state": "乌拉圭",
+	"state_en": "URUGUAY"
+}, {
+	"area_id": "29",
+	"state": "安圭拉",
+	"state_en": "ANGUILLA"
+}, {
+	"area_id": "29",
+	"state": "安提瓜和巴布达",
+	"state_en": "ANTIGUA"
+}, {
+	"area_id": "29",
+	"state": "阿鲁巴",
+	"state_en": "ARUBA"
+}, {
+	"area_id": "29",
+	"state": "巴哈马",
+	"state_en": "BAHAMAS"
+}, {
+	"area_id": "29",
+	"state": "巴巴多斯",
+	"state_en": "BARBADOS"
+}, {
+	"area_id": "29",
+	"state": "伯利兹",
+	"state_en": "BELIZE"
+}, {
+	"area_id": "29",
+	"state": "百慕达",
+	"state_en": "BERMUDA"
+}, {
+	"area_id": "29",
+	"state": "波利维亚",
+	"state_en": "BOLIVIA"
+}, {
+	"area_id": "29",
+	"state": "博内尔岛（荷属安地列斯）",
+	"state_en": "BONAIRE"
+}, {
+	"area_id": "29",
+	"state": "开曼群岛",
+	"state_en": "CAYMAN ISLANDS"
+}, {
+	"area_id": "29",
+	"state": "哥伦比亚",
+	"state_en": "COLOMBIA"
+}, {
+	"area_id": "29",
+	"state": "库腊索(荷属安地列斯)",
+	"state_en": "CURACAO"
+}, {
+	"area_id": "29",
+	"state": "厄瓜多尔",
+	"state_en": "ECUADOR"
+}, {
+	"area_id": "29",
+	"state": "萨尔瓦多",
+	"state_en": "EL SALVADOR"
+}, {
+	"area_id": "29",
+	"state": "法属圭亚那",
+	"state_en": "FRENCH GUYANA"
+}, {
+	"area_id": "29",
+	"state": "格林纳达",
+	"state_en": "GRENADA"
+}, {
+	"area_id": "29",
+	"state": "厄德罗普",
+	"state_en": "GUADELOUPE"
+}, {
+	"area_id": "29",
+	"state": "危地马拉",
+	"state_en": "GUATEMALA"
+}, {
+	"area_id": "29",
+	"state": "圭亚那",
+	"state_en": "GUYANA (BRITISH)"
+}, {
+	"area_id": "29",
+	"state": "海地",
+	"state_en": "HAITI"
+}, {
+	"area_id": "29",
+	"state": "马提尼克岛",
+	"state_en": "MARTINIQUE"
+}, {
+	"area_id": "29",
+	"state": "蒙古",
+	"state_en": "MONGOLIA"
+}, {
+	"area_id": "29",
+	"state": "蒙特塞拉特",
+	"state_en": "MONTSERRAT"
+}, {
+	"area_id": "29",
+	"state": "尼维斯",
+	"state_en": "NEVIS"
+}, {
+	"area_id": "29",
+	"state": "尼加拉瓜",
+	"state_en": "NICARAGUA"
+}, {
+	"area_id": "29",
+	"state": "波多黎各",
+	"state_en": "PUERTO RICO"
+}, {
+	"area_id": "29",
+	"state": "圣多美和普林西比",
+	"state_en": "SAO TOME & PRINCIPE"
+}, {
+	"area_id": "29",
+	"state": "圣巴夫林米（瓜德罗普岛）",
+	"state_en": "ST. BARTHELEMY"
+}, {
+	"area_id": "29",
+	"state": "圣尤斯特歇斯",
+	"state_en": "ST. EUSTATIUS"
+}, {
+	"area_id": "29",
+	"state": "圣基茨和尼维斯",
+	"state_en": "ST. KITTS"
+}, {
+	"area_id": "29",
+	"state": "圣卢西亚",
+	"state_en": "ST. LUCIA"
+}, {
+	"area_id": "29",
+	"state": "圣马藤岛（荷属安地列斯）",
+	"state_en": "ST. MAARTEN"
+}, {
+	"area_id": "29",
+	"state": "圣文森特和格林纳丁斯",
+	"state_en": "ST. VINCENT"
+}, {
+	"area_id": "29",
+	"state": "苏里南",
+	"state_en": "SURINAME"
+}, {
+	"area_id": "29",
+	"state": "特克斯和凯科斯群岛",
+	"state_en": "TURKS & CAICOS ISLANDS"
+}, {
+	"area_id": "29",
+	"state": "维尔克戈达岛（英属维尔群岛）",
+	"state_en": "VIRGIN ISLANDS (BRITISH)"
+}, {
+	"area_id": "29",
+	"state": "维尔克戈达岛（美属维尔群岛）",
+	"state_en": "VIRGIN ISLANDS (U.S.)"
+}, {
+	"area_id": "30",
+	"state": "巴拉圭",
+	"state_en": "PARAGUAY"
+}];
+
+
+
+window.common_counties = [{
+    "area_id": "9",
+    "state": "美国",
+    "state_en": "UNITED STATES OF AMERICA"
+},{
+    "area_id": "10",
+    "state": "加拿大",
+    "state_en": "CANADA"
+}, {
+    "area_id": "12",
+    "state": "法国",
+    "state_en": "FRANCE"
+}, {
+    "area_id": "12",
+    "state": "德国",
+    "state_en": "GERMANY"
+},{
+    "area_id": "3",
+    "state": "日本",
+    "state_en": "JAPAN"
+}, {
+    "area_id": "4",
+    "state": "澳大利亚",
+    "state_en": "AUSTRALIA"
+}, {
+    "area_id": "12",
+    "state": "意大利",
+    "state_en": "ITALY"
+}, {
+    "area_id": "17",
+    "state": "俄罗斯",
+    "state_en": "RUSSIAN FEDERATION, THE"
+}, {
+    "area_id": "12",
+    "state": "英国",
+    "state_en": "UNITED KINGDOM"
+}, {
+    "area_id": "13",
+    "state": "西班牙",
+    "state_en": "SPAIN"
+}];

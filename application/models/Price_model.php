@@ -11,7 +11,6 @@ class Price_model extends CI_Model {
 
     public function __construct()
     {
-
         parent::__construct();
         //Do your magic here
     }
@@ -202,6 +201,13 @@ class Price_model extends CI_Model {
     {
         $this->db->where('id',$id);
         return $this->db->update($this->table,$data);
+    }
+
+    public function checkDuplicate($field,$value)
+    {
+        $sql = "select count(*) count from $this->table where $field='$value'";
+        $query = $this->db->query($sql);
+        return $query->result('array');
     }
 
 }
