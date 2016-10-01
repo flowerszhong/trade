@@ -1,9 +1,9 @@
 <form action="<?php echo site_url('price/ajax'); ?>" id="query-form">
     <table>
         <tr>
-            <td>
 
             <?php if($this->manager_power > 10){ ?>
+            <td>
             <select name="company" id="choose-company" class="form-control">
                 <option value="">请选择公司</option>
             <?php 
@@ -13,17 +13,21 @@
 
              ?>
             </select>
-
+            </td>
             <?php }else{ ?>
 
-            <label for=""> <?php echo $this->company_name; ?> </label>
+            <!-- <label for=""> <?php echo $this->company_name; ?> </label> -->
 
             <?php } ?>
                 
 
 
+            <td>
+            <select name="" class="form-control">
+                <option value="深圳市[SHENZHEN]" selected>深圳市[SHENZHEN]</option>
+            </select>
+            
             </td>
-            <td>深圳市[SHENZHEN]</td>
             <td>
                 <input type="text" id="input-area" name="s" class="form-control" placeholder="请输入目标国家" action="<?php echo site_url('price/ajax_area'); ?>">
             </td>
@@ -42,7 +46,6 @@
         <thead>
             <tr>
                 <th>报价名称</th>
-                <th>区域</th>
                 <th>国家（地区）</th>
                 <th>重量</th>
                 <th>单价</th>
@@ -92,7 +95,6 @@
         
     </div>
     <div class="clearfix"></div>
-    <input type="button" name="" id="btn-close" class="btn btn-danger btn-large" value="关闭">
 </div>
 
 <!-- jQuery -->

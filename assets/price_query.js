@@ -47,7 +47,7 @@ $(function () {
 	var $group_header = $('#group-header');
 	var $group_body = $('#group-body');
 	var $price_result = $('#price-result');
-	var $btn_close = $('#btn-close');
+	// var $btn_close = $('#btn-close');
 
 	$btn_query.on('click', function(event) {
 		event.preventDefault();
@@ -61,6 +61,10 @@ $(function () {
         var state= $input_area.attr('data-state') || area;
         var state_en= $input_area.attr('data-en');
 		var company_id = $('#choose-company').val();
+		if(!company_id && $('#choose-company').length){
+			alert('请选择查询公司');
+			return;
+		}
 		/* Act on the event */
 		$.ajax({
 			url: url,
@@ -76,8 +80,12 @@ $(function () {
 		.done(function(response) {
 			if(response.ok){
 				var data = response.data;
+				data = data.sort(function (a,b) {
+					return a.price - b.price;
+				});
 				var state = response.state + '(' + response['state_en'] + ')';
 				var w = response.weight;
+				w = math_round(w);
 				var trs = '';
 				for (var i = 0; i < data.length; i++) {
 					var _d = data[i];
@@ -87,7 +95,7 @@ $(function () {
 						single = '';
 						sum = _d.price;
 					}
-					var tr = "<tr><td>"+ _d.cname+"</td><td>" + _d.area + "</td><td>"+ state + '</td><td>'+ w +'KG </td><td>' + single + '</td><td>'+ sum +'</td></tr>';
+					var tr = "<tr><td>"+ _d.cname+"</td><td>"+ state + '</td><td>'+ w +'KG </td><td>' + single + '</td><td>'+ sum +'</td></tr>';
 					trs += tr;
 				}
 				$price_result.find('#price-tbody').empty().append(trs);
@@ -101,9 +109,14 @@ $(function () {
 		});
 	});
 
+	function math_round(w) {
+		
+	}
+
 
 	$input_area.on('click', function(event) {
 		event.preventDefault();
+		event.stopPropagation();
 		var url = $(this).attr('action');
 		var offset = $(this).offset();
 		$select_tool.css({
@@ -157,10 +170,21 @@ $(function () {
 		$("#group-body").empty().append(group_title,group);
 	});
 
-	$btn_close.on('click', function(event) {
+	$select_tool.on('click', function(event) {
 		event.preventDefault();
-		$select_tool.hide();
+		event.stopPropagation();
+		/* Act on the event */
 	});
+
+	$(document).on('click', function(event) {
+		$select_tool.hide();
+		/* Act on the event */
+	});
+
+	// $btn_close.on('click', function(event) {
+	// 	event.preventDefault();
+	// 	$select_tool.hide();
+	// });
 
 	$group_header.find('b:first').trigger('click');
 	

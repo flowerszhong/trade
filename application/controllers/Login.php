@@ -32,7 +32,11 @@ class Login extends CI_Controller {
     	        $this->load->view('login_index',$view_data);
     	    }else{
                 $this->session->set_userdata('manager',$login_data);
-    	        redirect('price/index','refresh');
+                if($login_data['power'] >10){
+        	       redirect('price/history','refresh');
+                }else{
+                   redirect('query/index','refresh');
+                }
     	    }
     	}else{
     		$this->load->view('login_index');

@@ -1,7 +1,7 @@
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
+                        <!-- <li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -10,8 +10,7 @@
                                 </button>
                             </span>
                             </div>
-                            <!-- /input-group -->
-                        </li>
+                        </li> -->
                         
                         <?php if( $this->manager_power > 10){ ?>
                         <li>
@@ -70,6 +69,10 @@
                                 </li>
                                 <li>
                                     <a href="<?php echo site_url('configure/profile') ?>">资料更新</a>
+                                </li>
+
+                                <li>
+                                    <a href="http://www.szxtorun.com/wp-admin" target="_blank">文章更新</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
