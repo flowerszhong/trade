@@ -19,7 +19,7 @@ class Price extends MY_Controller {
         );
     }
 
-    public function index2($id=null)
+    public function index23($id=null)
     {
         $view_data = array();
         $prices = $this->price_model->select_all($id);

@@ -99,7 +99,10 @@ class Price_model extends CI_Model {
 
     public function record_count($company_id=null)
     {
-        $this->db->where('available',1);
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->join($this->table_agent, "$this->table.company_id = $this->table_agent.id");
+        $this->db->where("$this->table_agent.available",1);
         if($this->manager_power < 10){
             $this->db->where('company_id',$this->company_id);
         }else{
@@ -107,7 +110,7 @@ class Price_model extends CI_Model {
                 $this->db->where('company_id',$company_id);
             }
         }
-        return $this->db->count_all_results($this->table);
+        return $this->db->count_all_results();
     }
 
     //old version
