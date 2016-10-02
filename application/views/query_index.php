@@ -9,6 +9,14 @@
         color: #366da2;
     }
 
+    #batch-wrap{
+        padding-top: 10px;
+    }
+
+    #result-msg{
+        padding-top: 10px;
+    }
+
     .result-info2 { width: 100%;  }
     .result-info2 td { padding: 10px; color: #878787; border-bottom: 1px solid #d8d8d8 !important; background-color: #fbfbfb !important }
     .result-info2 .status { width: 30px; background: url("http://cdn.kuaidi100.com/images/ico_status.gif") -50px center no-repeat #fbfbfb }
@@ -115,12 +123,21 @@
 
             if(batches_array.length){
                 batches_array = batches_filter(batches_array);
-                $('#result-msg').empty().html("正在查询....");
+                $('#result-msg').empty().html("正在查询....").show();
+                $('#batch-wrap').empty();
                 do_query(batches_array);
             }else{
                 return false;
             }
         }  
+
+        function querying_state(postid) {
+            if(postid){
+                $('#result-msg').empty().html("正在查询运单号:" + postid +"....").show();
+            }else{
+                $('#result-msg').empty().html("正在查询....").show();
+            }
+        }
 
         function checkType (querystr) {
             var len = querystr.length;
@@ -143,7 +160,7 @@
             return false;
         }     
 
-        do_batches();
+        // do_batches();
         
         function do_query (batches,batch_index) {
             if(!batch_index){
@@ -164,6 +181,7 @@
             if(!trade_type){
                 show_error(batches,batch_index);
             }else{
+                querying_state(postid);
                 $.ajax({
                     url: query_url,
                     type: 'POST',
@@ -178,7 +196,7 @@
                     if(response && response.message == "ok" ){
                         showResult(response);
                     }else{
-                        alert("查询失败，请检查您的订单号是否正确！！！")
+                        showResult_error(postid);
                     }
                 })
                 .fail(function() {
@@ -189,11 +207,12 @@
                     window.console && console.log("complete");
                 });
             }
-
            
         }
 
         function show_error (batches,batch_index) {
+            var postid = batches[batch_index];
+            showResult_error(postid);
             do_query(batches,batch_index + 1);
         }
 
@@ -229,10 +248,31 @@
 
         }
 
+        function showResult_error(postid) {
+            var $case = $("<div class='case'></div>");
+            var $summary = $("<div class='case-summary'></div>");
+
+            $summary.append("运单号 <b>" + postid + "</b>：查询失败，请检查您的订单号是否正确！！！");
+            $case.append($summary);
+            $("#batch-wrap").append($case);
+        }
+
     function makeSummary ($summary,data) {
         var departure = data['departure']?data['departure']:"未知";
         var destination = data['destination']?data['destination']:"未知";
         var signedtime = data['signedtime']?data['signedtime']:"未知";
+        var states= {
+            '0':'在途',
+            '1':'揽件',
+            '2':'疑难',
+            '3':'签收',
+            '4':'退签',
+            '5':'派件',
+            '6':'退回'
+        };
+
+        var state = data['state'];
+        state = states[state];
         var com = companyName(data['com']);
         var str = "<dl>";
             str += "<dt>运单号:</dt>";
@@ -243,9 +283,11 @@
             str += "<dd>"+ departure +"</dd>";
             str += "<dt>目的地:</dt>";
             str += "<dd>"+destination+"</dd>";
+            str += "<dt class='d'>最新状态:</dt>";
+            str += "<dd>"+state+"</dd>";
             str += "<dt class='d'>签收时间:</dt>";
             str += "<dd>"+signedtime+"</dd>";
-            str += "<dd><a class='show-detail'>点击显示详情 &#10176;</a></dd>";
+            str += "<dd><a class='show-detail'>点击显示详情 &#x21d3;</a></dd>";
             str += "</dl>";
         $summary.append(str);
     }

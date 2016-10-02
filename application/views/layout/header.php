@@ -9,32 +9,32 @@
     <meta name="author" content="">
     <title>途瑞(torun) 物流管理系统</title>
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="<?php echo asset_url() . '/bootstrap/dist/css/bootstrap.min.css'; ?>">
+    <link rel="stylesheet" href="<?php asset_file_url('/bootstrap/dist/css/bootstrap.min.css'); ?>">
     <!-- MetisMenu CSS -->
-    <link href="<?php echo asset_url() . 'metisMenu/dist/metisMenu.min.css'; ?>" rel="stylesheet">
+    <link href="<?php asset_file_url('metisMenu/dist/metisMenu.min.css'); ?>" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="<?php echo asset_url() . 'main.css'; ?>" rel="stylesheet">
+    <link href="<?php asset_file_url('main.css'); ?>" rel="stylesheet">
     <!-- Morris Charts CSS -->
     <!-- <link href="../bower_components/morrisjs/morris.css" rel="stylesheet"> -->
 
     <!-- Custom Fonts -->
-    <link href="<?php echo asset_url() . 'font-awesome/css/font-awesome.min.css'; ?>" rel="stylesheet" type="text/css">
+    <link href="<?php asset_file_url('font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
 
     <!-- jQuery -->
-    <script src="<?php echo asset_url() . 'jquery/dist/jquery.min.js'; ?>"></script>
+    <script src="<?php asset_file_url('jquery/dist/jquery.min.js'); ?>"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo asset_url() . 'bootstrap/dist/js/bootstrap.min.js'; ?>""></script>
+    <script src="<?php asset_file_url('bootstrap/dist/js/bootstrap.min.js'); ?>""></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo asset_url() . 'metisMenu/dist/metisMenu.min.js'; ?>""></script>
+    <script src="<?php asset_file_url('metisMenu/dist/metisMenu.min.js'); ?>""></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="<?php echo asset_url() . 'raphael/raphael-min.js'; ?>"></script>
-    <script src="<?php echo asset_url() . 'morrisjs/morris.min.js'; ?>"></script>
+    <script src="<?php asset_file_url('raphael/raphael-min.js'); ?>"></script>
+    <script src="<?php asset_file_url('morrisjs/morris.min.js'); ?>"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="<?php echo asset_url() . 'main.js'; ?>"></script>
+    <script src="<?php asset_file_url('main.js'); ?>"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

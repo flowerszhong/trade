@@ -80,7 +80,7 @@ $(function () {
 		.done(function(response) {
 			if(response.ok){
 				var data = response.data;
-				data = data.sort(function (a,b) {
+				data.sort(function (a,b) {
 					return a.price - b.price;
 				});
 				var state = response.state + '(' + response['state_en'] + ')';
@@ -110,7 +110,16 @@ $(function () {
 	});
 
 	function math_round(w) {
-		
+		var w_floor = Math.floor(w);
+		if(w_floor<w){
+			if(w> w_floor+ 0.5){
+				return Math.ceil(w);
+			}else{
+				return w_floor+0.5;
+			}
+		}else{
+			return w;
+		}
 	}
 
 

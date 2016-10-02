@@ -132,7 +132,8 @@ class Price extends MY_Controller {
 
            $insert_result = $this->price_model->insert_price($data);
            if($insert_result){
-                $this->load_template('price_result',array('page_title'=>'新增报价成功','msg'=>'新增报价成功'));
+                redirect('price/index','refresh');
+                //$this->load_template('price_result',array('page_title'=>'新增报价成功','msg'=>'新增报价成功'));
            }else{
                 $this->load_template('price_result',array('page_title'=>'新增报价失败','msg'=>'新增报价失败'));
            }

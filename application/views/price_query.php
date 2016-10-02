@@ -99,5 +99,5 @@
 
 <!-- jQuery -->
 <!-- Custom Theme JavaScript -->
-<script src="<?php echo asset_url() . 'area.js'; ?>"></script>
-<script src="<?php echo asset_url() . 'price_query.js'; ?>"></script>
+<script src="<?php asset_file_url('area.js'); ?>"></script>
+<script src="<?php asset_file_url('price_query.js'); ?>"></script>
