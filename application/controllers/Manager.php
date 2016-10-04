@@ -136,11 +136,12 @@ class Manager extends MY_Controller {
             if (!$this->manager_model->update($data,$id)) {
                 return false;
             }else{
-                $data['page_title'] = $this->page_titles['edit'];
-                $data['edit_result'] = "编辑成功";
-                $data['id']=$id;
-                $this->load_template('manager_edit',$data);
-                return true;
+                redirect('manager/index','refresh');
+                // $data['page_title'] = $this->page_titles['edit'];
+                // $data['edit_result'] = "编辑成功";
+                // $data['id']=$id;
+                // $this->load_template('manager_edit',$data);
+                // return true;
             }
         }
 

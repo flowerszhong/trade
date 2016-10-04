@@ -11,6 +11,10 @@
                             </span>
                             </div>
                         </li> -->
+
+                        <li>
+                            <img src="<?php echo asset_url(). 'images/logo.png'; ?>" alt="">
+                        </li>
                         
                         <?php if( $this->manager_power > 10){ ?>
                         <li>

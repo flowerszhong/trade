@@ -201,7 +201,8 @@ class Price extends MY_Controller {
 
         $update_result = $this->price_model->update($price_id,$data);
         if($update_result){
-             $this->load_template('price_result',array('page_title'=>'编辑报价成功','msg'=>'编辑报价成功'));
+             // $this->load_template('price_result',array('page_title'=>'编辑报价成功','msg'=>'编辑报价成功'));
+            redirect("price/index",'refresh');
         }else{
              $this->load_template('price_result',array('page_title'=>'编辑报价失败','msg'=>'编辑报价失败'));
         }
