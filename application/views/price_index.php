@@ -1,6 +1,6 @@
 <?php if($this->manager_power > 10){ 
 $create_url = "price/create/";
-if(isset($company_name)){
+if($this->uri->segment(3)){
     $create_url = $create_url . $this->uri->segment(3);
 }
     ?>
@@ -10,16 +10,16 @@ if(isset($company_name)){
 <?php } ?>
 
 
-<?php if(isset($company_name)){ ?>
-    <h3>
-    <?php 
-    echo $company_name .' 报价列表';
-    ?>
-
-    </h3>
-
-
-   <?php } ?>
+<select name="company_id" class="form-control company-select">
+            <option value="<?php echo site_url('price/index'); ?>">请选择公司</option>
+        <?php foreach ($agents as $row) { ?>
+            <option value="<?php echo site_url('price/company/'. $row['id']); ?>"
+            <?php if($row['id'] == $this->uri->segment(3)){
+                echo 'selected';
+                } ?>
+            ><?php echo $row['shortname']; ?></option>
+        <?php } ?>
+    </select>
 
 <?php 
 if(isset($prices)){ ?>
@@ -49,7 +49,7 @@ if(isset($prices)){ ?>
                 </td>
                 <td>
 
-                <a class="btn btn-warning btn-xs" href="<?php echo base_url('uploads/'. $row->filename ); ?>">下载</a>
+                <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/download/'. $row->id);?>">下载</a>
                 <a class="btn btn-warning btn-xs" href="<?php echo site_url('price/detail/'.$row->id); ?>">查看</a>
 
                 <?php if($this->manager_power > 10){ ?>

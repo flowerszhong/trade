@@ -66,13 +66,24 @@ class Agent_model extends CI_Model {
         return $query;
     }
 
-    public function get_all_company($include_admin=false)
+    public function get_all_company_old($include_admin=false)
     {
-        $sql = "select id,shortname from $this->table where id<>$this->company_id";
+        $sql = "select id,shortname from $this->table where id<>$this->company_id and available=1";
         if($include_admin){
             $sql = "select id,shortname from $this->table";
         }
         $query = $this->db->query($sql);
+        return $query->result('array');
+    }
+
+    public function get_all_company($include_admin=false)
+    {
+        $this->db->select('id,shortname');
+        $this->db->where('available',1);
+        if(!$include_admin){
+            $this->db->where('id<>',$this->company_id);
+        }
+        $query = $this->db->get($this->table);
         return $query->result('array');
     }
 

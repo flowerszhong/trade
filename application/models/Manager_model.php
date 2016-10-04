@@ -14,12 +14,50 @@ class Manager_model extends CI_Model {
     }
 
     public function select_all($is_super_admin=false){
-        $sql = "select a.*,b.name as company_name from $this->table a inner join $this->agent_table b on a.company_id = b.id order by b.name desc,a.id desc";
+        $sql = "select a.*,b.shortname as company_name from $this->table a inner join $this->agent_table b on a.company_id = b.id order by b.name desc,a.id desc";
         if($is_super_admin){
-        $sql = "select a.*,b.name as company_name from $this->table a inner join $this->agent_table b on a.company_id = b.id where a.id<>$this->manager_id order by b.name desc,a.id desc";
+        $sql = "select a.*,b.shortname as company_name from $this->table a inner join $this->agent_table b on a.company_id = b.id where a.id<>$this->manager_id order by b.name desc,a.id desc";
 
         }
         $query = $this->db->query($sql);
+        return $query->result();
+    }
+
+    public function record_count($company_id=null)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->join($this->agent_table,"$this->table.company_id=$this->agent_table.id");
+        $this->db->where("$this->agent_table.available",1);
+
+        if($this->manager_power > 10){
+            $this->db->where("$this->table.company_id<>",$this->company_id);
+        }
+        if(isset($company_id)){
+            $this->db->where("$this->table.company_id",$company_id);
+        }
+        return $this->db->count_all_results();
+    }
+
+
+    public function fetch_managers($limit, $start,$company_id=null) {
+        if($start>0){
+            $start = $start-1;
+        }
+        $start = $limit * $start;
+
+        $this->db->select("$this->table.*,$this->agent_table.shortname as company_name");
+        $this->db->from($this->table);
+        $this->db->join($this->agent_table,"$this->table.company_id=$this->agent_table.id");
+        if($this->manager_power>10){
+            $this->db->where("$this->table.company_id<>",$this->company_id);
+        }
+        if(isset($company_id)){
+            $this->db->where("$this->table.company_id",$company_id);
+        }
+
+        $this->db->limit($limit,$start);
+        $query = $this->db->get();
         return $query->result();
     }
 
@@ -112,6 +150,12 @@ class Manager_model extends CI_Model {
         $sql = "select count(*) count from $this->table where $field='$value'";
         $query = $this->db->query($sql);
         return $query->result('array');
+    }
+
+    public function remove_manager($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete($this->table);
     }
 
 }

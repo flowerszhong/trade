@@ -70,10 +70,11 @@
                                 <li>
                                     <a href="<?php echo site_url('configure/profile') ?>">资料更新</a>
                                 </li>
-
+                                <?php if( $this->manager_power > 10){ ?>
                                 <li>
                                     <a href="http://www.szxtorun.com/wp-admin" target="_blank">文章更新</a>
                                 </li>
+                                <?php } ?>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

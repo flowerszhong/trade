@@ -1,5 +1,15 @@
 <?php 
 if(isset($managers)){ ?>
+    <select name="company_id" class="form-control company-select">
+            <option value="<?php echo site_url('manager/index'); ?>">请选择公司</option>
+        <?php foreach ($agents as $row) { ?>
+            <option value="<?php echo site_url('manager/company/'. $row['id']); ?>"
+            <?php if($row['id'] == $this->uri->segment(3)){
+                echo 'selected';
+                } ?>
+            ><?php echo $row['shortname']; ?></option>
+        <?php } ?>
+    </select>
     <a href="<?php echo site_url( 'manager/create'); ?>" class="btn btn-primary">添加客户经理</a>
     <table class="table table-hover">
         <thead>
@@ -50,3 +60,6 @@ if(isset($managers)){ ?>
     </table>
 <?php }
  ?>
+
+<?php echo $this->pagination->create_links(); ?>
+

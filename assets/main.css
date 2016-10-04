@@ -384,3 +384,9 @@ table.dataTable thead .sorting:after {
     padding: 3px;
     color:red;
 }
+
+.company-select{
+    float:left;
+    width:140px;
+    margin-right: 10px;
+}

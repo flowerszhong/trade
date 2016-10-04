@@ -14,12 +14,52 @@ class Manager extends MY_Controller {
          );
         $this->checkPermission();
     }
-    public function index()
+    public function index2()
     {
         $view_data = array();
         $view_data['managers'] = $this->manager_model->select_all($this->isSuperAdmin());
         $view_data['page_title']= $this->page_titles['index'];
         $this->load_template('manager_index',$view_data);
+    }
+
+    public function index() {
+        $this->load->library('pagination');
+        $config = array();
+        // $this->config->load('pagination');
+        $config["base_url"] = site_url('manager/index');
+        $config["total_rows"] = $this->manager_model->record_count();
+        $config["per_page"] = 15;
+        $config["uri_segment"] = 3;
+        $config['use_page_numbers'] = TRUE;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['agents'] = $this->agent_model->get_all_company();
+        $data["managers"] = $this->manager_model->
+            fetch_managers($config["per_page"], $page);
+        $data['page_title'] = $this->page_titles['index'];
+        $this->load_template('manager_index',$data);
+    }
+
+    public function company($company_id) {
+        $this->load->library('pagination');
+        $config = array();
+        // $this->config->load('pagination');
+        $config["base_url"] = site_url("manager/index/$company_id");
+        $config["total_rows"] = $this->manager_model->record_count($company_id);
+        $config["per_page"] = 15;
+        $config["uri_segment"] = 4;
+        $config['use_page_numbers'] = TRUE;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data['agents'] = $this->agent_model->get_all_company();
+        $data["managers"] = $this->manager_model->
+            fetch_managers($config["per_page"], $page,$company_id);
+        $data['page_title'] = $this->page_titles['index'];
+        $this->load_template('manager_index',$data);
     }
 
     public function create(){
@@ -106,6 +146,14 @@ class Manager extends MY_Controller {
 
         $this->load_template('manager_edit',$view_data);
         return true;
+    }
+
+    public function delete($id)
+    {
+        $query_result = $this->manager_model->remove_manager($id);
+        if($query_result){
+            redirect('manager/index','refresh');
+        }
     }
 
 }

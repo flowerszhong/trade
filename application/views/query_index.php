@@ -19,8 +19,8 @@
 
     .result-info2 { width: 100%;  }
     .result-info2 td { padding: 10px; color: #878787; border-bottom: 1px solid #d8d8d8 !important; background-color: #fbfbfb !important }
-    .result-info2 .status { width: 30px; background: url("http://cdn.kuaidi100.com/images/ico_status.gif") -50px center no-repeat #fbfbfb }
-    .result-info2 .status { width: 30px; background: url("http://cdn.kuaidi100.com/images/ico_status.gif") -50px center no-repeat #fbfbfb }
+    .result-info2 .status { width: 40px; background: url("http://cdn.kuaidi100.com/images/ico_status.gif") -50px center no-repeat #fbfbfb }
+    .result-info2 .status { width: 40px; background: url("http://cdn.kuaidi100.com/images/ico_status.gif") -50px center no-repeat #fbfbfb }
     .result-info2 .status-first { background: url("http://cdn.kuaidi100.com/images/ico_status.gif") 0px center no-repeat #fbfbfb }
     .result-info2 .status-check { background: url("http://cdn.kuaidi100.com/images/ico_status.gif") -150px center no-repeat #fbfbfb }
     .result-info2 .status-wait { background: url("http://cdn.kuaidi100.com/images/ico_status.gif") -100px center no-repeat #fbfbfb }
@@ -285,7 +285,7 @@
             str += "<dd>"+destination+"</dd>";
             str += "<dt class='d'>最新状态:</dt>";
             str += "<dd>"+state+"</dd>";
-            str += "<dt class='d'>签收时间:</dt>";
+            str += "<dt class='d'>更新时间:</dt>";
             str += "<dd>"+signedtime+"</dd>";
             str += "<dd><a class='show-detail'>点击显示详情 &#x21d3;</a></dd>";
             str += "</dl>";
@@ -303,38 +303,43 @@
     }
 
     function makeDetail($detail,data) {
-        $table = makeCheckpoints(data['data']);
+        var ischeck = parseInt(data['ischeck']);
+        $table = makeCheckpoints(data['data'],ischeck);
         $detail.append($table);
     }
 
 
-        function makeCheckpoints (checkpoints) {
-            var strs = "<table class='result-info2 result-border'>";
-            var len = checkpoints.length;
-            for (var i = len - 1; i >= 0; i--) {
-                var checkpoint = checkpoints[i];
-                var str = "<tr>";
-                str += "<td class='row1'>" + checkpoint['time'] + "</td>";
-                if(i == 0){
-                    str += "<td class='status status-wait'>&nbsp;</td>";
-                } else if(i == len-1 ){
-                    str += "<td class='status status-first'>&nbsp;</td>";
+    function makeCheckpoints (checkpoints,ischeck) {
+        var strs = "<table class='result-info2 result-border'>";
+        var len = checkpoints.length;
+        for (var i = len - 1; i >= 0; i--) {
+            var checkpoint = checkpoints[i]; 
+            var str = "<tr>";
+            str += "<td class='row1'>" + checkpoint['time'] + "</td>";
+            if(i == 0){
+                if(ischeck){
+                    str += "<td class='status status-check'>&nbsp;&nbsp;</td>";
                 }else{
-                    str += "<td class='status'>&nbsp;</td>";
+                    str += "<td class='status status-wait'>&nbsp;&nbsp;</td>";
                 }
+            } else if(i == len-1 ){
+                str += "<td class='status status-first'>&nbsp;&nbsp;</td>";
+            }else{
+                str += "<td class='status'>&nbsp;&nbsp;</td>";
+            }
 
-                str += "<td>" + checkpoint['context'] + "</td>";
-                str += "</tr>";
-                strs += str;
-                
-            };
-
-            strs += "</table>";
-
-            return strs;
+            str += "<td>" + checkpoint['context'] + "</td>";
+            str += "</tr>";
+            strs += str;
             
+        };
 
-        }
+        strs += "</table>";
+
+        return strs;
+        
+
+    }
 
         $('#batch-wrap').on('click', '.case-summary', function(event) {
             event.preventDefault();
@@ -343,6 +348,7 @@
 
         $('#clear-btn').on('click',function (e) {
             $('#batch-query-text').val("");
+            $('#batch-wrap').empty();
             e.preventDefault();
         });
 

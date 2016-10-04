@@ -5,6 +5,7 @@ if(isset($agents) && is_array($agents)){ ?>
         <thead>
             <tr>
                 <th>公司代码</th>
+                <th>公司全称</th>
                 <th>公司简称</th>
                 <th>地址</th>
                 <th>电话</th>
@@ -18,6 +19,10 @@ if(isset($agents) && is_array($agents)){ ?>
             <tr>
                 <td>
                     <?php echo $row->code; ?>
+                </td>
+
+                <td>
+                    <?php echo $row->name; ?>
                 </td>
                 <td>
                     <?php echo $row->shortname; ?>

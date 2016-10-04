@@ -81,8 +81,12 @@ $(function() {
         .always(function() {
             // console.log("complete");
         });
-        
-        /* Act on the event */
+    });
+
+
+    $('.company-select').on('change', function(event) {
+        var url = $(this).val();
+        window.location.href = url;
     });
 
 

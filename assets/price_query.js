@@ -65,6 +65,8 @@ $(function () {
 			alert('请选择查询公司');
 			return;
 		}
+
+		$price_result.find('#price-tbody').empty();
 		/* Act on the event */
 		$.ajax({
 			url: url,
@@ -110,16 +112,21 @@ $(function () {
 	});
 
 	function math_round(w) {
-		var w_floor = Math.floor(w);
-		if(w_floor<w){
-			if(w> w_floor+ 0.5){
-				return Math.ceil(w);
+		if(w<21){
+			var w_floor = Math.floor(w);
+			if(w_floor<w){
+				if(w> w_floor+ 0.5){
+					return Math.ceil(w);
+				}else{
+					return w_floor+0.5;
+				}
 			}else{
-				return w_floor+0.5;
+				return w;
 			}
 		}else{
-			return w;
+			return Math.ceil(w);
 		}
+		
 	}
 
 

@@ -43,6 +43,7 @@ class Price extends MY_Controller {
         $this->pagination->initialize($config);
 
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['agents'] = $this->agent_model->get_all_company();
         $data["prices"] = $this->price_model->
             fetch_prices($config["per_page"], $page);
         $data['page_title'] = $this->page_titles['index'];
@@ -55,14 +56,14 @@ class Price extends MY_Controller {
         // $this->config->load('pagination');
         $config["base_url"] = site_url("price/index/$company_id");
         $config["total_rows"] = $this->price_model->record_count($company_id);
-        $config["per_page"] = 3;
+        $config["per_page"] = 15;
         $config["uri_segment"] = 4;
         $config['use_page_numbers'] = TRUE;
 
         $this->pagination->initialize($config);
 
         $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-        $data['company_name'] = $this->agent_model->get_name_by_id($company_id);
+        $data['agents'] = $this->agent_model->get_all_company();
         $data["prices"] = $this->price_model->
             fetch_prices_by_company($config["per_page"], $page,$company_id);
         $data['page_title'] = $this->page_titles['index'];
@@ -569,6 +570,31 @@ class Price extends MY_Controller {
     {
         $result = $this->area_model->select_all();
         echo json_encode($result);
+    }
+
+
+    public function download($id)
+    {
+        $this->checkPermission();
+        $price = $this->price_model->get_price_by_id($id);
+        $filename = $price['filename'];
+        $file_url = base_url('uploads/'. $filename);
+        $type = pathinfo($file_url, PATHINFO_EXTENSION);
+        $name = $price['shortname'] . '-' . $price['cname'] .'-' . $price['create_time'] . '.' . $type;
+
+        header('Content-Description: File Transfer');
+        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        header("Content-Disposition: attachment; filename=\"".$name."\"");
+        header("Content-Transfer-Encoding: binary");
+        header("Expires: 0");
+        header("Pragma: public");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        ob_clean();
+        flush();
+
+        readfile($file_url);
+
+        // exit();
     }
 
 

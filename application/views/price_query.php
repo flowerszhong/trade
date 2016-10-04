@@ -24,7 +24,7 @@
 
             <td>
             <select name="" class="form-control">
-                <option value="深圳市[SHENZHEN]" selected>深圳市[SHENZHEN]</option>
+                <option value="深圳市[ShenZhen]" selected>深圳市[ShenZhen]</option>
             </select>
             
             </td>
