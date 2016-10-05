@@ -84,9 +84,11 @@ $(function () {
                 for (var i = 0; i < data.length; i++) {
                     var row = data[i];
                     var d = row['querytime'];
-                    d = new Date(d);
-                    d_ymd = yyyymmdd(d);
-                    d_his = date_his(d);
+                    var dd = d.split(' ');
+                    // d_ymd = yyyymmdd(d);
+                    // d_his = date_his(d);
+                    d_ymd = dd[0];
+                    d_his = dd[1];
 
 
                     var tr = '<tr><td>' + row['shortname'] + '</td><td>' + d_ymd + '</td><td>' + d_his + '</td><td>' + row['state'] + '</td><td>' + row['weight'] + '</td><td>' + row['ip'] + '</td></tr>';

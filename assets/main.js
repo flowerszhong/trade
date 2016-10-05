@@ -54,6 +54,10 @@ $(function() {
         var type = $this.attr('data-type');
         var field = $(this).attr('name');
         var value = $.trim($(this).val());
+        var original = $(this).attr('data-original');
+        if(value == original){
+            return true;
+        }
         $.ajax({
             url: url,
             type: 'POST',
@@ -69,7 +73,7 @@ $(function() {
                 var d = data[0];
                 var count = d['count'];
                 var count = parseInt(count);
-                if(count == 1){
+                if(count>0){
                     // alert('该字段值与系统某条记录有重复');
                     $this.next('.dup-error').show();
                 }

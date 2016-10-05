@@ -145,7 +145,7 @@ class Manager_model extends CI_Model {
         return $this->db->update($this->table);
     }
 
-    public function checkDuplicate($field,$value)
+    public function checkDuplicate($field,$value,$original=null)
     {
         $sql = "select count(*) count from $this->table where $field='$value'";
         $query = $this->db->query($sql);

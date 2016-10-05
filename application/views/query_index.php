@@ -277,7 +277,7 @@
         var str = "<dl>";
             str += "<dt>运单号:</dt>";
             str += "<dd>"+ data['nu']+"</dd>";
-            str += "<dt>承运公司:</dt>";
+            str += "<dt>承运商:</dt>";
             str += "<dd>"+ com +"</dd>";
             str += "<dt class='d'>起运地:</dt>";
             str += "<dd>"+ departure +"</dd>";

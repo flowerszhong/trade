@@ -134,9 +134,9 @@ class Price_model extends CI_Model {
         $start = $limit * $start;
 
         if($this->manager_power>10){
-            $sql = "SELECT a.id,a.cname,a.channel,a.create_time,a.filename,b.shortname FROM $this->table a inner join $this->table_agent b on a.company_id=b.id where b.id <> $this->company_id and a.available=1 order by b.shortname, a.id desc limit $start,$limit";
+            $sql = "SELECT a.id,a.cname,a.channel,a.update_date,a.create_time,a.filename,b.shortname FROM $this->table a inner join $this->table_agent b on a.company_id=b.id where b.id <> $this->company_id and a.available=1 order by b.shortname, a.id desc limit $start,$limit";
         }else{
-            $sql = "SELECT a.id,a.cname,a.channel,a.create_time,a.filename,b.shortname FROM $this->table a inner join $this->table_agent b on a.company_id = b.id where b.id = $this->company_id and a.available=1 order by b.shortname,a.id desc limit $start,$limit";
+            $sql = "SELECT a.id,a.cname,a.channel,a.update_date,a.create_time,a.filename,b.shortname FROM $this->table a inner join $this->table_agent b on a.company_id = b.id where b.id = $this->company_id and a.available=1 order by b.shortname,a.id desc limit $start,$limit";
         }
         $query = $this->db->query($sql);
         return $query->result();
@@ -149,7 +149,7 @@ class Price_model extends CI_Model {
         $start = $limit * $start;
 
         if($this->manager_power>10){
-            $sql = "SELECT a.id,a.cname,a.channel,a.create_time,a.filename,b.shortname FROM $this->table a inner join $this->table_agent b on a.company_id=b.id where b.id = $company_id and a.available=1 order by a.id desc limit $start,$limit";
+            $sql = "SELECT a.id,a.cname,a.channel,a.update_date,a.create_time,a.filename,b.shortname FROM $this->table a inner join $this->table_agent b on a.company_id=b.id where b.id = $company_id and a.available=1 order by a.id desc limit $start,$limit";
         }
         $query = $this->db->query($sql);
         return $query->result();

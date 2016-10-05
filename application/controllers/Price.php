@@ -54,7 +54,7 @@ class Price extends MY_Controller {
         $this->load->library('pagination');
         $config = array();
         // $this->config->load('pagination');
-        $config["base_url"] = site_url("price/index/$company_id");
+        $config["base_url"] = site_url("price/company/$company_id");
         $config["total_rows"] = $this->price_model->record_count($company_id);
         $config["per_page"] = 15;
         $config["uri_segment"] = 4;
@@ -95,7 +95,7 @@ class Price extends MY_Controller {
             return true;
         }
 
-        $this->form_validation->set_rules('cname', '报价名称', 'trim|required|xss_clean|min_length[2]|max_length[24]');
+        $this->form_validation->set_rules('cname', '报价名称', 'trim|required|xss_clean|min_length[2]|max_length[24]|callback_duplication_name');
         $this->form_validation->set_rules('company_id[]', '关联公司', 'trim|required');
 
         if($this->form_validation->run() == False){
@@ -152,17 +152,17 @@ class Price extends MY_Controller {
             redirect('price/index','refresh');
         }
 
+        $price_data = $this->price_model->get_price_by_id($price_id);
+        $original = $price_data['cname'];
         if(!$this->input->post()){
-            $price_data = $this->price_model->get_price_by_id($price_id);
             $price_data['page_title'] = $this->page_titles['edit'];
             $this->load_template( 'price_edit', $price_data );
             return true;
         }
 
-        $this->form_validation->set_rules('cname', '报价名称', 'trim|required|xss_clean|min_length[2]|max_length[24]');
+        $this->form_validation->set_rules('cname', '报价名称', "trim|required|xss_clean|min_length[2]|max_length[24]|callback_duplication_name[$original]");
 
         if($this->form_validation->run() == False){
-            $price_data = $this->price_model->get_price_by_id($price_id);
             $price_data['page_title'] = $this->page_titles['edit'];
             $this->load_template( 'price_edit', $price_data );
             return true;
@@ -207,6 +207,22 @@ class Price extends MY_Controller {
              $this->load_template('price_result',array('page_title'=>'编辑报价失败','msg'=>'编辑报价失败'));
         }
 
+    }
+
+    public function duplication_name($name,$original)
+    {
+        if($name == $original){
+            return true;
+        }
+        $this->form_validation->set_message('duplication_name','报价名称 不能重复');
+        $field = "cname";
+        $ret = $this->price_model->checkDuplicate($field,$name);
+        if(is_array($ret)){
+            $ret = $ret[0];
+        }
+        if(intval($ret['count']) > 0){
+            return false;
+        }
     }
 
     public function update($id)
@@ -582,20 +598,27 @@ class Price extends MY_Controller {
         $file_url = base_url('uploads/'. $filename);
         $type = pathinfo($file_url, PATHINFO_EXTENSION);
         $name = $price['shortname'] . '-' . $price['cname'] .'-' . $price['create_time'] . '.' . $type;
-
+        $encoded_filename = urlencode($name);
+        $encoded_filename = str_replace("+", "%20", $encoded_filename);
         header('Content-Description: File Transfer');
-        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
         header("Content-Disposition: attachment; filename=\"".$name."\"");
+        $ua = $_SERVER["HTTP_USER_AGENT"];
+        if (preg_match("/MSIE/", $ua)) {
+            header('Content-Disposition: attachment; filename="' . $encoded_filename . '"');
+        } else {
+            header('Content-Disposition: attachment; filename="' . $name . '"');
+        }
         header("Content-Transfer-Encoding: binary");
         header("Expires: 0");
         header("Pragma: public");
         header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-        ob_clean();
+        // ob_clean();
         flush();
 
         readfile($file_url);
 
-        // exit();
+        exit();
     }
 
 

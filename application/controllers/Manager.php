@@ -46,7 +46,7 @@ class Manager extends MY_Controller {
         $this->load->library('pagination');
         $config = array();
         // $this->config->load('pagination');
-        $config["base_url"] = site_url("manager/index/$company_id");
+        $config["base_url"] = site_url("manager/company/$company_id");
         $config["total_rows"] = $this->manager_model->record_count($company_id);
         $config["per_page"] = 15;
         $config["uri_segment"] = 4;
@@ -98,10 +98,10 @@ class Manager extends MY_Controller {
     }
 
 
-    public function validate_manager()
+    public function validate_manager($original_username=null)
     {
         $this->form_validation->set_rules('name', '用户名称', 'trim|required|xss_clean|min_length[2]|max_length[40]');
-        $this->form_validation->set_rules('username', '登录账号', 'trim|required|min_length[4]|max_length[20]|xss_clean|alpha_dash');
+        $this->form_validation->set_rules('username', '登录账号', "trim|required|min_length[4]|max_length[20]|xss_clean|alpha_dash|callback_duplication_username[$original_username]");
         $this->form_validation->set_rules('pwd', '登录密码', 'trim|xss_clean|min_length[6]|max_length[16]|alpha_dash');
         $this->form_validation->set_rules('company_id', '关联公司', 'trim|xss_clean|required');
         $this->form_validation->set_rules('mobile', '手机号码', 'trim|required|xss_clean|max_length[14]|alpha_dash');
@@ -111,6 +111,9 @@ class Manager extends MY_Controller {
 
     public function edit($id)
     {
+        if(is_null($id)){
+            redirect('manager/index','refresh');
+        }
         $view_data = $this->manager_model->get_manager_by_id($id);
         $view_data['page_title'] = $this->page_titles['edit'];
         $view_data['agents'] = $this->agent_model->get_all_company();
@@ -118,7 +121,8 @@ class Manager extends MY_Controller {
             $this->load_template('manager_edit',$view_data);
             return true;
         }
-        $this->validate_manager();
+        $original_username = $view_data['username'];
+        $this->validate_manager($original_username);
         if($this->form_validation->run() == True){
             $data = $this->input->post();
 
@@ -147,6 +151,22 @@ class Manager extends MY_Controller {
 
         $this->load_template('manager_edit',$view_data);
         return true;
+    }
+
+    public function duplication_username($name,$original)
+    {
+        if($name == $original){
+            return true;
+        }
+        $this->form_validation->set_message('duplication_username','用户账号 不能重复');
+        $field = "username";
+        $ret = $this->manager_model->checkDuplicate($field,$name);
+        if(is_array($ret)){
+            $ret = $ret[0];
+        }
+        if(intval($ret['count']) > 0){
+            return false;
+        }
     }
 
     public function delete($id)

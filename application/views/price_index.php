@@ -28,7 +28,7 @@ if(isset($prices)){ ?>
             <tr>
                 <th>报价名称</th>
                 <th>公司名称</th>
-                <th>创建日期</th>
+                <th>更新日期</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -45,7 +45,7 @@ if(isset($prices)){ ?>
                     <?php echo $row->shortname; ?>
                 </td>
                 <td>
-                    <?php echo $row->create_time; ?>
+                    <?php echo $row->update_date? $row->update_date : $row->create_time; ?>
                 </td>
                 <td>
 

@@ -40,7 +40,8 @@ $attributes = array('class'=>'','id'=>'edit-price');
 <?php echo form_open_multipart("price/edit/$id",$attributes); ?>
     <div class="form-group">
         <label for="">报价名称<span class="hint">(<b>*</b>)</span></label>
-        <input type="text" name="cname" class="form-control" value="<?php echo $cname; ?>">
+        <input type="text" name="cname" class="form-control check-duplicate" value="<?php echo $cname; ?>" data-type="price" data-original="<?php echo $cname; ?>" data-url="<?php echo site_url('common/check_duplicate'); ?>">
+        <label for="" class="dup-error info-danger">提示：报价名称有重复</label>
     </div>
 
     <div class="form-group">
