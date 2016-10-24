@@ -261,6 +261,8 @@
         var departure = data['departure']?data['departure']:"未知";
         var destination = data['destination']?data['destination']:"未知";
         var signedtime = data['signedtime']?data['signedtime']:"未知";
+
+        var signname = data['signname'];
         var states= {
             '0':'在途',
             '1':'揽件',
@@ -272,7 +274,7 @@
         };
 
         var state = data['state'];
-        state = states[state];
+        state = signname || states[state];
         var com = companyName(data['com']);
         var str = "<dl>";
             str += "<dt>运单号:</dt>";
