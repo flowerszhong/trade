@@ -13,11 +13,6 @@
 <?php echo form_open_multipart('file/add',array("class"=>"")); ?>
 
 	<div class="form-group">
-		<label for="name">文档名称</label>
-		<input type="text" name="name" value="<?php echo $this->input->post('name'); ?>" class="form-control" id="name" />
-	</div>
-
-	<div class="form-group">
 	    <label for="">上传文档</label>
 	    <input type="file" name="uploadfile">
 	</div>

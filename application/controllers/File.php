@@ -35,34 +35,97 @@ class File extends MY_Controller
         $data = array('page_title'=>$this->page_titles['create']);
         $this->load->library('form_validation');
 
-		$this->form_validation->set_rules('name','Name','max_length[40]');
-		$this->form_validation->set_rules('comments','Comments','max_length[60]');
-
-        $this->upload_config();
-		
-		if($this->form_validation->run())     
-        {   
-            $params = array(
-				'name' => $this->input->post('name'),
-				'size' => $this->input->post('size'),
-				'comments' => $this->input->post('comments'),
-            );
-            
-            $admin_file_id = $this->Admin_file_model->add_admin_file($params);
-            redirect('file/index');
-        }
-        else
+        $this->form_validation->set_rules('comments','Comments','max_length[60]');
+        if (empty($_FILES['uploadfile']['name']))
         {
+            $this->form_validation->set_rules('uploadfile','上传文档','required');
+        }
+
+        $config = array();
+        $config['upload_path']      = './files/';
+        $config['max_size']      = 10000000000000;
+        $config['allowed_types']    = 'doc|docx|jpg|jpeg|png|gif|pdf|xls|xlsx|rar';
+        
+        if($this->form_validation->run()){   
+            
+            $file_name = $_FILES['uploadfile']['name'];
+
+            $file_name = iconv( "UTF-8","GBK", $file_name);
+            $config['file_name'] = $file_name;
+
+            $this->load->library('upload', $config);
+            $this->upload->do_upload('uploadfile');
+
+            $errors = $this->upload->display_errors();
+            if(empty($errors)){
+                $upload_data = $this->upload->data();
+                $params = array(
+                    'comments' => $this->input->post('comments'),
+                    'file_name' => $upload_data['file_name'],
+                    'file_type' => $upload_data['file_type'],
+                    'orig_name' => $upload_data['client_name'],
+                    'file_ext' => $upload_data['file_ext'],
+                    'file_size' => $upload_data['file_size'],
+                );
+                $admin_file_id = $this->file_model->add_admin_file($params);
+                redirect('file/index');
+            }else{
+                echo $errors;
+            }
+
+        }else{
             $this->load_template( 'file_add', $data );
         }
     }  
+
+    public function download($id)
+    {
+        $this->checkPermission();
+        $file = $this->file_model->get_admin_file($id);
+
+        $name = $file['name'];
+        $file_name = $file['file_name'];
+        $orig_name = $file['orig_name'];
+        $file_full_name = base_url('files/'. $file_name);
+        $file_size = $file['file_size'];
+        $file_type = $file['file_type'];
+
+        // echo $file_full_name;
+
+
+        $fp = fopen($file_full_name, 'r');
+        $content = fread($fp, $file_size);
+        $content = addslashes($content);
+        fclose($fp);
+
+
+        // $content = addslashes(file_get_contents($file_full_name));
+
+        header("Content-type: $file_type");
+        header("Content-length: $file_size");
+        header('Content-Disposition: attachment; filename="' . $orig_name .'"');
+        header("Content-Description: PHP Generated Data");
+        // echo $content;
+        // exit;
+        header("Content-Transfer-Encoding: binary");
+        header("Expires: 0");
+        header("Pragma: public");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        ob_clean();
+        flush();
+
+        readfile($file_full_name);
+
+        exit();
+    }
 
     public function upload_config()
     {
         $config = array();
         $config['upload_path']      = './files/';
-        $config['allowed_types']    = 'doc|docx|jpg|jpeg|png|gif';
-        $config['encrypt_name'] = TRUE;
+        $config['max_size']      = 10000000000000;
+        $config['allowed_types']    = 'doc|docx|jpg|jpeg|png|gif|pdf|xls|xlsx|rar';
+        // $config['encrypt_name'] = TRUE;
 
         $this->load->library('upload', $config);
     }
@@ -96,6 +159,7 @@ class File extends MY_Controller
             else
             {   
                 $data['admin_file'] = $this->Admin_file_model->get_admin_file($id);
+
     
                 $this->load->view('admin_file/edit',$data);
             }
@@ -109,13 +173,13 @@ class File extends MY_Controller
      */
     function remove($id)
     {
-        $admin_file = $this->Admin_file_model->get_admin_file($id);
+        $admin_file = $this->file_model->get_admin_file($id);
 
         // check if the admin_file exists before trying to delete it
         if(isset($admin_file['id']))
         {
-            $this->Admin_file_model->delete_admin_file($id);
-            redirect('admin_file/index');
+            $this->file_model->delete_admin_file($id);
+            redirect('file/index');
         }
         else
             show_error('The admin_file you are trying to delete does not exist.');

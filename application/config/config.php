@@ -26,10 +26,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $config['base_url'] = 'http://www.mztest.com:1988/trade';
 // $config['base_url'] = 'http://localhost/trade';
 // base_url : echo base_url();
-// site_url : echo siet_url();\
+// site_url : echo siet_url();
 // site_url = base_url + index_page
-// $config['base_url'] = 'http://www.mzhong.com/trade/';
-$config['base_url'] = 'http://localhost/trade/';
+$config['base_url'] = 'http://www.mzhong.com/trade/';
+// $config['base_url'] = 'http://localhost/trade/';
 // $config['base_url'] = 'http://www.szxtorun.com/trade/';
 
 
@@ -43,8 +43,8 @@ $config['base_url'] = 'http://localhost/trade/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
-// $config['index_page'] = 'index.php';
+// $config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
