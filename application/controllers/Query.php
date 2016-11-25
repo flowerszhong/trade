@@ -9,7 +9,9 @@ class Query extends MY_Controller {
     }
 
     public function index() {
-        $data=array('page_title'=>'运单查询');
+        $data=array(
+            'page_title'=>'运单查询',
+            );
         $this->load_template('query_index',$data);
     }
 
@@ -22,5 +24,11 @@ class Query extends MY_Controller {
     	$url = "http://www.kuaidi100.com/query?type=" . $type . "&postid=". $postid . "&id=1&valicode=&temp=0.5715253283269703";
     	$data = file_get_contents($url);
     	echo $data;
+    }
+
+    public function remote()
+    {
+        $data = array('page_title'=>'偏远查询');
+        $this->load_template('query_remote',$data);
     }
 }

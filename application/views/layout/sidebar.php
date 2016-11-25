@@ -52,7 +52,7 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> 资料查询<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse" aria-expanded="true">
                                 <li>
-                                    <a href="http://www.szxtorun.com/query/remoteareas" target="_blank">偏远查询</a>
+                                    <a href="<?php echo site_url('query/remote'); ?>">偏远查询</a>
                                 </li>
                                 <li>
                                     <!-- <a href="http://www.szxtorun.com/query/hscode" target="_blank">商品编码</a> -->

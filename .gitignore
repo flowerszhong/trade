@@ -1,2 +1,5 @@
 application/core/wp-config.php
 uploads/*
+doc/Test/Test/测试用报价表/5kg-sub-no-price.xlsx
+wp-config.php
+wp-cron.php
