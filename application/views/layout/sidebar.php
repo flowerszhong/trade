@@ -17,6 +17,14 @@
                         </li>
                         
                         <?php if( $this->manager_power > 10){ ?>
+
+                        <li>
+                            <a href="<?php echo site_url('waybill/manage'); ?>"><i class="fa fa-table fa-fw"></i> 运单管理</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo site_url('waybill/index'); ?>"><i class="fa fa-table fa-fw"></i> 运单列表</a>
+                        </li>
                         <li>
                             <a href="<?php echo site_url('price/history'); ?>"><i class="fa fa-table fa-fw"></i> 报价记录</a>
                         </li>

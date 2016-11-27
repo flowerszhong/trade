@@ -70,3 +70,12 @@
 	font-weight: bold;
 	text-align: right;
 }
+
+#remote-code{
+	max-width: 100px;
+}
+
+#remote-table{
+	width:765px;
+	margin-top: 10px;
+}

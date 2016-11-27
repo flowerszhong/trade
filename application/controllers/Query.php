@@ -6,6 +6,7 @@ class Query extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('remote_model');
     }
 
     public function index() {
@@ -28,7 +29,20 @@ class Query extends MY_Controller {
 
     public function remote()
     {
+        $this->form_validation->set_message('either_or', '城市或邮编 必选其一');
+        $this->form_validation->set_rules('country', '国家', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('code', '邮编', 'trim|callback_either_or[city]|xss_clean');
         $data = array('page_title'=>'偏远查询');
+        $search = $this->input->post();
+        if($this->form_validation->run() == True){
+            $remotes = $this->remote_model->get_remote($search);
+            $data['remotes'] = $remotes;
+        }
         $this->load_template('query_remote',$data);
+    }
+
+    public function either_or($this_filed,$other_field)
+    {
+        return ($this_filed!= '' || $this->input->post($other_field) != '');
     }
 }
