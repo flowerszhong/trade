@@ -11,4 +11,22 @@ class Waybill_model extends CI_Model
     {
         parent::__construct();
     }
+
+    public function insert_batch($data)
+    {
+        return $this->db->insert_batch($this->table,$data);
+    }
+
+    public function get_waybills($filter)
+    {
+        if(isset($filter['starttime'])){
+            $starttime = strtotime($filter['starttime']);
+            $starttime = date('Y-m-d H:i:s',$starttime);
+            var_dump($starttime);
+            $this->db->where('starttime >=',$starttime);
+        }
+
+        $query = $this->db->get($this->table);
+        return $query->result_array();
+    }
 }

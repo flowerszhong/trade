@@ -6,6 +6,7 @@ class Waybill extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('waybill_model');
+        $this->load->model('agent_model');
     }
 
     public function index()
@@ -27,7 +28,14 @@ class Waybill extends MY_Controller {
             }
         }
 
-        
+        if($this->input->post('query')){
+            var_dump($this->input->post());
+            $query_data = $this->waybill_model->get_waybills($this->input->post());
+            $data['query_data'] = $query_data;
+        }
+
+        $companies = $this->agent_model->get_all_company();
+        $data['companies'] = $companies;
         $this->load_template('waybill_manage',$data);
     }
 
@@ -153,6 +161,15 @@ class Waybill extends MY_Controller {
         }
         
         return $xls_data;
+    }
+
+
+    public function upload_ajax_handle()
+    {
+        var_dump($this->input->post());
+        $waybill_data = $this->input->post('waybill_data');
+        $result = $this->waybill_model->insert_batch($waybill_data);
+        echo $result;
     }
 
 }

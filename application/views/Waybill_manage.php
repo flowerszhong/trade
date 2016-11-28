@@ -1,5 +1,7 @@
 
 
+<link rel="stylesheet" type="text/css" href="<?php echo asset_file_url('css/waybill.css'); ?>">
+
 <?php if(isset($upload_error)){ ?>
 <div class="alert alert-danger" role="alert">
     <?php echo $upload_error; ?>
@@ -20,8 +22,8 @@
 
 <hr>
 
-<form class="form-horizontal" id="history-form" action="<?php echo site_url('price/historyquery'); ?>">
-<table class="history-query">
+<?php echo form_open('waybill/manage',array('class'=>'form-horizontal')); ?>
+<table class="waybill-query-form">
     <tr>
         <td>
         <label for="">公司名称</label>
@@ -34,59 +36,32 @@
              ?>
             </select>
         </td>
-            
         <td>
             <div class="date">
-                <label for="startdate">开始时间</label>
-                <input type="date" name="startdate" id="startdate" placeholder="开始时间" class="form-control">
+                <label for="starttime">开始时间</label>
+                <input type="date" name="starttime" value="<?php echo $this->input->post('starttime'); ?>" id="starttime" placeholder="开始时间" class="form-control">
             </div>
         </td>
         <td>
             <div class="date">
-                <label for="enddate">结束时间</label>
-                <input type="date" name="enddate" id="enddate" placeholder="结束时间" class="form-control">
+                <label for="signedtime">结束时间</label>
+                <input type="date" name="signedtime" value="<?php echo $this->input->post('signedtime'); ?>" id="signedtime" placeholder="结束时间" class="form-control">
             </div>
         </td>
         <td>
             <br>
-            <input type="button" class="btn btn-primary" value="查询" id="btn-history">
+            <input type="submit" name="query" class="btn btn-primary" value="查询" id="btn-waybill-query">
+            <input type="button" name="export" class="btn btn-danger" value="导出" id="btn-waybill-export">
         </td>
     </tr>
 </table>
-</form>
+<?php echo form_close(); ?>
 
-<?php if(isset($xls)){ ?>
 
-<table class="table table-hover">
-<tr>
-	<td>日期</td>	
-	<td>客户</td>	
-	<td>业务员</td>	
-	<td>原单号</td>	
-	<td>转单号</td>	
-	<td>目的地</td>	
-	<td>渠道</td>	
-	<td>件数</td>	
-	<td>重量</td>	
-	<td>单价</td>	
-	<td>运费</td>	
-	<td>代理</td>	
-	<td>运费成本</td>	
-	<td>利润</td>	
-	<td>备注</td>	
-	<td>当前状态</td>	
-</tr>
-	<?php foreach ($xls as $key => $row) { 
-	?>
-	<tr>
-		<?php foreach ($row as $td) { ?>
-			<td><?php echo $td; ?></td>
-		<?php } ?>
-	</tr>
-		
-	<?php } ?>
+<?php $this->load->view('waybill_manage_upload'); ?>
+<?php $this->load->view('waybill_manage_query'); ?>
 
-</table>
 
-<?php } ?>
+
+<script src="<?php echo asset_file_url('waybill_manage.js'); ?>" type="text/javascript"></script>
 
