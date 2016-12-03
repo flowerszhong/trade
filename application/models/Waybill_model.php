@@ -22,7 +22,6 @@ class Waybill_model extends CI_Model
         if(isset($filter['starttime'])){
             $starttime = strtotime($filter['starttime']);
             $starttime = date('Y-m-d H:i:s',$starttime);
-            var_dump($starttime);
             $this->db->where('starttime >=',$starttime);
         }
 

@@ -51,7 +51,7 @@
         <td>
             <br>
             <input type="submit" name="query" class="btn btn-primary" value="查询" id="btn-waybill-query">
-            <input type="button" name="export" class="btn btn-danger" value="导出" id="btn-waybill-export">
+            <input type="submit" name="export" class="btn btn-danger" value="导出" id="btn-waybill-export">
         </td>
     </tr>
 </table>

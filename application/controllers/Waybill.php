@@ -28,8 +28,12 @@ class Waybill extends MY_Controller {
             }
         }
 
+        if($this->input->post('export')){
+            $this->export($this->input->post());
+        }
+
+
         if($this->input->post('query')){
-            var_dump($this->input->post());
             $query_data = $this->waybill_model->get_waybills($this->input->post());
             $data['query_data'] = $query_data;
         }
@@ -57,6 +61,77 @@ class Waybill extends MY_Controller {
             }
             
         }
+    }
+
+
+    public function export($post)
+    {
+        // Starting the PHPExcel library
+        $this->load->library('excel');
+        $this->load->library('IOFactory');
+ 
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setTitle("export")->setDescription("none");
+ 
+        $objPHPExcel->setActiveSheetIndex(0);
+ 
+        // Field names in the first row
+        $fields = array(
+            'starttime'=>'日期',
+            'customer_com'=>'客户',
+            'manager'=>'业务员',
+            // 'signedtime'=>'签收时间',
+            'num'=>'原单号',
+            'transport_num'=>'转单号',
+            'destination'=>'目的地',
+            // 'departure'=>'送出地',
+            'com'=>'渠道',
+            'amount'=>'件数',
+            'weight'=>'重量',
+            'price'=>'单价',
+            'fee'=>'运费',
+            'agent_com'=>'代理',
+            'cost'=>'运费成本',
+            'profit'=>'利润',
+            'remarks'=>'备注',
+            'state'=>'当前状态'
+        );
+        $col = 0;
+        $row = 1;
+        foreach ($fields as $field)
+        {
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $field);
+            $col++;
+        }
+ 
+        // Fetching the table data
+        $row = 2;
+        $query_data = $this->waybill_model->get_waybills($post);
+
+        foreach($query_data as $data)
+        {
+            $col = 0;
+            foreach ($fields as $key => $field)
+            {
+                $_data = $data[$key];
+                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $_data);
+                $col++;
+            }
+ 
+            $row++;
+        }
+ 
+        $objPHPExcel->setActiveSheetIndex(0);
+ 
+        $objWriter = IOFactory::createWriter($objPHPExcel, 'Excel5');
+ 
+        // Sending headers to force the user to download the file
+        // confirm no output before
+        header('Content-Description: File Transfer');
+        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
+        header('Content-Disposition: attachment;filename="Products_'.date('dMy').'.xls"');
+        header('Cache-Control: max-age=0');
+        $objWriter->save('php://output');
     }
 
 
@@ -166,7 +241,6 @@ class Waybill extends MY_Controller {
 
     public function upload_ajax_handle()
     {
-        var_dump($this->input->post());
         $waybill_data = $this->input->post('waybill_data');
         $result = $this->waybill_model->insert_batch($waybill_data);
         echo $result;
