@@ -17,6 +17,11 @@ class Waybill_model extends CI_Model
         return $this->db->insert_batch($this->table,$data);
     }
 
+    public function update_batch($data)
+    {
+        return $this->db->update_batch($this->table,$data,'id');
+    }
+
     public function get_waybills($filter)
     {
         if(isset($filter['starttime'])){
@@ -25,7 +30,20 @@ class Waybill_model extends CI_Model
             $this->db->where('starttime >=',$starttime);
         }
 
+        if($this->manager_power<100){
+            $this->db->like('customer_com',$this->company_name);
+        }
+
         $query = $this->db->get($this->table);
         return $query->result_array();
     }
+
+
+    public function delete($id)
+    {
+        $this->db->where('id',$id);
+        $this->db->delete($this->table);
+    }
+
+
 }

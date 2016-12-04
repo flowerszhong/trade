@@ -11,14 +11,21 @@ class Waybill extends MY_Controller {
 
     public function index()
     {
-        $this->load_template('waybill_index');
+        $data = array('page_title'=>'运单列表');
+        $companies = $this->agent_model->get_all_company();
+
+        if($this->input->post('query')){
+            $query_data = $this->waybill_model->get_waybills($this->input->post());
+            $data['query_data'] = $query_data;
+        }
+        $data['companies'] = $companies;
+        $this->load_template('waybill_index',$data);
     }
 
     public function manage()
     {
         $data = array('page_title'=>'运单管理');
         $this->upload_config();
-
         if($this->input->post('uploaded')){
             $upload_data = $this->do_upload();
             if(is_array($upload_data)){
@@ -243,6 +250,27 @@ class Waybill extends MY_Controller {
     {
         $waybill_data = $this->input->post('waybill_data');
         $result = $this->waybill_model->insert_batch($waybill_data);
+        echo $result;
+    }
+
+    public function delete($id)
+    {
+        if(empty($id)){
+            echo json_encode(array('ok'=>False));
+            return;
+        }else{
+            $this->waybill_model->delete($id);
+            echo json_encode(array('ok'=>True));
+        }
+
+
+    }
+
+
+    public function queryupdate()
+    {
+        $waybill_data = $this->input->post('waybill_data');
+        $result = $this->waybill_model->update_batch($waybill_data);
         echo $result;
     }
 

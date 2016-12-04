@@ -1,6 +1,6 @@
 <?php if(isset($xls)){ ?>
 
-<table class="table table-hover" id="upload-edit-table">
+<table class="table table-hover editable-table" id="editable-table">
 <tr>
 	<td>日期</td>	
 	<td>客户</td>	
@@ -54,6 +54,6 @@
 
 </table>
 
-<input type="button" name="" id="btn-push2back" class="btn btn-danger" value="提交到服务器" data-url="<?php echo site_url('waybill/upload_ajax_handle'); ?>" />
+<input type="button" name="" id="btn-push2back" class="btn btn-danger btn-toback" value="提交到服务器" data-url="<?php echo site_url('waybill/upload_ajax_handle'); ?>" />
 
 <?php } ?>

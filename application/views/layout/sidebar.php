@@ -19,12 +19,10 @@
                         <?php if( $this->manager_power > 10){ ?>
 
                         <li>
-                            <a href="<?php echo site_url('waybill/manage'); ?>"><i class="fa fa-table fa-fw"></i> 运单管理</a>
+                            <a href="<?php echo site_url('waybill/manage'); ?>"><i class="fa fa-tasks   fa-fw"></i> 运单管理</a>
                         </li>
 
-                        <li>
-                            <a href="<?php echo site_url('waybill/index'); ?>"><i class="fa fa-table fa-fw"></i> 运单列表</a>
-                        </li>
+                        
                         <li>
                             <a href="<?php echo site_url('price/history'); ?>"><i class="fa fa-table fa-fw"></i> 报价记录</a>
                         </li>
@@ -43,6 +41,10 @@
                             </ul>
                         </li>
                         <?php } ?>
+
+                        <li>
+                            <a href="<?php echo site_url('waybill/index'); ?>"><i class="fa fa-list-ul fa-fw"></i> 运单列表</a>
+                        </li>
                         <li class="active">
                             <a href="<?php echo site_url('price/index'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i> 财务查询<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

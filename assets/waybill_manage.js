@@ -1,6 +1,6 @@
 $(function () {
 	$('#btn-push2back').on('click', function() {
-		if(confirm('确认提交到服务器端？')){
+		if(confirm('确认提交到服务器端?')){
 			var url = $(this).attr('data-url');
 			pushback(url);
 		}else{
@@ -9,8 +9,19 @@ $(function () {
 	});
 
 
+	$("#btn-update").on('click', function(event) {
+		event.preventDefault();
+		if(confirm('确认修改数据?')){
+			var url = $(this).attr('data-url');
+			update(url);
+		}else{
+			return false;
+		}
+	});
+
+
 	function get_upload_data() {
-		var $trs = $('#upload-edit-table').find('tr.datarow');
+		var $trs = $('#editable-table').find('tr.datarow');
 		var data = [];
 		$trs.each(function(index, el) {
 			$tr = $(el);
@@ -30,11 +41,11 @@ $(function () {
 				'cost':$tr.find('.cost').text(),
 				'profit':$tr.find('.profit').text(),
 				'remarks':$tr.find('.remarks').text(),
-				'state':1
+				'state':$tr.find('.state').find('select').val()
 			};
 			data.push(tr_data);	
 		});
-		console.log(data);
+		window.console && console.log(data);
 		return data;
 	}
 
@@ -47,10 +58,33 @@ $(function () {
 			data: {'waybill_data': upload_data},
 		})
 		.done(function() {
-			console.log("success");
+			alert('数据推送至后台成功！');
+			window.location.reload(true);
 		})
 		.fail(function() {
-			console.log("error");
+			alert('数据推送至后台出错！');
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+	}
+
+
+	function update(update_url) {
+		var update_data = get_update_data();
+		$.ajax({
+			url: update_url,
+			type: 'POST',
+			dataType: 'json',
+			data: {'waybill_data': update_data},
+		})
+		.done(function() {
+			alert('数据推送至后台成功！');
+			window.location.reload(true);
+		})
+		.fail(function() {
+			alert('数据推送至后台出错！');
 		})
 		.always(function() {
 			console.log("complete");
@@ -97,7 +131,39 @@ $(function () {
 
 
 
-	$('#query-edit-table').on('dblclick', 'td', function(event) {
+	function get_update_data() {
+		var $trs = $('#editable-table').find('tr.datarow');
+		var data = [];
+		$trs.each(function(index, el) {
+			$tr = $(el);
+			var tr_data = {
+				'id' : $tr.attr('data-id'),
+				'starttime': $tr.find('.starttime').text(),
+				'customer_com':$tr.find('.customer_com').text(),
+				'manager':$tr.find('.manager').text(),
+				'num':$tr.find('.num').text(),
+				'transport_num':$tr.find('.transport_num').text(),
+				'destination':$tr.find('.destination').text(),
+				'com':$tr.find('.com').text(),
+				'amount':$tr.find('.amount').text(),
+				'weight':$tr.find('.weight').text(),
+				'price':$tr.find('.price').text(),
+				'fee':$tr.find('.fee').text(),
+				'agent_com':$tr.find('.agent_com').text(),
+				'cost':$tr.find('.cost').text(),
+				'profit':$tr.find('.profit').text(),
+				'remarks':$tr.find('.remarks').text(),
+				'state':$tr.find('.state').find('select').val()
+			};
+			data.push(tr_data);	
+		});
+		window.console && console.log(data);
+		return data;
+	}
+
+
+
+	$('#editable-table').on('dblclick', 'td', function(event) {
 		var $td = $(this);
 		if($td.find('input').length || $td.find('select').length){
 
@@ -113,7 +179,7 @@ $(function () {
 	});
 
 	function quitedit() {
-		var $tds = $('#query-edit-table').find('td.editing');
+		var $tds = $('#editable-table').find('td.editing');
 		$tds.each(function(index, el) {
 			$(el).removeClass('editing');
 			var val = $(el).find('input').val();
@@ -121,22 +187,18 @@ $(function () {
 		});
 	}
 
-	$('#query-edit-table').on('click', function(event) {
+	$('#editable-table').on('click', function(event) {
 		quitedit();
 		event.preventDefault();
 		/* Act on the event */
 	});
 
 
-	$('#query-edit-table').on('click','input', function(event) {
+	$('#editable-table').on('click','input', function(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		/* Act on the event */
 	});
-
-
-
-
 
 
 	function select_state(state) {
@@ -157,10 +219,13 @@ $(function () {
 		for (var i = 0; i < states.length; i++) {
 			var option_data = states[i];
 			var option = "<option value='" + option_data[0] + "'>" + option_data[1] + "</option>";
+			if(zt == option_data[0] || zt == option_data[1]){
+				option = "<option value='" + option_data[0] + "' selected>" + option_data[1] + "</option>";
+			}
 			options += option;
 		}
 		$select.append(options);
-		$select.val(zt);
+		// $select.val(zt);
 		return $select;
 	}
 
@@ -168,6 +233,42 @@ $(function () {
 		var zt = $.trim($(el).text());
 		$select = select_state(zt);
 		$(el).empty().append($select);
+	});
+
+
+
+	// remove 
+	// remove upload data row
+	$('.btn-remove').on('click', function(event) {
+		if(confirm('确认删除该条记录?')){
+			$(this).parents('tr').remove();
+		}
+		event.preventDefault();
+		/* Act on the event */
+	});
+
+	$('.btn-delete-wb').on('click', function(event) {
+		if(confirm('确认删除该条记录?')){
+			$this = $(this);
+			var url = $this.attr('data-url');
+			$.ajax({
+				url: url,
+				type: 'POST',
+				dataType: 'json'
+			})
+			.done(function() {
+				$this.parents('tr').remove();
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		}
+		
+		event.preventDefault();
+		/* Act on the event */
 	});
 
 })
