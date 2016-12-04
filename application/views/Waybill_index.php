@@ -7,8 +7,11 @@
                 <select name="company" id="choose-company" class="form-control">
                 <option value="">全选</option>
                 <?php 
-                foreach ($companies as $company) { ?>
-                    <option value="<?php echo $company['id'] ?>"><?php echo $company['shortname'] ?></option>
+                foreach ($companies as $company) { 
+                    $selected = $this->input->post('company') == $company['shortname'] ? 'selected' : '';
+                    ?>
+
+                    <option value="<?php echo $company['shortname'] ?>" <?php echo $selected; ?> ><?php echo $company['shortname'] ?></option>
                 <?php }
                  ?>
                 </select>

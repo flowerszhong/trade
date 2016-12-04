@@ -74,8 +74,9 @@ class Waybill extends MY_Controller {
     public function export($post)
     {
         // Starting the PHPExcel library
+        error_reporting(0);
         $this->load->library('excel');
-        $this->load->library('IOFactory');
+        $this->load->library('IOfactory');
  
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->getProperties()->setTitle("export")->setDescription("none");
@@ -115,12 +116,26 @@ class Waybill extends MY_Controller {
         $row = 2;
         $query_data = $this->waybill_model->get_waybills($post);
 
+        $states = array(
+            '1'=>'已提货',
+            '3'=>'暂扣',
+            '5'=>'已上网',
+            '7'=>'已提取',
+            '9'=>'在途中',
+            '11'=>'派送中',
+            '13'=>'已签收'
+        );
+            
         foreach($query_data as $data)
         {
             $col = 0;
             foreach ($fields as $key => $field)
             {
                 $_data = $data[$key];
+                if($key == 'state'){
+                    $_data = $states[$_data];
+                }
+
                 $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $_data);
                 $col++;
             }

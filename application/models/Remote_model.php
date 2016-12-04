@@ -25,8 +25,11 @@ class Remote_model extends CI_Model {
             return null;
         }
 
-        if(!empty($search['city']) or !empty($search['code'])){
-            if(!empty($search['city'] and !empty($search['code']))){
+        $city = $search['city'];
+        $code = $search['code'];
+
+        if(!empty($city) or !empty($code)){
+            if(!(empty($city) or empty($code))){
                 $code = $search['code'];
                 $this->db->group_start();
                 $this->db->like('city',$search['city']);

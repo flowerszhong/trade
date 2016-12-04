@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-10-06 05:04:37
+-- Generation Time: 2016-12-04 17:20:30
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -28,14 +28,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `admin_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) NOT NULL,
-  `size` int(11) NOT NULL,
+  `file_name` varchar(60) NOT NULL,
+  `orig_name` varchar(60) NOT NULL,
+  `file_ext` varchar(20) NOT NULL,
+  `file_type` varchar(100) NOT NULL,
+  `file_size` float NOT NULL,
   `comments` varchar(200) NOT NULL,
-  `filebody` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
   `available` tinyint(4) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
