@@ -129,7 +129,7 @@ class Waybill extends MY_Controller {
         // confirm no output before
         header('Content-Description: File Transfer');
         header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
-        header('Content-Disposition: attachment;filename="Products_'.date('dMy').'.xls"');
+        header('Content-Disposition: attachment;filename="Waybill_'.date('Y-m-d').'.xls"');
         header('Cache-Control: max-age=0');
         $objWriter->save('php://output');
     }

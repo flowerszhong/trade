@@ -28,7 +28,7 @@
         <td>
         <label for="">公司名称</label>
             <select name="company" id="choose-company" class="form-control">
-            <option value="all">全选</option>
+            <option value="">全选</option>
             <?php 
             foreach ($companies as $company) { ?>
                 <option value="<?php echo $company['id'] ?>"><?php echo $company['shortname'] ?></option>

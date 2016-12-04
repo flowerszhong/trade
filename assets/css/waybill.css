@@ -2,3 +2,13 @@
 	clear: both;
 	float: right;
 }
+
+.state input,
+.cost input,
+.fee input,
+.price input,
+.amount input,
+.com input,
+.destination input{
+	max-width: 50px;
+}

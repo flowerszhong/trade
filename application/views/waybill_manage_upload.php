@@ -54,11 +54,6 @@
 
 </table>
 
-<input type="button" name="" id="btn-push2back" class="btn btn-danger" value="提交到服务器" />
-
-<script type="text/javascript">
-	window.upload_ajax_handle_url = '<?php echo site_url('waybill/upload_ajax_handle'); ?>';
-</script>
-
+<input type="button" name="" id="btn-push2back" class="btn btn-danger" value="提交到服务器" data-url="<?php echo site_url('waybill/upload_ajax_handle'); ?>" />
 
 <?php } ?>
