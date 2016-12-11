@@ -31,10 +31,10 @@
             <option value="">全选</option>
             <?php 
                 foreach ($companies as $company) { 
-                    $selected = $this->input->post('company') == $company['shortname'] ? 'selected' : '';
+                    $selected = $this->input->post('company') == $company['id'] ? 'selected' : '';
                     ?>
 
-                    <option value="<?php echo $company['shortname'] ?>" <?php echo $selected; ?> ><?php echo $company['shortname'] ?></option>
+                    <option value="<?php echo $company['id'] ?>" <?php echo $selected; ?> ><?php echo $company['shortname'] ?></option>
                 <?php }
                  ?>
             </select>

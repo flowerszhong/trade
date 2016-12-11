@@ -30,14 +30,13 @@ class Waybill_model extends CI_Model
             $this->db->where('starttime >=',$starttime);
         }
 
-        if(isset($filter['company'])){
+        if(isset($filter['company']) and is_array($filter['company'])){
             $customer_com = $filter['company'];
-            $this->db->like('customer_com',$customer_com);
+            $this->db->where_in('customer_com',$customer_com);
         }
 
-        if($this->manager_power<100){
-            $this->db->like('customer_com',$this->company_name);
-        }
+
+        $this->db->order_by('id','desc');
 
         $query = $this->db->get($this->table);
         return $query->result_array();

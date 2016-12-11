@@ -8,17 +8,16 @@
                 <option value="">全选</option>
                 <?php 
                 foreach ($companies as $company) { 
-                    $selected = $this->input->post('company') == $company['shortname'] ? 'selected' : '';
+                    $selected = $this->input->post('company') == $company['id'] ? 'selected' : '';
                     ?>
 
-                    <option value="<?php echo $company['shortname'] ?>" <?php echo $selected; ?> ><?php echo $company['shortname'] ?></option>
+                    <option value="<?php echo $company['id'] ?>" <?php echo $selected; ?> ><?php echo $company['shortname'] ?></option>
                 <?php }
                  ?>
                 </select>
-                <?php }else{
-                    echo '<br>';
-                    echo $this->company_name;
-                } ?>
+                <?php }else{ ?>
+                    <input type="text" disabled class="form-control" name="" value="<?php echo $this->company_name; ?>">
+                <?php } ?>
         </td>
         <td>
             <div class="date">
@@ -42,3 +41,6 @@
 
 
 <?php $this->load->view('waybill_index_list'); ?>
+
+<script src="<?php echo asset_file_url('waybill_index.js'); ?>" type="text/javascript"></script>
+

@@ -23,7 +23,7 @@
 	<?php foreach ($query_data as $key => $row) { 
 	?>
 	<tr class="datarow" data-id="<?php echo $row['id']; ?>">
-		<td class="starttime" data-orig="<?php echo $row['starttime']; ?>"><?php echo $row['starttime']; ?> </td>
+		<td class="starttime" data-orig="<?php echo date('Y-m-d',strtotime($row['starttime'])); ?>"><?php echo date('Y-m-d',strtotime($row['starttime'])); ?> </td>
 		<td class="customer_com" data-orig="<?php echo $row['customer_com']; ?>"><?php echo $row['customer_com']; ?></td>
 		<td class="manager" data-orig="<?php echo $row['manager']; ?>"><?php echo $row['manager']; ?></td>
 		<td class="num" data-orig="<?php echo $row['num']; ?>"> <?php echo $row['num']; ?> </td>

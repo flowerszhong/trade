@@ -50,7 +50,7 @@ class File extends MY_Controller
             
             $file_name = $_FILES['uploadfile']['name'];
 
-            $file_name = iconv( "UTF-8","GBK", $file_name);
+            // $file_name = iconv( "UTF-8","GBK", $file_name);
             $config['file_name'] = $file_name;
 
             $this->load->library('upload', $config);

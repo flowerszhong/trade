@@ -42,8 +42,8 @@
 			'O' => 'remarks',
 			'P' => 'state',
 		);
-		foreach ($row as $key => $td) { ?>
-			<td class="<?php echo $keys[$key];  ?>"><?php echo $td; ?></td>
+		foreach ($keys as $key => $value) { ?>
+			<td class="<?php echo $value;  ?>"><?php echo $row[$key]; ?></td>
 		<?php } ?>
 		<td> 
 		<input type="button" class="btn btn-danger btn-remove" value="删除" /> 

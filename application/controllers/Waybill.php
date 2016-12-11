@@ -15,7 +15,17 @@ class Waybill extends MY_Controller {
         $companies = $this->agent_model->get_all_company();
 
         if($this->input->post('query')){
-            $query_data = $this->waybill_model->get_waybills($this->input->post());
+            $post = $this->input->post();
+            if($this->manager_power<100){
+                $company = $this->company_id;
+            }else{
+                $company = $post['company'];
+            }
+            if(!empty($company)){
+                $company_string = $this->get_company_titles($company);
+                $post['company']= $company_string;
+            }
+            $query_data = $this->waybill_model->get_waybills($post);
             $data['query_data'] = $query_data;
         }
         $data['companies'] = $companies;
@@ -41,13 +51,25 @@ class Waybill extends MY_Controller {
 
 
         if($this->input->post('query')){
-            $query_data = $this->waybill_model->get_waybills($this->input->post());
+            $post = $this->input->post();
+            $company = $post['company'];
+            if(!empty($company)){
+                $company_string = $this->get_company_titles($company);
+                $post['company']= $company_string;
+            }
+            $query_data = $this->waybill_model->get_waybills($post);
             $data['query_data'] = $query_data;
         }
 
         $companies = $this->agent_model->get_all_company();
         $data['companies'] = $companies;
         $this->load_template('waybill_manage',$data);
+    }
+
+    public function get_company_titles($company)
+    {
+        $company_string = $this->agent_model->get_company_titles($company);
+        return $company_string;
     }
 
     public function do_upload()
@@ -166,95 +188,35 @@ class Waybill extends MY_Controller {
         $this->load->library('upload', $config);
     }
 
-    public function create($company_id = null){
-        $view_data = array();
-        $view_data['page_title'] = $this->page_titles['create'];
-        $view_data['agents'] = $this->agent_model->get_all_company();
-
-        if(!$this->input->post()){
-            if($company_id){
-                $view_data['company_id'] = $company_id;
-            }
-            $this->load_template('price_create',$view_data);
-            return true;
-        }
-
-        $this->form_validation->set_rules('cname', '报价名称', 'trim|required|xss_clean|min_length[2]|max_length[24]|callback_duplication_name');
-        $this->form_validation->set_rules('company_id[]', '关联公司', 'trim|required');
-
-        if($this->form_validation->run() == False){
-            $this->load_template('price_create',$view_data);
-            return true;
-        }
-
-        
-        $this->upload_config();
-
-        $post_data = $this->input->post();
-
-
-        if ( ! $this->upload->do_upload('pricetable'))
-        {
-           $errors = $this->upload->display_errors();
-           $view_data['errors'] = $errors;
-           $this->load_template( 'price_create', $view_data );
-        }
-        else
-        {
-           $upload_data = $this->upload->data();
-           $file_name = $upload_data['file_name'];
-           $data = $this->parseXLS($upload_data);
-           if($data && isset($data['errors'])){
-                $view_data['errors'] = $data['errors'];
-                $this->load_template( 'price_create', $view_data );
-                return;
-           }
-           // $data['channel'] = $post_data['ctype'];
-           $data['cname'] = $post_data['cname'];
-           $data['filename'] = $file_name;
-           $data['company_id'] = $post_data['company_id'];
-           // $company_ids = $post_data['company_id'];
-
-           $insert_result = $this->price_model->insert_price($data);
-           if($insert_result){
-                redirect('price/index','refresh');
-                //$this->load_template('price_result',array('page_title'=>'新增报价成功','msg'=>'新增报价成功'));
-           }else{
-                $this->load_template('price_result',array('page_title'=>'新增报价失败','msg'=>'新增报价失败'));
-           }
-
-        }
-    }
-
-
     public function parseXLS($upload_data)
     {
         $file = $upload_data['full_path'];
         //load the excel library
         $this->load->library('excel');
         $data = array();
-         
         //read file from path
         $objPHPExcel = PHPExcel_IOFactory::load($file);
+        $current_sheet = $objPHPExcel->getSheet(0);
 
         //get only the Cell Collection
-        $cell_collection = $objPHPExcel->getSheet(0)->getCellCollection();
+        // $cell_collection = $objPHPExcel->getSheet(0)->getCellCollection();
          
         //extract to a PHP readable array format
         $xls_data = array();
-        $first_column = array();
+        $maxCell = $objPHPExcel->getSheet(0)->getHighestRowAndColumn();
+        $max_col = 16;
+        $max_row = $maxCell['row'];
 
-        foreach ($cell_collection as $cell) {
-            $column = $objPHPExcel->getSheet(0)->getCell($cell)->getColumn();
-            $row = $objPHPExcel->getSheet(0)->getCell($cell)->getRow();
-            if($row==1){
-                continue;
+        for ($i=2; $i < $max_row ; $i++) { 
+            for ($j=0; $j < $max_col; $j++) { 
+                $cell = $current_sheet->getCellByColumnAndRow($j,$i);
+                $column = $cell->getColumn();
+                $data_value = $cell->getValue();
+                if($column == 'A'){
+                    $data_value = PHPExcel_Style_NumberFormat::toFormattedString($data_value,'YYYY-MM-DD' );
+                }
+                $xls_data[$i][$column] = $data_value;
             }
-            $data_value = $objPHPExcel->getSheet(0)->getCell($cell)->getValue();
-            if($column == 'A'){
-                $data_value = PHPExcel_Style_NumberFormat::toFormattedString($data_value,'YYYY-MM-DD' );
-            }
-            $xls_data[$row][$column] = $data_value;
         }
         
         return $xls_data;
@@ -277,10 +239,7 @@ class Waybill extends MY_Controller {
             $this->waybill_model->delete($id);
             echo json_encode(array('ok'=>True));
         }
-
-
     }
-
 
     public function queryupdate()
     {

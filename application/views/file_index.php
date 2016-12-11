@@ -19,7 +19,7 @@ if($this->manager_power>10){
 		<td><?php echo $a['file_size']; ?></td>
 		<td><?php echo $a['comments']; ?></td>
 		<td>
-            <a href="<?php echo base_url() . 'files/'.$a['orig_name']; ?>" class="btn btn-info">下载</a> 
+            <a href="<?php echo base_url() . 'files/'.urlencode($a['orig_name']); ?>" class="btn btn-info">下载</a> 
             <a href="<?php echo site_url('file/remove/'.$a['id']); ?>" class="btn btn-danger">删除</a>
         </td>
     </tr>

@@ -30,6 +30,14 @@ class Agent_model extends CI_Model {
         return $this->db->insert_id(); 
     }
 
+    public function get_company_titles($id)
+    {
+        $this->db->select('name,shortname,code');
+        $this->db->where('id',$id);
+        $query = $this->db->get($this->table);
+        return $query->row_array();
+    }
+
     public function record_count($include_admin=False)
     {
         if(!$include_admin){

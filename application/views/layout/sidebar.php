@@ -70,7 +70,7 @@
                                     <a href="<?php echo site_url('hscode/index'); ?>">商品编码</a>
                                 </li>
                                 <li>
-                                    <a href="http://www.szxtorun.com/services/files" target="_blank">文档模板</a>
+                                    <a href="<?php echo site_url('file/index'); ?>">文档模板</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

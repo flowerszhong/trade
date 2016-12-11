@@ -1,5 +1,20 @@
 <?php if(isset($query_data)){ ?>
 
+<style>
+	.waybill-tab-header{
+		margin:10px 0 20px;
+	}
+</style>
+
+<ul class="nav nav-tabs waybill-tab-header" role="tablist">
+   <li class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">全部</a></li>
+   <li><a href="#error" aria-controls="error" role="tab" data-toggle="tab">异常件</a></li>
+   <li><a href="#signed" aria-controls="signed" role="tab" data-toggle="tab">已签收</a></li>
+   <li><a href="#unsigned" aria-controls="unsigned" role="tab" data-toggle="tab">未签收</a></li>
+   <li><a href="#return" aria-controls="return" role="tab" data-toggle="tab">退换货</a></li>
+ </ul>
+
+
 <table class="table table-hover editable-table" id="editable-table">
 <tr>
 	<td>日期</td>	
@@ -17,7 +32,7 @@
 	<?php foreach ($query_data as $key => $row) { 
 	?>
 	<tr class="datarow" data-id="<?php echo $row['id']; ?>">
-		<td class="starttime" data-orig="<?php echo $row['starttime']; ?>"><?php echo $row['starttime']; ?> </td>
+		<td class="starttime" data-orig="<?php echo date('Y-m-d',strtotime($row['starttime'])); ?>"><?php echo date('Y-m-d',strtotime($row['starttime'])); ?> </td>
 		<td class="num" data-orig="<?php echo $row['num']; ?>"> <?php echo $row['num']; ?> </td>
 		<td class="transport_num" data-orig="<?php echo $row['transport_num']; ?>"> <?php echo $row['transport_num']; ?> </td>
 		<td class="destination" data-orig="<?php echo $row['destination']; ?>"> <?php echo $row['destination']; ?> </td>
