@@ -62,6 +62,7 @@
 
 
 <?php $this->load->view('waybill_manage_upload'); ?>
+<?php $this->load->view('waybill_modal'); ?>
 <?php $this->load->view('waybill_manage_query'); ?>
 
 

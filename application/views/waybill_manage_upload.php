@@ -20,9 +20,31 @@
 	<td>当前状态</td>
 	<td>操作</td>	
 </tr>
-	<?php foreach ($xls as $key => $row) { 
+<?php foreach ($xls as $key => $row) { 
 	?>
 	<tr class="datarow">
+	<td class="starttime"><?php echo $row['starttime']; ?></td>
+	<td class="customer_com"><?php echo $row['customer_com']; ?> <i class="fa fa-edit icon-com" data-toggle="modal" data-target="#myModal"></i></td>
+	<td class="manager"><?php echo $row['manager']; ?></td>
+	<td class="num"><?php echo $row['num']; ?></td>
+	<td class="transport_num"><?php echo $row['transport_num']; ?></td>
+	<td class="destination"><?php echo $row['destination']; ?></td>
+	<td class="com"><?php echo $row['com']; ?></td>
+	<td class="amount"><?php echo $row['amount']; ?></td>
+	<td class="weight"><?php echo $row['weight']; ?></td>
+	<td class="price"><?php echo $row['price']; ?></td>
+	<td class="fee"><?php echo $row['fee']; ?></td>
+	<td class="agent_com"><?php echo $row['agent_com']; ?></td>
+	<td class="cost"><?php echo $row['cost']; ?></td>
+	<td class="profit"><?php echo $row['profit']; ?></td>
+	<td class="remarks"><?php echo $row['remarks']; ?></td>
+	<td class="state"><?php echo $row['state']; ?></td>
+<td> 
+<input type="button" class="btn btn-danger btn-remove" value="删除"> 
+</td>
+
+
+
 		<?php 
 		$keys = array(
 			'A' =>'starttime',
@@ -42,12 +64,7 @@
 			'O' => 'remarks',
 			'P' => 'state',
 		);
-		foreach ($keys as $key => $value) { ?>
-			<td class="<?php echo $value;  ?>"><?php echo $row[$key]; ?></td>
-		<?php } ?>
-		<td> 
-		<input type="button" class="btn btn-danger btn-remove" value="删除" /> 
-		</td>
+		?>
 	</tr>
 		
 	<?php } ?>

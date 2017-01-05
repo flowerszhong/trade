@@ -36,9 +36,16 @@ class Waybill extends MY_Controller {
     {
         $data = array('page_title'=>'运单管理');
         $this->upload_config();
+
+        $companies = $this->agent_model->get_companies_name();
+        $data['companies'] = $companies;
+
         if($this->input->post('uploaded')){
             $upload_data = $this->do_upload();
             if(is_array($upload_data)){
+                //为上传数据添加业务数据
+                //关联公司id
+                $upload_data = $this->associate_company($upload_data,$companies);
                 $data['xls'] = $upload_data;
             }else{
                 $data['upload_error'] = $upload_data;
@@ -61,8 +68,7 @@ class Waybill extends MY_Controller {
             $data['query_data'] = $query_data;
         }
 
-        $companies = $this->agent_model->get_all_company();
-        $data['companies'] = $companies;
+        
         $this->load_template('waybill_manage',$data);
     }
 
@@ -90,6 +96,74 @@ class Waybill extends MY_Controller {
             }
             
         }
+    }
+
+    public function associate_company($upload_data,$companies)
+    {
+        var_dump($companies);
+
+        $ret = array();
+
+        foreach ($upload_data as $index => $row) {
+            $ret[] = array(
+                'starttime'       => $row['A'],
+                'customer_com'    => $row['B'],
+                'manager'         => $row['C'],
+                'num'             => $row['D'],
+                'transport_num'   => $row['E'],
+                'destination'     => $row['F'],
+                'com'             => $row['G'],
+                'amount'          => $row['H'],
+                'weight'          => $row['I'],
+                'price'           => $row['J'],
+                'fee'             => $row['K'],
+                'agent_com'       => $row['L'],
+                'cost'            => $row['M'],
+                'profit'          => $row['N'],
+                'remarks'         => $row['O'],
+                'state'           => $row['P'],
+                'customer_com_id' => $this->get_com_id($row['B'],$companies),
+            );
+        }
+        var_dump($ret);
+
+        // $keys = array(
+        //     'A' => 'starttime',
+        //     'B' => 'customer_com',
+        //     'C' => 'manager',
+        //     'D' => 'num',
+        //     'E' => 'transport_num',
+        //     'F' => 'destination',
+        //     'G' => 'com',
+        //     'H' => 'amount',
+        //     'I' => 'weight',
+        //     'J' => 'price',
+        //     'K' => 'fee',
+        //     'L' => 'agent_com',
+        //     'M' => 'cost',
+        //     'N' => 'profit',
+        //     'O' => 'remarks',
+        //     'P' => 'state',
+        // );
+
+        return $ret;
+
+    }
+
+    function get_com_id($com,$coms)
+    {
+        if(empty($com) || empty($coms)){
+            return null;
+        }
+
+        foreach ($coms as $key => $com_data) {
+            if($com_data['shortname'] == $com || $com_data['name'] == $com || $com_data['code'] == $com){
+                return $com_data['id'];
+            }
+        }
+
+        return null;
+
     }
 
 

@@ -95,6 +95,17 @@ class Agent_model extends CI_Model {
         return $query->result('array');
     }
 
+    public function get_companies_name($include_admin=false)
+    {
+        $this->db->select('id,name,shortname,code');
+        $this->db->where('available',1);
+        if(!$include_admin){
+            $this->db->where('id<>',$this->company_id);
+        }
+        $query = $this->db->get($this->table);
+        return $query->result('array');
+    }
+
     public function update($data,$id)
     {
         $this->db->where('id',$id);

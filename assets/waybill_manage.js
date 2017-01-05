@@ -271,4 +271,17 @@ $(function () {
 		/* Act on the event */
 	});
 
+
+	$('.icon-com').on('click', function(event) {
+		$('#myModal').attr('data-id','ddddddff');
+		event.preventDefault();
+		/* Act on the event */
+	});
+
+
+	$('#myModal').on('show.bs.modal', function (e) {
+		console.log(e);
+	})
+
+
 })
