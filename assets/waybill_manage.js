@@ -165,6 +165,9 @@ $(function () {
 
 	$('#editable-table').on('dblclick', 'td', function(event) {
 		var $td = $(this);
+		if($td.hasClass('disable_dblclick')){
+			return;
+		}
 		if($td.find('input').length || $td.find('select').length){
 
 		}else{
@@ -273,15 +276,49 @@ $(function () {
 
 
 	$('.icon-com').on('click', function(event) {
-		$('#myModal').attr('data-id','ddddddff');
+		$('#company-modal').attr('data-id','ddddddff');
 		event.preventDefault();
 		/* Act on the event */
 	});
 
 
-	$('#myModal').on('show.bs.modal', function (e) {
-		console.log(e);
-	})
+	$('#company-modal').on('show.bs.modal', function (e) {
+		$this = $(this);
+		var $rt = e.relatedTarget;
+		var rt_id = $rt.id;
+		$this.attr('data-rt',rt_id);
+		var $rt_td = $($rt).parent();
+		var company_id = $rt_td.attr('data-id');
+		if(company_id){
+			$this.find('#com-item' + company_id).addClass('selected').siblings().removeClass('selected');
+		}else{
+			$this.find('.com-items span').removeClass('selected');
+		}
+	});
+
+
+	$('#company-modal').on('hidden.bs.modal', function (e) {
+		$(this).removeAttr('data-rt');
+	});
+
+
+	$('.com-items').on('click', 'span', function(event) {
+		$(this).addClass('selected').siblings().removeClass('selected');
+		event.preventDefault();
+	});
+
+	$('#btn-close-modal').on('click', function() {
+		$m = $('#company-modal');
+		var rt = $m.attr('data-rt');
+		if(rt && $('#' + rt).length){
+			var $selected = $m.find('.selected');
+			var id = $selected.attr('id'),
+				name = $selected.text();
+			$('#' + rt).parent().removeClass('com_dismatch').addClass('com_match').attr('data-id',id).find('span').text(name);
+		}
+
+		$('#company-modal').modal('hide');
+	});
 
 
 })

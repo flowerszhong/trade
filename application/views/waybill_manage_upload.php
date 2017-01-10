@@ -21,10 +21,11 @@
 	<td>操作</td>	
 </tr>
 <?php foreach ($xls as $key => $row) { 
+	$com_match = $row['customer_com_id'] ? "com_match": "com_dismatch";
 	?>
 	<tr class="datarow">
 	<td class="starttime"><?php echo $row['starttime']; ?></td>
-	<td class="customer_com"><?php echo $row['customer_com']; ?> <i class="fa fa-edit icon-com" data-toggle="modal" data-target="#myModal"></i></td>
+	<td class="customer_com disable_dblclick <?php echo $com_match; ?>" data-id="<?php echo $row['customer_com_id']; ?>"><span><?php echo $row['customer_com']; ?></span> <i id="<?php echo 'icon-'. $key; ?>" class="fa fa-edit icon-com" data-toggle="modal" data-target="#company-modal"></i></td>
 	<td class="manager"><?php echo $row['manager']; ?></td>
 	<td class="num"><?php echo $row['num']; ?></td>
 	<td class="transport_num"><?php echo $row['transport_num']; ?></td>
