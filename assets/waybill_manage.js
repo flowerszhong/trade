@@ -290,7 +290,7 @@ $(function () {
 		var $rt_td = $($rt).parent();
 		var company_id = $rt_td.attr('data-id');
 		if(company_id){
-			$this.find('#com-item' + company_id).addClass('selected').siblings().removeClass('selected');
+			$this.find('#com-item-' + company_id).addClass('selected').siblings().removeClass('selected');
 		}else{
 			$this.find('.com-items span').removeClass('selected');
 		}
@@ -312,7 +312,7 @@ $(function () {
 		var rt = $m.attr('data-rt');
 		if(rt && $('#' + rt).length){
 			var $selected = $m.find('.selected');
-			var id = $selected.attr('id'),
+			var id = $selected.attr('data-id'),
 				name = $selected.text();
 			$('#' + rt).parent().removeClass('com_dismatch').addClass('com_match').attr('data-id',id).find('span').text(name);
 		}
