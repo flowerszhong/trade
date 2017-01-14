@@ -7,6 +7,7 @@
 class Waybill_model extends CI_Model
 {
     protected $table ="admin_waybill";
+    protected $agent_table ="admin_agent";
     function __construct()
     {
         parent::__construct();
@@ -17,31 +18,51 @@ class Waybill_model extends CI_Model
         return $this->db->insert_batch($this->table,$data);
     }
 
+    public function record_count($post)
+    {
+        $this->filter_data($post);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
     public function update_batch($data)
     {
         return $this->db->update_batch($this->table,$data,'id');
     }
 
-    public function get_waybills($filter)
+    public function get_waybills($filter,$per_page = 10,$page=0)
     {
-        if(isset($filter['starttime'])){
-            $starttime = strtotime($filter['starttime']);
-            $starttime = date('Y-m-d H:i:s',$starttime);
-            $this->db->where('starttime >=',$starttime);
-        }
 
-        if(isset($filter['company']) and is_array($filter['company'])){
-            $customer_com = $filter['company'];
-            $this->db->where_in('customer_com',$customer_com);
-        }
+        $query = $this->filter_data($filter);
 
+        $this->db->order_by("$this->table.id",'desc');
+        $this->db->limit($per_page,$page);
 
-        $this->db->order_by('id','desc');
-
-        $query = $this->db->get($this->table);
+        $query = $this->db->get();
         return $query->result_array();
     }
 
+
+    public function filter_data($filter)
+    {
+        $this->db->select("$this->table.*,$this->agent_table.shortname customer_com");
+        $this->db->from($this->table);
+        $this->db->join($this->agent_table,"$this->table.customer_com_id=$this->agent_table.id");
+        $this->db->where("$this->agent_table.available",1);
+
+        if(isset($filter['starttime'])){
+            $starttime = strtotime($filter['starttime']);
+            $starttime = date('Y-m-d H:i:s',$starttime);
+            $this->db->where("$this->table.starttime >=",$starttime);
+        }
+
+        if(!empty($filter['company'])){
+            $customer_com_id = $filter['company'];
+            $this->db->where("$this->agent_table.id",$customer_com_id);
+        }
+
+
+    }
 
     public function delete($id)
     {

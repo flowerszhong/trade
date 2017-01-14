@@ -1,4 +1,4 @@
-<?php echo form_open('waybill/index',array('class'=>'form-horizontal')); ?>
+<?php echo form_open('waybill/index',array('class'=>'form-horizontal','method'=>'get')); ?>
 <table class="waybill-query-form">
     <tr>
         <td>

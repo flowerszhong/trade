@@ -14,26 +14,27 @@ class Waybill extends MY_Controller {
         $data = array('page_title'=>'运单列表');
         $companies = $this->agent_model->get_all_company();
 
-        if($this->input->post('query')){
-            $post = $this->input->post();
+        if($this->input->get('query')){
+            $get = $this->input->get();
             if($this->manager_power<100){
-                $company = $this->company_id;
-            }else{
-                $company = $post['company'];
+                $get['company'] = $this->company_id;
             }
-            if(!empty($company)){
-                $company_string = $this->get_company_titles($company);
-                $post['company']= $company_string;
-            }
-            $query_data = $this->waybill_model->get_waybills($post);
+
+            $base_url = site_url('waybill/index');
+            $config = $this->config_pagination($base_url,$get);
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+            $query_data = $this->waybill_model->get_waybills($get,$config['per_page'],$page);
             $data['query_data'] = $query_data;
         }
         $data['companies'] = $companies;
+
+
         $this->load_template('waybill_index',$data);
     }
 
     public function manage()
     {
+        $this->load->library('pagination');
         $data = array('page_title'=>'运单管理');
         $this->upload_config();
 
@@ -52,24 +53,43 @@ class Waybill extends MY_Controller {
             }
         }
 
-        if($this->input->post('export')){
-            $this->export($this->input->post());
+        if($this->input->get('export')){
+            $this->export($this->input->get());
         }
 
 
-        if($this->input->post('query')){
-            $post = $this->input->post();
-            $company = $post['company'];
-            if(!empty($company)){
-                $company_string = $this->get_company_titles($company);
-                $post['company']= $company_string;
-            }
-            $query_data = $this->waybill_model->get_waybills($post);
+        if($this->input->get('query')){
+            $get = $this->input->get();
+            $base_url = site_url('waybill/manage');
+            $config = $this->config_pagination($base_url,$get);
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+            $query_data = $this->waybill_model->get_waybills($get,$config['per_page'],$page);
             $data['query_data'] = $query_data;
         }
 
         
         $this->load_template('waybill_manage',$data);
+    }
+
+
+    public function config_pagination($base_url,$get)
+    {
+        $this->load->library('pagination');
+        $config = array();
+        // $this->config->load('pagination');
+        $config["base_url"] = $base_url;
+        if (count($get) > 0) {
+            $config['suffix'] = '?' . http_build_query($get, '', "&");
+        }
+        $config['first_url'] = $base_url . '?' . http_build_query($get, '', "&query=true");
+        $config["total_rows"] = $this->waybill_model->record_count($get);
+        $config["per_page"] = 8;
+        $config["uri_segment"] = 3;
+        $config['use_page_numbers'] = TRUE;
+
+        $this->pagination->initialize($config);
+
+        return $config;
     }
 
     public function get_company_titles($company)
@@ -100,10 +120,7 @@ class Waybill extends MY_Controller {
 
     public function associate_company($upload_data,$companies)
     {
-        var_dump($companies);
-
         $ret = array();
-
         foreach ($upload_data as $index => $row) {
             $ret[] = array(
                 'starttime'       => $row['A'],
@@ -178,6 +195,7 @@ class Waybill extends MY_Controller {
         $objPHPExcel->getProperties()->setTitle("export")->setDescription("none");
  
         $objPHPExcel->setActiveSheetIndex(0);
+
  
         // Field names in the first row
         $fields = array(
@@ -210,7 +228,7 @@ class Waybill extends MY_Controller {
  
         // Fetching the table data
         $row = 2;
-        $query_data = $this->waybill_model->get_waybills($post);
+        $query_data = $this->waybill_model->get_waybills($post,3);
 
         $states = array(
             '1'=>'已提货',
@@ -294,6 +312,11 @@ class Waybill extends MY_Controller {
         }
         
         return $xls_data;
+    }
+
+    public function query_ajax_handle()
+    {
+        
     }
 
 

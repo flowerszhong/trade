@@ -24,7 +24,7 @@
 	?>
 	<tr class="datarow" data-id="<?php echo $row['id']; ?>">
 		<td class="starttime" data-orig="<?php echo date('Y-m-d',strtotime($row['starttime'])); ?>"><?php echo date('Y-m-d',strtotime($row['starttime'])); ?> </td>
-		<td class="customer_com" data-orig="<?php echo $row['customer_com']; ?>"><?php echo $row['customer_com']; ?></td>
+		<td class="customer_com disable_dblclick" data-id="<?php echo $row['customer_com_id']; ?>"><?php echo $row['customer_com']; ?></td>
 		<td class="manager" data-orig="<?php echo $row['manager']; ?>"><?php echo $row['manager']; ?></td>
 		<td class="num" data-orig="<?php echo $row['num']; ?>"> <?php echo $row['num']; ?> </td>
 		<td class="transport_num" data-orig="<?php echo $row['transport_num']; ?>"> <?php echo $row['transport_num']; ?> </td>
@@ -50,5 +50,7 @@
 
 <input type="button" name="" id="btn-update" class="btn btn-danger btn-toback" data-url="<?php echo site_url('waybill/queryupdate'); ?>" value="提交到服务器" />
 
+<?php 
+echo $this->pagination->create_links();
+} ?>
 
-<?php } ?>

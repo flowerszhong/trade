@@ -44,8 +44,6 @@
 <input type="button" class="btn btn-danger btn-remove" value="删除"> 
 </td>
 
-
-
 		<?php 
 		$keys = array(
 			'A' =>'starttime',

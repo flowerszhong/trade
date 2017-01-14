@@ -22,7 +22,7 @@
 
 <hr>
 
-<?php echo form_open('waybill/manage',array('class'=>'form-horizontal')); ?>
+<?php echo form_open('waybill/manage',array('class'=>'form-horizontal','method'=>'get')); ?>
 <table class="waybill-query-form">
     <tr>
         <td>
@@ -31,7 +31,7 @@
             <option value="">全选</option>
             <?php 
                 foreach ($companies as $company) { 
-                    $selected = $this->input->post('company') == $company['id'] ? 'selected' : '';
+                    $selected = $this->input->get('company') == $company['id'] ? 'selected' : '';
                     ?>
 
                     <option value="<?php echo $company['id'] ?>" <?php echo $selected; ?> ><?php echo $company['shortname'] ?></option>
@@ -42,13 +42,13 @@
         <td>
             <div class="date">
                 <label for="starttime">开始时间</label>
-                <input type="date" name="starttime" value="<?php echo $this->input->post('starttime'); ?>" id="starttime" placeholder="开始时间" class="form-control">
+                <input type="date" name="starttime" value="<?php echo $this->input->get('starttime'); ?>" id="starttime" placeholder="开始时间" class="form-control">
             </div>
         </td>
         <td>
             <div class="date">
                 <label for="signedtime">结束时间</label>
-                <input type="date" name="signedtime" value="<?php echo $this->input->post('signedtime'); ?>" id="signedtime" placeholder="结束时间" class="form-control">
+                <input type="date" name="signedtime" value="<?php echo $this->input->get('signedtime'); ?>" id="signedtime" placeholder="结束时间" class="form-control">
             </div>
         </td>
         <td>
@@ -64,6 +64,7 @@
 <?php $this->load->view('waybill_manage_upload'); ?>
 <?php $this->load->view('waybill_modal'); ?>
 <?php $this->load->view('waybill_manage_query'); ?>
+
 
 
 

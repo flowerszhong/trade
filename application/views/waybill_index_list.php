@@ -49,4 +49,14 @@
 
 </table>
 
-<?php } ?>
+
+
+<?php 
+
+	if($this->pagination){
+		echo $this->pagination->create_links();
+	}
+
+
+
+} ?>

@@ -27,7 +27,7 @@ $(function () {
 			$tr = $(el);
 			var tr_data = {
 				'starttime': $tr.find('.starttime').text(),
-				'customer_com':$tr.find('.customer_com').text(),
+				'customer_com_id':$tr.find('.customer_com').attr('data-id'),
 				'manager':$tr.find('.manager').text(),
 				'num':$tr.find('.num').text(),
 				'transport_num':$tr.find('.transport_num').text(),
@@ -51,6 +51,14 @@ $(function () {
 
 	function pushback(handle_url) {
 		var upload_data = get_upload_data();
+
+		var is_complete = check_data_complete(upload_data);
+
+		if(!is_complete){
+			alert('数据不完整，部分运单未关联公司');
+			return;
+		}
+
 		$.ajax({
 			url: handle_url,
 			type: 'POST',
@@ -59,7 +67,7 @@ $(function () {
 		})
 		.done(function() {
 			alert('数据推送至后台成功！');
-			window.location.reload(true);
+			window.location.href = window.location.href;
 		})
 		.fail(function() {
 			alert('数据推送至后台出错！');
@@ -93,6 +101,21 @@ $(function () {
 	}
 
 
+	function check_data_complete(data) {
+		if(data && data.length){
+			for (var i = 0; i < data.length; i++) {
+				var item = data[i];
+				if(!item['customer_com_id']){
+					return false;
+				}
+			}
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
 
 	$('#btn-waybill-export').on('click', function(event) {
 		var url = $(this).attr('data-url');
@@ -101,13 +124,12 @@ $(function () {
 		var signedtime = $('#signedtime').val();
 		var label = "确认导出excel文件?";
 		if($.trim(company) =='' && $.trim(starttime)=='' && $.trim(signedtime)== ''){
-			label = "未选择过滤条件，是要全部导出吗？";
+			label = "默认导出第1页，是否导出？";
 		}
 
-
 		if(confirm(label)){
-
 			return true;
+			
 			$.ajax({
 				url: url,
 				type: 'POST',
@@ -126,7 +148,6 @@ $(function () {
 		}else{
 			return false;
 		}
-
 	});
 
 
@@ -139,7 +160,7 @@ $(function () {
 			var tr_data = {
 				'id' : $tr.attr('data-id'),
 				'starttime': $tr.find('.starttime').text(),
-				'customer_com':$tr.find('.customer_com').text(),
+				'customer_com_id':$tr.find('.customer_com').attr('data-id'),
 				'manager':$tr.find('.manager').text(),
 				'num':$tr.find('.num').text(),
 				'transport_num':$tr.find('.transport_num').text(),
