@@ -73,7 +73,7 @@ $(function () {
 			alert('数据推送至后台出错！');
 		})
 		.always(function() {
-			console.log("complete");
+			window.console && console.log("complete");
 		});
 		
 	}
@@ -284,10 +284,10 @@ $(function () {
 				$this.parents('tr').remove();
 			})
 			.fail(function() {
-				console.log("error");
+				window.console && console.log("error");
 			})
 			.always(function() {
-				console.log("complete");
+				window.console && console.log("complete");
 			});
 		}
 		
@@ -295,12 +295,166 @@ $(function () {
 		/* Act on the event */
 	});
 
-
-	$('.icon-com').on('click', function(event) {
-		$('#company-modal').attr('data-id','ddddddff');
-		event.preventDefault();
-		/* Act on the event */
+	$('.btn-update-num').on('click', function(event) {
+		$('#num-modal').modal('show',$(this));
 	});
+
+
+	$('#num-modal').on('show.bs.modal', function (e) {
+		$this = $(this);
+		var $rt = e.relatedTarget;
+		var num = $.trim($rt.attr('data-num'));
+		var query_url = $this.attr('data-url');
+		$("#statesbox").empty().append('正在加载...');
+		$.ajax({
+		    url: query_url,
+		    type: 'POST',
+		    dataType: 'json',
+		    data: {
+		        'postid': num
+		    },
+		})
+		.done(function(response) {
+		    if(response && response.message == "ok" ){
+                showResult(response);
+            }else{
+                showResult_error(postid);
+            }
+		})
+		.fail(function() {
+		    window.console && console.log("error");
+        	$("#statesbox").empty().append('查询出错！！！');
+		})
+		.always(function() {
+
+		});
+
+
+	});
+
+	$('#statesbox').on('click', '.case-summary', function(event) {
+	    event.preventDefault();
+	    $(this).next().toggle();
+	});
+
+
+	    function checkCaseAvailable (key) {
+	        
+	    }
+
+
+    function showResult (queryData) {
+
+        var $case = $("<div class='case'></div>");
+        var $summary = $("<div class='case-summary'></div>");
+        var $detail = $("<div class='case-detail'></div>");
+
+        makeSummary($summary,queryData);
+        makeDetail($detail,queryData);
+
+        $case.append($summary,$detail);
+
+        $("#statesbox").empty().append($case);
+
+    }
+
+    function showResult_error(postid) {
+        var $case = $("<div class='case'></div>");
+        var $summary = $("<div class='case-summary'></div>");
+
+        $summary.append("运单号 <b>" + postid + "</b>：查询失败，请检查您的订单号是否正确！！！");
+        $case.append($summary);
+        $("#statesbox").append($case);
+    }
+
+	function makeSummary ($summary,data) {
+	    var departure = data['departure']?data['departure']:"未知";
+	    var destination = data['destination']?data['destination']:"未知";
+	    var signedtime = data['signedtime']?data['signedtime']:"未知";
+
+	    var signname = data['signname'];
+	    var states= {
+	        '0':'在途',
+	        '1':'揽件',
+	        '2':'疑难',
+	        '3':'签收',
+	        '4':'退签',
+	        '5':'派件',
+	        '6':'退回'
+	    };
+
+	    var state = data['state'];
+	    state = signname || states[state];
+	    var com = companyName(data['com']);
+	    var str = "<dl>";
+	        str += "<dt>运单号:</dt>";
+	        str += "<dd>"+ data['nu']+"</dd>";
+	        str += "<dt>承运商:</dt>";
+	        str += "<dd>"+ com +"</dd>";
+	        str += "<dt class='d'>起运地:</dt>";
+	        str += "<dd>"+ departure +"</dd>";
+	        str += "<dt>目的地:</dt>";
+	        str += "<dd>"+destination+"</dd>";
+	        str += "<dt class='d'>最新状态:</dt>";
+	        str += "<dd>"+state+"</dd>";
+	        str += "<dt class='d'>更新时间:</dt>";
+	        str += "<dd>"+signedtime+"</dd>";
+	        str += "<dd><a class='show-detail'>点击显示详情 &#x21d3;</a></dd>";
+	        str += "</dl>";
+	    $summary.append(str);
+	}
+
+	function companyName (name) {
+	    var company = {
+	        'fedex':'Fedex',
+	        'ups' : 'UPS',
+	        'dhl' : 'DHL'
+	    }
+
+	    return company[name]?company[name]:name;
+	}
+
+	function makeDetail($detail,data) {
+	    var ischeck = parseInt(data['ischeck']);
+	    $table = makeCheckpoints(data['data'],ischeck);
+	    $detail.append($table);
+	}
+
+
+	function makeCheckpoints (checkpoints,ischeck) {
+	    var strs = "<table class='result-info2 result-border'>";
+	    var len = checkpoints.length;
+	    for (var i = len - 1; i >= 0; i--) {
+	        var checkpoint = checkpoints[i]; 
+	        var str = "<tr>";
+	        str += "<td class='row1'>" + checkpoint['time'] + "</td>";
+	        if(i == 0){
+	            if(ischeck){
+	                str += "<td class='status status-check'>&nbsp;&nbsp;</td>";
+	            }else{
+	                str += "<td class='status status-wait'>&nbsp;&nbsp;</td>";
+	            }
+	        } else if(i == len-1 ){
+	            str += "<td class='status status-first'>&nbsp;&nbsp;</td>";
+	        }else{
+	            str += "<td class='status'>&nbsp;&nbsp;</td>";
+	        }
+
+	        str += "<td>" + checkpoint['context'] + "</td>";
+	        str += "</tr>";
+	        strs += str;
+	        
+	    };
+
+	    strs += "</table>";
+
+	    return strs;
+	    
+
+	}
+
+
+	$('#state-slt').val($('#state-slt').attr('data-option'));
 
 
 	$('#company-modal').on('show.bs.modal', function (e) {

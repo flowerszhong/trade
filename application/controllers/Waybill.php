@@ -27,8 +27,6 @@ class Waybill extends MY_Controller {
             $data['query_data'] = $query_data;
         }
         $data['companies'] = $companies;
-
-
         $this->load_template('waybill_index',$data);
     }
 
@@ -57,7 +55,6 @@ class Waybill extends MY_Controller {
             $this->export($this->input->get());
         }
 
-
         if($this->input->get('query')){
             $get = $this->input->get();
             $base_url = site_url('waybill/manage');
@@ -66,7 +63,6 @@ class Waybill extends MY_Controller {
             $query_data = $this->waybill_model->get_waybills($get,$config['per_page'],$page);
             $data['query_data'] = $query_data;
         }
-
         
         $this->load_template('waybill_manage',$data);
     }
@@ -83,7 +79,7 @@ class Waybill extends MY_Controller {
         }
         $config['first_url'] = $base_url . '?' . http_build_query($get, '', "&query=true");
         $config["total_rows"] = $this->waybill_model->record_count($get);
-        $config["per_page"] = 8;
+        $config["per_page"] = 15;
         $config["uri_segment"] = 3;
         $config['use_page_numbers'] = TRUE;
 
@@ -142,7 +138,6 @@ class Waybill extends MY_Controller {
                 'customer_com_id' => $this->get_com_id($row['B'],$companies),
             );
         }
-        var_dump($ret);
 
         // $keys = array(
         //     'A' => 'starttime',
@@ -228,7 +223,7 @@ class Waybill extends MY_Controller {
  
         // Fetching the table data
         $row = 2;
-        $query_data = $this->waybill_model->get_waybills($post,3);
+        $query_data = $this->waybill_model->get_waybills($post);
 
         $states = array(
             '1'=>'已提货',
@@ -299,7 +294,7 @@ class Waybill extends MY_Controller {
         $max_col = 16;
         $max_row = $maxCell['row'];
 
-        for ($i=2; $i < $max_row ; $i++) { 
+        for ($i=2; $i <= $max_row ; $i++) { 
             for ($j=0; $j < $max_col; $j++) { 
                 $cell = $current_sheet->getCellByColumnAndRow($j,$i);
                 $column = $cell->getColumn();

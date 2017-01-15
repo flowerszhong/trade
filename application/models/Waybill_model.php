@@ -61,6 +61,10 @@ class Waybill_model extends CI_Model
             $this->db->where("$this->agent_table.id",$customer_com_id);
         }
 
+        if(!empty($filter['state'])){
+            $state = $filter['state'];
+            $this->db->where("$this->table.state",$state);
+        }
 
     }
 

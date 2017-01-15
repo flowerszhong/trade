@@ -22,6 +22,8 @@ $(function () {
 		return label;
 	}
 
+	$('#state-slt').val($('#state-slt').attr('data-option'));
+
 	$('td.state').each(function(index, el) {
 		var zt = $.trim($(el).text());
 		$label = label_state(zt);

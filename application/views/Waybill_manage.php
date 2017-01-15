@@ -52,6 +52,19 @@
             </div>
         </td>
         <td>
+            <label for="state">运单状态</label>
+            <select class="form-control" name="state" id="state-slt" data-option="<?php echo $this->input->get('state'); ?>">
+                <option value="" selected>请选择运单状态</option>
+                <option value="1">已提货</option>
+                <option value="3">暂扣</option>
+                <option value="5">已上网</option>
+                <option value="7">已提取</option>
+                <option value="9">在途中</option>
+                <option value="11">派送中</option>
+                <option value="13">已签收</option>
+            </select>
+        </td>
+        <td>
             <br>
             <input type="submit" name="query" class="btn btn-primary" value="查询" id="btn-waybill-query">
             <input type="submit" name="export" class="btn btn-danger" value="导出" id="btn-waybill-export">
@@ -62,7 +75,6 @@
 
 
 <?php $this->load->view('waybill_manage_upload'); ?>
-<?php $this->load->view('waybill_modal'); ?>
 <?php $this->load->view('waybill_manage_query'); ?>
 
 

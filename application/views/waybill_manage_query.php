@@ -41,6 +41,8 @@
 		<td class="state" data-orig="<?php echo $row['state']; ?>"> <?php echo $row['state']; ?> </td>
 		<td> 
 		<input type="button" class="btn btn-danger btn-delete-wb" data-url="<?php echo site_url('waybill/delete/'. $row['id'] ); ?>" value="删除" /> 
+
+		<input type="button" class="btn btn-info btn-update-num" data-num="<?php echo $row['num']; ?>" value="查看运单实时状态" data-toggle="modal" data-target="#num-modal" /> 
 		</td>
 	</tr>
 		
@@ -51,6 +53,11 @@
 <input type="button" name="" id="btn-update" class="btn btn-danger btn-toback" data-url="<?php echo site_url('waybill/queryupdate'); ?>" value="提交到服务器" />
 
 <?php 
-echo $this->pagination->create_links();
+	if($this->pagination){
+		echo $this->pagination->create_links();
+	}
 } ?>
+
+
+<?php $this->load->view('waybill_num_modal'); ?>
 

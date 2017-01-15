@@ -20,11 +20,42 @@ class Query extends MY_Controller {
     {
     	$post = $this->input->post();
     	$postid = $post['postid'];
-    	$type=$post['type'];
+        if(isset($post['type'])){
+    	    $type=$post['type'];
+        }else{
+            $type=$this->check_com_type($postid);
+        }
+
+        if(!$type){
+            echo "error";
+            exit();
+        }
+
     	// $url = "http://www.cn.dhl.com/shipmentTracking?AWB=7982591912&countryCode=cn&languageCode=zh&_=1434553475231";
     	$url = "http://www.kuaidi100.com/query?type=" . $type . "&postid=". $postid . "&id=1&valicode=&temp=0.5715253283269703";
     	$data = file_get_contents($url);
     	echo $data;
+    }
+
+    public function check_com_type($querystr)
+    {
+        $len = strlen($querystr);
+        $ups = "1ZA2X2406743675748";
+        $fedex = "643440921040";
+        $dhl = "4071380110";
+
+        if($len == strlen($ups)){
+            return "ups";
+        }
+
+        if($len == strlen($fedex)){
+            return "fedex";
+        }
+        if($len == strlen($dhl)){
+            return "dhl";
+        }
+
+        return false;
     }
 
     public function remote()

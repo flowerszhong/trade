@@ -72,4 +72,9 @@
 
 <input type="button" name="" id="btn-push2back" class="btn btn-danger btn-toback" value="提交到服务器" data-url="<?php echo site_url('waybill/upload_ajax_handle'); ?>" />
 
-<?php } ?>
+<?php 
+
+$this->load->view('waybill_company_modal');
+
+} ?>
+
