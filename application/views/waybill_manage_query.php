@@ -42,7 +42,7 @@
 		<td> 
 		<input type="button" class="btn btn-danger btn-delete-wb" data-url="<?php echo site_url('waybill/delete/'. $row['id'] ); ?>" value="删除" /> 
 
-		<input type="button" class="btn btn-info btn-update-num" data-num="<?php echo $row['num']; ?>" value="查看运单实时状态" data-toggle="modal" data-target="#num-modal" /> 
+		<input type="button" class="btn btn-info btn-update-num" data-num="<?php echo $row['transport_num']; ?>" value="查看运单实时状态" data-toggle="modal" data-target="#num-modal" /> 
 		</td>
 	</tr>
 		

@@ -304,6 +304,10 @@ $(function () {
 		$this = $(this);
 		var $rt = e.relatedTarget;
 		var num = $.trim($rt.attr('data-num'));
+		if(!num){
+			$("#statesbox").empty().append('无转单号');
+			return;
+		}
 		var query_url = $this.attr('data-url');
 		$("#statesbox").empty().append('正在加载...');
 		$.ajax({
@@ -318,12 +322,12 @@ $(function () {
 		    if(response && response.message == "ok" ){
                 showResult(response);
             }else{
-                showResult_error(postid);
+                showResult_error(num);
             }
 		})
 		.fail(function() {
 		    window.console && console.log("error");
-        	$("#statesbox").empty().append('查询出错！！！');
+        	$("#statesbox").empty().append('查询出错，请检查转单号！！！');
 		})
 		.always(function() {
 

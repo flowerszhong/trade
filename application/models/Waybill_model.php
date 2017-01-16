@@ -30,7 +30,7 @@ class Waybill_model extends CI_Model
         return $this->db->update_batch($this->table,$data,'id');
     }
 
-    public function get_waybills($filter,$per_page = 10,$page=0)
+    public function get_waybills($filter,$per_page = 15,$page=0)
     {
 
         $query = $this->filter_data($filter);
